@@ -1,0 +1,117 @@
+id: page_koszty
+bg_color: 0xEEEEEE
+widgets:
+  - label:
+      text: "PODSUMOWANIE KOSZTÓW MIESIĄCA"
+      align: TOP_MID
+      y: 60
+      text_font: font_title
+      text_color: 0x333333
+
+  # ==========================================
+  # --- RZĄD 1: CZTERY KAFELKI (Zużycie i Koszt) ---
+  # ==========================================
+  # 1. ZUŻYCIE DOMU
+  - obj:
+      x: 16
+      y: 110
+      width: 180
+      height: 130
+      radius: 15
+      bg_color: 0xBBDEFB
+      widgets:
+        - label: {text: "DOM", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_k_house_z, text: "-- kWh", align: CENTER, y: 0, text_font: font_btn}
+        - label: {id: lbl_k_house_k, text: "-- zł", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0x1565C0}
+
+  # 2. PRĄD REALNY (Import)
+  - obj:
+      x: 212
+      y: 110
+      width: 180
+      height: 130
+      radius: 15
+      bg_color: 0x90CAF9
+      widgets:
+        - label: {text: "PRĄD", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_k_prad_real_z, text: "-- kWh", align: CENTER, y: 0, text_font: font_btn}
+        - label: {id: lbl_k_prad_real_k, text: "-- zł", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0xC62828}
+
+  # 3. WODA (Miesiąc)
+  - obj:
+      x: 408
+      y: 110
+      width: 180
+      height: 130
+      radius: 15
+      bg_color: 0x81D4FA
+      widgets:
+        - label: {text: "WODA", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_k_woda_z, text: "-- m3", align: CENTER, y: 0, text_font: font_btn}
+        - label: {id: lbl_k_woda_k, text: "-- zł", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0x01579B}
+
+  # 4. GAZ (Miesiąc)
+  - obj:
+      x: 604
+      y: 110
+      width: 180
+      height: 130
+      radius: 15
+      bg_color: 0x4DD0E1
+      widgets:
+        - label: {text: "GAZ", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_k_gaz_z, text: "-- m3", align: CENTER, y: 0, text_font: font_btn}
+        - label: {id: lbl_k_gaz_m_k, text: "-- zł", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0x006064}
+
+  # ==========================================
+  # --- RZĄD 2: FAKTURA, ZYSK PV I MAGAZYN ---
+  # ==========================================
+  # 1. Faktura Gaz
+  - obj:
+      x: 20
+      y: 250
+      width: 240
+      height: 100
+      radius: 15
+      bg_color: 0xFFAB91
+      widgets:
+        - label: {text: "GAZ (FAKTURA)", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_k_gaz_k, text: "-- zł", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0xC62828}
+
+  # 2. Zysk z PV
+  - obj:
+      x: 280
+      y: 250
+      width: 240
+      height: 100
+      radius: 15
+      bg_color: 0xA5D6A7
+      widgets:
+        - label: {text: "ZYSK PV", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_k_zysk_pv_val, text: "0.00 zł", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0x2E7D32}
+
+  # 3. Magazyn Tauron
+  - obj:
+      x: 540
+      y: 250
+      width: 240
+      height: 100
+      radius: 15
+      bg_color: 0xD1C4E9
+      widgets:
+        - label: {text: "W MAGAZYNIE", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_k_magazyn_val, text: "-- kWh", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0x4527A0}
+
+  # ==========================================
+  # --- RZĄD 3: PODSUMOWANIE ---
+  # ==========================================
+  - obj:
+      align: BOTTOM_MID
+      y: -35
+      width: 500
+      height: 80
+      radius: 20
+      bg_color: 0xFFE082
+      widgets:
+        - label: {text: "DO ZAPŁATY (SUMA):", x: 30, y: 28, text_font: font_btn}
+        - label: {id: lbl_k_suma, text: "-- zł", align: CENTER, y: 10, text_font: font_title, text_color: 0xC62828}

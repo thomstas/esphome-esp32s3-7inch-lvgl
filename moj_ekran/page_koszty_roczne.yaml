@@ -1,0 +1,76 @@
+id: page_koszty_roczne
+bg_color: 0xEEEEEE
+widgets:
+  - label:
+      text: "PODSUMOWANIE ROKU"
+      align: TOP_MID
+      y: 60
+      text_font: font_title
+      text_color: 0x333333
+
+  # ==========================================
+  # --- RZĄD 1: MEDIA (Prąd, Woda, Gaz) ---
+  # ==========================================
+  # 1. PRĄD (Pobór z sieci)
+  - obj:
+      x: 20
+      y: 110
+      width: 240
+      height: 130
+      radius: 15
+      bg_color: 0x90CAF9
+      widgets:
+        - label: {text: "PRĄD (SIEĆ)", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_kr_prad_z, text: "-- kWh", align: CENTER, y: 0, text_font: font_btn}
+        - label: {id: lbl_kr_prad_k, text: "-- zł", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0xC62828}
+
+  # 2. WODA
+  - obj:
+      x: 280
+      y: 110
+      width: 240
+      height: 130
+      radius: 15
+      bg_color: 0x81D4FA
+      widgets:
+        - label: {text: "WODA", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_kr_woda_z, text: "-- m3", align: CENTER, y: 0, text_font: font_btn}
+        - label: {id: lbl_kr_woda_k, text: "-- zł", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0x01579B}
+
+  # 3. GAZ
+  - obj:
+      x: 540
+      y: 110
+      width: 240
+      height: 130
+      radius: 15
+      bg_color: 0x4DD0E1
+      widgets:
+        - label: {text: "GAZ", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_kr_gaz_z, text: "-- m3", align: CENTER, y: 0, text_font: font_btn}
+        - label: {id: lbl_kr_gaz_k, text: "-- zł", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0x006064}
+
+  # ==========================================
+  # --- RZĄD 2: ZYSK PV I ZUŻYCIE DOMU ---
+  # ==========================================
+  - obj:
+      x: 20
+      y: 260
+      width: 370
+      height: 100
+      radius: 15
+      bg_color: 0xA5D6A7
+      widgets:
+        - label: {text: "OSZCZĘDNOŚĆ Z FOTOWOLTAIKI", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_kr_zysk_pv, text: "-- zł", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0x2E7D32}
+
+  - obj:
+      x: 410
+      y: 260
+      width: 370
+      height: 100
+      radius: 15
+      bg_color: 0xBBDEFB
+      widgets:
+        - label: {text: "CAŁKOWITE ZUŻYCIE DOMU", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_kr_dom_z, text: "-- kWh", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0x1565C0}

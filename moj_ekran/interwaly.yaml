@@ -1,0 +1,70 @@
+interval:
+  - interval: 1s
+    then:
+      - if:
+          condition:
+            time.has_time:
+          then:
+            - lvgl.label.update:
+                id: lbl_time
+                text: !lambda 'return id(my_time).now().strftime("%H:%M");'
+            - lvgl.label.update:
+                id: lbl_wygaszacz_czas
+                text: !lambda 'return id(my_time).now().strftime("%H:%M");'  
+            - lvgl.label.update:
+                id: lbl_date
+                text: !lambda |-
+                  auto t = id(my_time).now();
+                  const char* days[] = {"", "Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"};
+                  return str_sprintf("%s, %02d.%02d.%04d", days[t.day_of_week], t.day_of_month, t.month, t.year);
+            
+            - lvgl.label.update:
+                id: lbl_prog_day_1
+                text: !lambda |-
+                  auto t = id(my_time).now();
+                  const char* days[] = {"", "NIEDZIELA", "PONIEDZIAŁEK", "WTOREK", "ŚRODA", "CZWARTEK", "PIĄTEK", "SOBOTA"};
+                  return days[t.day_of_week];
+            - lvgl.label.update:
+                id: lbl_prog_day_2
+                text: !lambda |-
+                  auto t = id(my_time).now();
+                  const char* days[] = {"", "NIEDZIELA", "PONIEDZIAŁEK", "WTOREK", "ŚRODA", "CZWARTEK", "PIĄTEK", "SOBOTA"};
+                  return days[(t.day_of_week % 7) + 1];
+            - lvgl.label.update:
+                id: lbl_prog_day_3
+                text: !lambda |-
+                  auto t = id(my_time).now();
+                  const char* days[] = {"", "NIEDZIELA", "PONIEDZIAŁEK", "WTOREK", "ŚRODA", "CZWARTEK", "PIĄTEK", "SOBOTA"};
+                  return days[((t.day_of_week + 1) % 7) + 1];
+            - lvgl.label.update:
+                id: lbl_prog_day_4
+                text: !lambda |-
+                  auto t = id(my_time).now();
+                  const char* days[] = {"", "NIEDZIELA", "PONIEDZIAŁEK", "WTOREK", "ŚRODA", "CZWARTEK", "PIĄTEK", "SOBOTA"};
+                  return days[((t.day_of_week + 2) % 7) + 1];
+            - lvgl.label.update:
+                id: lbl_prog_day_5
+                text: !lambda |-
+                  auto t = id(my_time).now();
+                  const char* days[] = {"", "NIEDZIELA", "PONIEDZIAŁEK", "WTOREK", "ŚRODA", "CZWARTEK", "PIĄTEK", "SOBOTA"};
+                  return days[((t.day_of_week + 3) % 7) + 1];
+            - lvgl.label.update:
+                id: lbl_prog_day_6
+                text: !lambda |-
+                  auto t = id(my_time).now();
+                  const char* days[] = {"", "NIEDZIELA", "PONIEDZIAŁEK", "WTOREK", "ŚRODA", "CZWARTEK", "PIĄTEK", "SOBOTA"};
+                  return days[((t.day_of_week + 4) % 7) + 1];
+
+            # --- AKTUALIZACJA GÓRNEGO PASKA BATERII ---
+            - lvgl.label.update:
+                id: lbl_bat_top
+                text: !lambda 'return str_sprintf("%.0f%%", id(bat_pct).state);'
+            - lvgl.label.update:
+                id: icon_bat
+                text: !lambda |-
+                  float pct = id(bat_pct).state;
+                  if (pct > 80) return "\U000F0085"; // 100%
+                  if (pct > 50) return "\U000F0087"; // 80%
+                  if (pct > 20) return "\U000F0089"; // 50%
+                  if (pct > 5)  return "\U000F008C"; // 30%
+                  return "\U000F008E";               // Pusta

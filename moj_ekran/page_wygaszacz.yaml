@@ -1,0 +1,21 @@
+id: page_wygaszacz
+bg_color: 0x000000
+widgets:
+  # --- WIELKI ZEGAR ---
+  - label:
+      id: lbl_wygaszacz_czas
+      text: "00:00"
+      align: CENTER
+      text_font: font_zegar_wielki
+      text_color: 0x607D8B # Ciemno-szary, żeby nie raził w nocy (możesz zmienić na 0xFFFFFF dla białego)
+      
+  # --- NIEWIDZIALNY PRZYCISK WYBUDZANIA NA CAŁY EKRAN ---
+  - obj:
+      x: 0
+      y: 0
+      width: 800
+      height: 480
+      bg_opa: 0       # Całkowicie przezroczysty
+      border_width: 0 # Bez ramki
+      on_click:
+        - lvgl.page.show: page_dom # <-- ZMIEŃ NA ID TWOJEJ STRONY GŁÓWNEJ (np. page_1, page_pogoda)

@@ -1,0 +1,115 @@
+script:
+  - id: screen_timeout_script
+    mode: restart
+    then:
+      # ==================================
+      # --- WYBUDZENIE (Dotknięcie) ---
+      # ==================================
+      # 1. Przywracamy jasność z suwaka
+      - light.turn_on:
+          id: screen_backlight
+          brightness: !lambda 'return id(brightness_setpoint);'
+          
+      # 2. Odkrywamy z powrotem górny pasek
+      - lvgl.obj.update:
+          id: pasek_statusu
+          hidden: false
+
+      # ==================================
+      # --- OCZEKIWANIE ---
+      # ==================================
+      - delay: 60s  # <-- Zmieniono na 1 minutę
+      
+      # ==================================
+      # --- UŚPIENIE (Dzień: Mapa / Noc: Zegar) ---
+      # ==================================
+      - if:
+          condition:
+            lambda: |-
+              // UWAGA: Upewnij się, że "ha_time" to właściwe ID Twojego czasu
+              auto time = id(my_time).now();
+              if (!time.is_valid()) return false;
+              
+              // Noc: od 22:00 do 05:29
+              if (time.hour >= 22 || time.hour < 5 || (time.hour == 5 && time.minute < 30)) {
+                return true; // Jest noc
+              } else {
+                return false; // Jest dzień
+              }
+          then:
+            # --- AKCJA DLA NOCY (Wygaszacz) ---
+            - lvgl.page.show: page_wygaszacz
+            - lvgl.obj.update:
+                id: pasek_statusu
+                hidden: true
+            - light.turn_on:
+                id: screen_backlight
+                brightness: 0.5
+          else:
+            # --- AKCJA DLA DNIA (Mapa Europy) ---
+            - lvgl.page.show: page_radar_europa
+            - lvgl.obj.update:
+                id: pasek_statusu
+                hidden: false
+            - light.turn_on:
+                id: screen_backlight
+                brightness: !lambda 'return id(brightness_setpoint);'
+
+  - id: turbo_25st
+    then:
+      - homeassistant.service:
+          service: climate.set_temperature
+          data:
+            entity_id: climate.ogrzewanie
+            temperature: "25"
+
+  - id: send_temp_to_ha
+    then:
+      - homeassistant.service:
+          service: climate.set_temperature
+          data:
+            entity_id: climate.ogrzewanie
+            temperature: !lambda |-
+              return str_sprintf("%.1f", id(temp_setpoint));
+
+  - id: sync_thermostat_colors
+    then:
+      - lvgl.widget.update:
+          id: btn_term_grzanie
+          bg_color: !lambda 'return (id(hvac_mode_sensor).state == "heat") ? lv_color_hex(0xFFD700) : lv_color_hex(0xFFFFFF);'
+      - lvgl.widget.update:
+          id: btn_term_auto
+          bg_color: !lambda 'return (id(hvac_mode_sensor).state == "auto") ? lv_color_hex(0xFFD700) : lv_color_hex(0xFFFFFF);'
+      - lvgl.widget.update:
+          id: btn_term_wylacz # <--- POPRAWIONE ID
+          bg_color: !lambda 'return (id(hvac_mode_sensor).state == "off") ? lv_color_hex(0xFFD700) : lv_color_hex(0xFFFFFF);'
+
+  - id: sync_ui_colors
+    then:
+      - lvgl.widget.update: {id: btn_1, bg_color: !lambda 'if (id(s_1).state == "on") return lv_color_hex(0xFFD700); if (id(s_1).state == "unavailable" || id(s_1).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_2, bg_color: !lambda 'if (id(s_2).state == "on") return lv_color_hex(0xFFD700); if (id(s_2).state == "unavailable" || id(s_2).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_3, bg_color: !lambda 'if (id(s_3).state == "on") return lv_color_hex(0xFFD700); if (id(s_3).state == "unavailable" || id(s_3).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_4, bg_color: !lambda 'if (id(s_4).state == "on") return lv_color_hex(0xFFD700); if (id(s_4).state == "unavailable" || id(s_4).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_5, bg_color: !lambda 'if (id(s_5).state == "on") return lv_color_hex(0xFFD700); if (id(s_5).state == "unavailable" || id(s_5).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_6, bg_color: !lambda 'if (id(s_6).state == "on") return lv_color_hex(0xFFD700); if (id(s_6).state == "unavailable" || id(s_6).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_7, bg_color: !lambda 'if (id(s_7).state == "on") return lv_color_hex(0xFFD700); if (id(s_7).state == "unavailable" || id(s_7).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_8, bg_color: !lambda 'if (id(s_8).state == "on") return lv_color_hex(0xFFD700); if (id(s_8).state == "unavailable" || id(s_8).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_9, bg_color: !lambda 'if (id(s_9).state == "on") return lv_color_hex(0xFFD700); if (id(s_9).state == "unavailable" || id(s_9).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_10, bg_color: !lambda 'if (id(s_10).state == "on") return lv_color_hex(0xFFD700); if (id(s_10).state == "unavailable" || id(s_10).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_11, bg_color: !lambda 'if (id(s_11).state == "on") return lv_color_hex(0xFFD700); if (id(s_11).state == "unavailable" || id(s_11).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_12, bg_color: !lambda 'if (id(s_12).state == "on") return lv_color_hex(0xFFD700); if (id(s_12).state == "unavailable" || id(s_12).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_13, bg_color: !lambda 'if (id(s_13).state == "on") return lv_color_hex(0xFFD700); if (id(s_13).state == "unavailable" || id(s_13).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_14, bg_color: !lambda 'if (id(s_14).state == "on") return lv_color_hex(0xFFD700); if (id(s_14).state == "unavailable" || id(s_14).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_15, bg_color: !lambda 'if (id(s_15).state == "on") return lv_color_hex(0xFFD700); if (id(s_15).state == "unavailable" || id(s_15).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_16, bg_color: !lambda 'if (id(s_16).state == "on") return lv_color_hex(0xFFD700); if (id(s_16).state == "unavailable" || id(s_16).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_17, bg_color: !lambda 'if (id(s_17).state == "on") return lv_color_hex(0xFFD700); if (id(s_17).state == "unavailable" || id(s_17).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_18, bg_color: !lambda 'if (id(s_18).state == "on") return lv_color_hex(0xFFD700); if (id(s_18).state == "unavailable" || id(s_18).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_19, bg_color: !lambda 'if (id(s_19).state == "on") return lv_color_hex(0xFFD700); if (id(s_19).state == "unavailable" || id(s_19).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_20, bg_color: !lambda 'if (id(s_20).state == "on") return lv_color_hex(0xFFD700); if (id(s_20).state == "unavailable" || id(s_20).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_21, bg_color: !lambda 'if (id(s_21).state == "on") return lv_color_hex(0xFFD700); if (id(s_21).state == "unavailable" || id(s_21).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_22, bg_color: !lambda 'if (id(s_22).state == "on") return lv_color_hex(0xFFD700); if (id(s_22).state == "unavailable" || id(s_22).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_23, bg_color: !lambda 'if (id(s_23).state == "on") return lv_color_hex(0xFFD700); if (id(s_23).state == "unavailable" || id(s_23).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_24, bg_color: !lambda 'if (id(s_24).state == "on") return lv_color_hex(0xFFD700); if (id(s_24).state == "unavailable" || id(s_24).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_25, bg_color: !lambda 'if (id(s_25).state == "on") return lv_color_hex(0xFFD700); if (id(s_25).state == "unavailable" || id(s_25).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_26, bg_color: !lambda 'if (id(s_26).state == "on") return lv_color_hex(0xFFD700); if (id(s_26).state == "unavailable" || id(s_26).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+      - lvgl.widget.update: {id: btn_27, bg_color: !lambda 'if (id(s_27).state == "on") return lv_color_hex(0xFFD700); if (id(s_27).state == "unavailable" || id(s_27).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}

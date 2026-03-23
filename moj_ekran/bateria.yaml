@@ -1,0 +1,55 @@
+- platform: ina219
+  address: 0x40
+  shunt_resistance: 0.1 ohm
+  current:
+    name: "Bateria Natężenie"
+    id: bat_current
+    unit_of_measurement: "A"
+    accuracy_decimals: 3
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_bat_a
+            text: !lambda 'return str_sprintf("%.3f A", x);'
+  bus_voltage:
+    name: "Bateria Napięcie"
+    id: bat_voltage
+    unit_of_measurement: "V"
+    accuracy_decimals: 2
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_bat_v
+            text: !lambda 'return str_sprintf("%.2f V", x);'
+  power:
+    name: "Bateria Moc"
+    id: bat_power
+    unit_of_measurement: "W"
+    accuracy_decimals: 2
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_bat_w
+            text: !lambda 'return str_sprintf("%.2f W", x);'
+  update_interval: 10s
+
+- platform: template
+  name: "Bateria Procent"
+  id: bat_pct
+  unit_of_measurement: "%"
+  device_class: battery
+  accuracy_decimals: 0
+  lambda: |-
+    return id(bat_voltage).state;
+  filters:
+    - calibrate_linear:
+        - 3.2 -> 0.0
+        - 4.2 -> 100.0
+    - clamp:
+        min_value: 0.0
+        max_value: 100.0
+  on_value:
+    then:
+      - lvgl.label.update:
+          id: lbl_bat_pct
+          text: !lambda 'return str_sprintf("%.0f%%", x);'

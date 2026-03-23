@@ -1,0 +1,71 @@
+id: page_ustawienia
+bg_color: 0xEEEEEE
+widgets:
+  - obj:
+      x: 0
+      y: 45
+      width: 800
+      height: 435
+      bg_opa: 0
+      border_width: 0
+      pad_all: 0
+      scrollbar_mode: "OFF"
+      widgets:
+        # --- SEKCJA EKRANU ---
+        - label: {text: "EKRAN", x: 30, y: 20, text_font: font_title, text_color: 0x333333}
+        - line: {points: ["30, 55", "770, 55"], line_color: 0xDDDDDD, line_width: 2}
+        
+        - label: {text: "Jasność podświetlenia:", x: 30, y: 80, text_font: font_btn, text_color: 0x555555}
+        - slider:
+            id: slider_brightness
+            x: 30
+            y: 110
+            width: 500
+            height: 40
+            min_value: 10
+            max_value: 100
+            value: 100
+            on_value:
+              then:
+                - globals.set:
+                    id: brightness_setpoint
+                    value: !lambda 'return x / 100.0;'
+                - light.turn_on:
+                    id: screen_backlight
+                    brightness: !lambda 'return id(brightness_setpoint);'
+                - lvgl.label.update:
+                    id: lbl_brightness_val
+                    text: !lambda 'return str_sprintf("%.0f%%", x);'
+        - label:
+            id: lbl_brightness_val
+            text: "100%"
+            x: 550
+            y: 115
+            text_font: font_title
+            text_color: 0x1976D2
+
+        # --- SEKCJA BATERIA (INA219) ---
+        - label: {text: "ZASILANIE I BATERIA", x: 30, y: 170, text_font: font_title, text_color: 0x333333}
+        - line: {points: ["30, 205", "770, 205"], line_color: 0xDDDDDD, line_width: 2}
+
+        - label: {text: "Napięcie:", x: 30, y: 220, text_font: font_btn, text_color: 0x555555}
+        - label: {id: lbl_bat_v, text: "0.00 V", x: 160, y: 215, text_font: font_title, text_color: 0x000000}
+
+        - label: {text: "Natężenie:", x: 280, y: 220, text_font: font_btn, text_color: 0x555555}
+        - label: {id: lbl_bat_a, text: "0.000 A", x: 420, y: 215, text_font: font_title, text_color: 0x000000}
+
+        - label: {text: "Stan:", x: 550, y: 220, text_font: font_btn, text_color: 0x555555}
+        - label: {id: lbl_bat_pct, text: "0%", x: 650, y: 215, text_font: font_title, text_color: 0x1976D2}
+
+        - label: {text: "Aktualna moc:", x: 30, y: 265, text_font: font_btn, text_color: 0x555555}
+        - label: {id: lbl_bat_w, text: "0.00 W", x: 160, y: 260, text_font: font_title, text_color: 0x000000}
+
+        # --- SEKCJA SYSTEM ---
+        - label: {text: "SYSTEM", x: 30, y: 320, text_font: font_title, text_color: 0x333333}
+        - line: {points: ["30, 355", "770, 355"], line_color: 0xDDDDDD, line_width: 2}
+
+        - label: {text: "WiFi:", x: 30, y: 375, text_font: font_btn, text_color: 0x555555}
+        - label: {id: lbl_wifi_str, text: "-- dBm", x: 100, y: 370, text_font: font_title, text_color: 0x000000}
+
+        - label: {text: "Uptime:", x: 280, y: 375, text_font: font_btn, text_color: 0x555555}
+        - label: {id: lbl_uptime, text: "--:--", x: 380, y: 370, text_font: font_title, text_color: 0x000000}

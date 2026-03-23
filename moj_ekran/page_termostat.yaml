@@ -1,0 +1,66 @@
+id: page_termostat
+bg_color: 0xEEEEEE
+widgets:
+  - arc:
+      id: term_arc
+      x: 250
+      y: 75
+      width: 300
+      height: 300
+      min_value: 100
+      max_value: 300
+      value: 210
+      adjustable: true
+      on_value:
+        - globals.set: {id: temp_setpoint, value: !lambda 'return x / 10.0;'}
+        - lvgl.label.update: {id: lbl_temp_set, text: !lambda 'return str_sprintf("%.1f °C", id(temp_setpoint));'}
+        - script.execute: send_temp_to_ha
+  - obj:
+      x: 250
+      y: 155
+      width: 300
+      height: 140
+      bg_opa: 0
+      border_width: 0
+      widgets:
+        - label: {id: lbl_curr_temp, text: "--.- °C", align: TOP_MID, text_font: font_title, text_color: 0x2E7D32}
+        - label: {text: "NASTAWA", align: CENTER, text_font: font_btn, text_color: 0x555555}
+        - label: {id: lbl_temp_set, text: "21.0 °C", align: BOTTOM_MID, text_font: font_title, text_color: 0xE65100}
+  - button:
+      x: 150
+      y: 195
+      width: 60
+      height: 60
+      radius: 30
+      bg_color: 0xFFFFFF
+      on_click:
+        - globals.set: {id: temp_setpoint, value: !lambda 'return id(temp_setpoint) - 0.5;'}
+        - lvgl.label.update: {id: lbl_temp_set, text: !lambda 'return str_sprintf("%.1f °C", id(temp_setpoint));'}
+        - lvgl.arc.update: {id: term_arc, value: !lambda 'return id(temp_setpoint) * 10;'}
+        - script.execute: send_temp_to_ha
+      widgets: [{label: {text: "-", align: CENTER, text_font: font_title, text_color: 0x333333}}]
+  - button:
+      x: 590
+      y: 195
+      width: 60
+      height: 60
+      radius: 30
+      bg_color: 0xFFFFFF
+      on_click:
+        - globals.set: {id: temp_setpoint, value: !lambda 'return id(temp_setpoint) + 0.5;'}
+        - lvgl.label.update: {id: lbl_temp_set, text: !lambda 'return str_sprintf("%.1f °C", id(temp_setpoint));'}
+        - lvgl.arc.update: {id: term_arc, value: !lambda 'return id(temp_setpoint) * 10;'}
+        - script.execute: send_temp_to_ha
+      widgets: [{label: {text: "+", align: CENTER, text_font: font_title, text_color: 0x333333}}]
+  - obj:
+      x: 20
+      y: 395
+      width: 760
+      height: 80
+      bg_opa: 0
+      border_width: 0
+      widgets:
+        - button: {id: btn_term_grzanie, x: 0, width: 150, height: 60, bg_color: 0xFFFFFF, on_click: {homeassistant.service: {service: climate.set_hvac_mode, data: {entity_id: climate.ogrzewanie, hvac_mode: heat}}}, widgets: [{label: {text: "GRZANIE", align: CENTER, text_font: font_btn, text_color: 0x333333}}]}
+        - button: {id: btn_term_auto, x: 170, width: 150, height: 60, bg_color: 0xFFFFFF, on_click: {homeassistant.service: {service: climate.set_hvac_mode, data: {entity_id: climate.ogrzewanie, hvac_mode: auto}}}, widgets: [{label: {text: "AUTO", align: CENTER, text_font: font_btn, text_color: 0x333333}}]}
+        - button: {id: btn_term_wylacz, x: 340, width: 150, height: 60, bg_color: 0xFFFFFF, on_click: {homeassistant.service: {service: climate.set_hvac_mode, data: {entity_id: climate.ogrzewanie, hvac_mode: "off"}}}, widgets: [{label: {text: "WYŁĄCZ", align: CENTER, text_font: font_btn, text_color: 0x333333}}]}
+        - button: {id: btn_term_turbo, x: 510, width: 150, height: 60, bg_color: 0xFFFFFF, on_click: {script.execute: turbo_25st}, widgets: [{label: {text: "TURBO", align: CENTER, text_font: font_btn, text_color: 0x333333}}]}

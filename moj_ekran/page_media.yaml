@@ -1,0 +1,111 @@
+id: page_media
+bg_color: 0xEEEEEE
+widgets:
+  - obj:
+      x: 0
+      y: 45
+      width: 800
+      height: 435
+      bg_opa: 0
+      border_width: 0
+      pad_all: 0
+      scrollbar_mode: "OFF"
+      widgets:
+        # --- LEWA STRONA (Zegar Mocy i Produkcje) ---
+        - arc:
+            id: arc_pv_power
+            x: 40
+            y: 20
+            width: 260
+            height: 260
+            min_value: 0
+            max_value: 4000
+            value: 0
+            bg_color: 0xE0E0E0
+            widgets:
+              - label:
+                  text: "AKTUALNA MOC"
+                  align: TOP_MID
+                  y: 50
+                  text_font: font_btn
+                  text_color: 0x555555
+              - label:
+                  id: lbl_pv_power_arc
+                  text: "-- W"
+                  align: CENTER
+                  y: 10
+                  text_font: font_title
+                  text_color: 0x000000
+
+        # Kafelki DZIŚ i CAŁKOWITA
+        - obj:
+            x: 20
+            y: 300
+            width: 150
+            height: 100
+            radius: 10
+            bg_color: 0xFFFFFF
+            border_width: 0
+            widgets:
+              - label: {text: "DZIŚ", align: TOP_MID, y: 15, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_pv_daily_2, text: "-- kWh", align: CENTER, y: 10, text_font: font_title, text_color: 0x2E7D32}
+
+        - obj:
+            x: 180
+            y: 300
+            width: 150
+            height: 100
+            radius: 10
+            bg_color: 0xFFFFFF
+            border_width: 0
+            widgets:
+              - label: {text: "CAŁKOWITA", align: TOP_MID, y: 15, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_pv_total, text: "-- kWh", align: CENTER, y: 10, text_font: font_title, text_color: 0x1976D2}
+
+        # --- PRAWA STRONA (Parametry Techniczne) ---
+        - obj:
+            x: 360
+            y: 20
+            width: 420
+            height: 410  # <--- ZMIENIONE Z 380 NA 410
+            radius: 10
+            bg_color: 0xFFFFFF
+            border_width: 0
+            widgets:
+              - label: {text: "PARAMETRY TECHNICZNE", align: TOP_MID, y: 15, text_font: font_btn, text_color: 0x333333}
+              
+              # AC
+              - label: {text: "SIEĆ (AC)", x: 20, y: 60, text_font: font_btn, text_color: 0x1976D2}
+              - label: {text: "Napięcie:", x: 20, y: 90, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_pv_v_ac, text: "-- V", x: 180, y: 90, text_font: font_btn, text_color: 0x000000}
+              
+              - label: {text: "Prąd:", x: 20, y: 120, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_pv_i_ac, text: "-- A", x: 180, y: 120, text_font: font_btn, text_color: 0x000000}
+              
+              - label: {text: "Częstotliwość:", x: 20, y: 150, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_pv_freq, text: "-- Hz", x: 180, y: 150, text_font: font_btn, text_color: 0x000000}
+
+              # LINIA ODDZIELAJĄCA 1
+              - line:
+                  points: ["20, 190", "400, 190"]
+                  line_color: 0xDDDDDD
+                  line_width: 2
+
+              # DC
+              - label: {text: "PANELE (PV)", x: 20, y: 210, text_font: font_btn, text_color: 0xE65100}
+              - label: {text: "Napięcie:", x: 20, y: 240, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_pv_v_dc, text: "-- V", x: 180, y: 240, text_font: font_btn, text_color: 0x000000}
+              
+              - label: {text: "Prąd:", x: 20, y: 270, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_pv_i_dc, text: "-- A", x: 180, y: 270, text_font: font_btn, text_color: 0x000000}
+
+              # LINIA ODDZIELAJĄCA 2
+              - line:
+                  points: ["20, 310", "400, 310"]
+                  line_color: 0xDDDDDD
+                  line_width: 2
+
+              # TEMP
+              - label: {text: "FALOWNIK", x: 20, y: 330, text_font: font_btn, text_color: 0x388E3C}
+              - label: {text: "Temperatura:", x: 20, y: 360, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_pv_temp, text: "-- °C", x: 180, y: 360, text_font: font_btn, text_color: 0x000000}

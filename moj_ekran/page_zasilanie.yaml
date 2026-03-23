@@ -1,0 +1,130 @@
+id: page_zasilanie
+bg_color: 0xEEEEEE
+
+widgets:
+  - obj:
+      width: 790
+      height: 420
+      x: 5
+      y: 55
+      bg_opa: 0
+      border_width: 0
+      widgets:
+        # --- LEWA KOLUMNA (STATYSTYKI) ---
+        - label: {text: "MIESIĄC:", x: 10, y: 10, text_font: font_btn, text_color: 0x333333}
+        - label: {id: lbl_import_monthly, text: "-- kWh", x: 10, y: 40, text_font: font_title, text_color: 0x1976D2}
+        - label: {id: lbl_export_monthly, text: "-- kWh", x: 10, y: 70, text_font: font_btn, text_color: 0x333333}
+        - label: {id: lbl_home_monthly, text: "-- kWh", x: 10, y: 95, text_font: font_btn, text_color: 0x333333}
+        - label: {text: "LICZNIKI:", x: 10, y: 135, text_font: font_btn, text_color: 0x333333}
+        - label: {id: lbl_water_total, text: "---.--- m3", x: 10, y: 165, text_font: font_btn, text_color: 0x03A9F4}
+        - label: {id: lbl_gas_total, text: "---.--- m3", x: 10, y: 195, text_font: font_btn, text_color: 0xFF9800}
+        - label: {id: lbl_gas_invoice, text: "Gaz: -- zł", x: 10, y: 265, text_font: font_btn, text_color: 0xC62828}
+
+        # ==========================================
+        # 1. FOTOWOLTAIKA (GÓRA ŚRODEK)
+        # ==========================================
+        - obj:
+            x: 310
+            y: 5
+            width: 140
+            height: 150
+            bg_opa: 0
+            border_width: 0
+            widgets:
+              - label: 
+                  id: lbl_pv_icon
+                  text: "\U000F1A73"
+                  align: TOP_MID
+                  text_font: font_mdi_wielka
+                  text_color: !lambda |-
+                    return (id(pv_power_logic).state > 10) ? Color(0xFBC02D) : Color(0x9E9E9E);
+              - label: {id: lbl_pv_power, text: "-- W", align: CENTER, y: 25, text_font: font_title, text_color: 0x000000}
+              - label: {id: lbl_pv_daily, text: "-- kWh", align: BOTTOM_MID, y: 0, text_font: font_btn, text_color: 0x333333}
+
+        # ==========================================
+        # 6. PORTFEL ZYSKU (GÓRA PRAWA)
+        # ==========================================
+        - obj:
+            x: 500
+            y: 5
+            width: 140
+            height: 150
+            bg_opa: 0
+            border_width: 0
+            widgets:
+              # Zielona ikona portfela i wyrównany tekst wartości pod spodem
+              - label: {id: lbl_wallet_icon, text: "\U000F0F8E", align: TOP_MID, y: 0, text_font: font_mdi_wielka, text_color: 0x4CAF50}
+              - label: {id: lbl_savings_pln, text: "0.00 PLN", align: CENTER, y: 25, text_font: font_title, text_color: 0x2E7D32}
+
+        # ==========================================
+        # 2. DOM (ŚRODEK LEWA)
+        # ==========================================
+        - obj:
+            x: 220
+            y: 150
+            width: 140
+            height: 150
+            bg_opa: 0
+            border_width: 0
+            widgets:
+              - label: 
+                  id: lbl_home_icon
+                  align: TOP_MID
+                  text_font: font_mdi_wielka
+                  text: !lambda |-
+                    return (id(grid_power_logic).state > 0) ? std::string("\U000F0F9C") : std::string("\U000F0F9B");
+                  text_color: !lambda |-
+                    return (id(grid_power_logic).state > 0) ? Color(0x4CAF50) : Color(0x2196F3);
+              - label: {id: lbl_home_power, text: "-- W", align: CENTER, y: 25, text_font: font_title, text_color: 0x000000}
+              - label: {id: lbl_home_daily, text: "-- kWh", align: BOTTOM_MID, y: 0, text_font: font_btn, text_color: 0x333333}
+
+        # ==========================================
+        # 3. SIEĆ (ŚRODEK PRAWA)
+        # ==========================================
+        - obj:
+            x: 420
+            y: 150
+            width: 140
+            height: 165
+            bg_opa: 0
+            border_width: 0
+            widgets:
+              - label: 
+                  id: lbl_grid_icon
+                  align: TOP_MID
+                  text_font: font_mdi_wielka
+                  text: !lambda |-
+                    return (id(grid_power_logic).state > 0) ? std::string("\U000F192D") : std::string("\U000F192C");
+                  text_color: !lambda |-
+                    return (id(grid_power_logic).state > 0) ? Color(0xF44336) : Color(0x4CAF50);
+              - label: {id: lbl_grid_power, text: "-- W", align: CENTER, y: 15, text_font: font_title, text_color: 0x000000}
+              - label: {id: lbl_import_daily, text: "-- kWh", align: BOTTOM_MID, y: -20, text_font: font_btn, text_color: 0xC62828}
+              - label: {id: lbl_export_daily, text: "-- kWh", align: BOTTOM_MID, y: 0, text_font: font_btn, text_color: 0x2E7D32}
+
+        # ==========================================
+        # 4. WODA (POMPA)
+        # ==========================================
+        - obj:
+            x: 220
+            y: 295
+            width: 140
+            height: 130
+            bg_opa: 0
+            border_width: 0
+            widgets:
+              - label: {text: "\U000F058F", align: TOP_MID, y: 0, text_font: font_mdi_wielka, text_color: 0x03A9F4}
+              - label: {id: lbl_water_daily, text: "-- L", align: BOTTOM_MID, y: 0, text_font: font_title, text_color: 0x000000}
+
+        # ==========================================
+        # 5. GAZ
+        # ==========================================
+        - obj:
+            x: 420
+            y: 295
+            width: 140
+            height: 130
+            bg_opa: 0
+            border_width: 0
+            widgets:
+              - label: {text: "\U000F0238", align: TOP_MID, y: 0, text_font: font_mdi_wielka, text_color: 0xFF9800}
+              - label: {id: lbl_gas_daily, text: "-- m3", align: BOTTOM_MID, y: 0, text_font: font_title, text_color: 0x000000}

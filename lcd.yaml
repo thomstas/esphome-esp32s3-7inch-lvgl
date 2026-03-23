@@ -1,0 +1,225 @@
+esphome:
+  name: lcd
+  friendly_name: "LCD"
+  platformio_options:
+    build_flags: "-DBOARD_HAS_PSRAM"
+    board_build.arduino.memory_type: qio_opi
+    board_build.flash_mode: dio
+    board_upload.maximum_ram_size: 524288
+  on_boot:
+    priority: -100
+    then:
+      - delay: 5s
+      - script.execute: sync_ui_colors
+      - script.execute: screen_timeout_script
+      - script.execute: sync_thermostat_colors
+      - lvgl.slider.update:
+          id: slider_brightness
+          value: !lambda 'return id(brightness_setpoint) * 100;'
+      - lvgl.label.update:
+          id: lbl_brightness_val
+          text: !lambda 'return str_sprintf("%.0f%%", id(brightness_setpoint) * 100);'
+      - lvgl.page.show: page_radar_europa
+esp32:
+  board: esp32-s3-devkitc-1
+  variant: ESP32S3
+  flash_size: 8MB
+  cpu_frequency: 240MHz
+  framework:
+    type: esp-idf
+    sdkconfig_options:
+      CONFIG_ESPTOOLPY_FLASHSIZE_8MB: "y"
+      CONFIG_ESPTOOLPY_FLASHMODE_DIO: "y"
+      CONFIG_ESPTOOLPY_FLASHFREQ_80M: "y"
+      CONFIG_SPIRAM_MODE_OCT: "y"
+      CONFIG_SPIRAM_SPEED_80M: "y"
+      CONFIG_SPIRAM_RODATA: "y"
+      CONFIG_COMPILER_OPTIMIZATION_DEFAULT: "y"
+
+psram:
+  mode: octal
+  speed: 80MHz
+http_request:
+  verify_ssl: false
+logger:
+
+
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+  services:
+    - service: pokaz_okno_menu
+      then:
+        - lvgl.obj.update:
+            id: my_menu_window
+            hidden: false
+    - service: zamknij_okno_menu
+      then:
+        - lvgl.obj.update:
+            id: my_menu_window
+            hidden: true
+    - service: pokaz_strone_dom
+      then:
+        - lvgl.page.show: page_dom
+    - service: pokaz_strone_termostat
+      then:
+        - lvgl.page.show: page_termostat
+    - service: pokaz_strone_media
+      then:
+        - lvgl.page.show: page_media
+    - service: pokaz_strone_zasilanie
+      then:
+        - lvgl.page.show: page_zasilanie
+    - service: pokaz_strone_pogoda
+      then:
+        - lvgl.page.show: page_pogoda
+    - service: pokaz_strone_koszty
+      then:
+        - lvgl.page.show: page_koszty
+    - service: pokaz_strone_ustawienia
+      then:
+        - lvgl.page.show: page_ustawienia
+    - service: pokaz_strone_prognoza
+      then:
+        - lvgl.page.show: page_prognoza
+    - service: pokaz_strone_wygaszacz
+      then:
+        - lvgl.page.show: page_wygaszacz   
+    - service: pokaz_strone_radar
+      then:
+        - lvgl.page.show: page_radar     
+    - service: pokaz_strone_radar_europa
+      then:
+        - lvgl.page.show: page_radar_europa
+    - service: pokaz_strone_koszty_roczne
+      then:
+        - lvgl.page.show: page_koszty_roczne                     
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  power_save_mode: none
+# --- WCIĄGNIĘCIE WYDZIELONYCH MODUŁÓW ---
+sensor: !include moj_ekran/bateria.yaml
+font: !include moj_ekran/fonts.yaml
+online_image: !include moj_ekran/obrazki.yaml
+time:
+  - platform: homeassistant
+    id: my_time
+    timezone: "CET-1CEST,M3.5.0,M10.5.0/3"
+    on_time:
+      # Równo o 22:00 -> idź do wygaszacza
+      - seconds: 0
+        minutes: 0
+        hours: 22
+        then:
+          - lvgl.page.show: page_wygaszacz
+          - lvgl.obj.update: {id: pasek_statusu, hidden: true}
+          - light.turn_on: {id: screen_backlight, brightness: 0.5}
+
+      # Równo o 05:30 -> idź do mapy Europy
+      - seconds: 0
+        minutes: 30
+        hours: 5
+        then:
+          - lvgl.page.show: page_radar_europa
+          - lvgl.obj.update: {id: pasek_statusu, hidden: false}
+          - light.turn_on: {id: screen_backlight, brightness: !lambda 'return id(brightness_setpoint);'}
+
+
+spi:
+  clk_pin: 11
+  mosi_pin: 12
+
+display:
+  - platform: mipi_rgb
+    id: my_display
+    model: CUSTOM
+    dimensions: { width: 800, height: 480 }
+    color_order: RGB
+    pclk_frequency: 16MHz
+    pclk_inverted: true
+    auto_clear_enabled: false
+    update_interval: never
+    init_sequence: []
+    de_pin: 5
+    hsync_pin: 46
+    vsync_pin: 3
+    pclk_pin: 7
+    data_pins:
+      red:   [1, 2, 42, 41, 40]
+      green: [39, 0, 45, 48, 47, 21]
+      blue:  [14, 38, 18, 17, 10]
+    hsync_front_porch: 40
+    hsync_pulse_width: 48
+    hsync_back_porch: 40
+    vsync_front_porch: 13
+    vsync_pulse_width: 1
+    vsync_back_porch: 31
+
+i2c:
+  sda: 8
+  scl: 9
+  scan: true
+
+output:
+  - platform: ledc
+    id: backlight_pwm
+    pin: 16
+    frequency: 20000 Hz    # ~20 kHz – komfortowo
+
+light:
+  - platform: monochromatic
+    output: backlight_pwm
+    name: "Podświetlenie LCD"
+    id: screen_backlight
+    restore_mode: ALWAYS_ON
+
+touchscreen:
+  - platform: gt911
+    id: my_touch
+    display: my_display
+    interrupt_pin: 4
+    on_touch:
+      - light.turn_on:
+          id: screen_backlight
+          brightness: !lambda 'return id(brightness_setpoint);'
+      - script.execute: screen_timeout_script
+
+globals:
+  - id: temp_setpoint
+    type: float
+    initial_value: '21.0'
+  - id: brightness_setpoint
+    type: float
+    initial_value: '1.0'
+    restore_value: yes
+
+packages:
+  dane_ha: !include moj_ekran/sensory.yaml
+  skrypty: !include moj_ekran/skrypty.yaml
+  interwaly: !include moj_ekran/interwaly.yaml
+lvgl:
+  displays: [my_display]
+  touchscreens: [my_touch]
+  buffer_size: 100%
+  top_layer:
+    widgets: !include moj_ekran/ui_shell.yaml
+  pages:
+    - !include moj_ekran/page_dom.yaml
+    - !include moj_ekran/page_termostat.yaml
+    - !include moj_ekran/page_media.yaml
+    - !include moj_ekran/page_pogoda.yaml
+    - !include moj_ekran/page_zasilanie.yaml
+    - !include moj_ekran/page_koszty.yaml
+    - !include moj_ekran/page_ustawienia.yaml
+    - !include moj_ekran/page_prognoza.yaml
+    - !include moj_ekran/page_wygaszacz.yaml
+    - !include moj_ekran/page_radar.yaml
+    - !include moj_ekran/page_radar_europa.yaml
+    - !include moj_ekran/page_koszty_roczne.yaml

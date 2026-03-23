@@ -1,0 +1,1180 @@
+sensor:
+  # ==========================================
+  # --- POGODA ---
+  # ==========================================
+  - platform: homeassistant
+    id: w_temp_out
+    entity_id: sensor.ws2900_v2_01_08_outdoor_temperature 
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_w_temp_out
+            text: !lambda |-
+              if(std::isnan(x)) return "-- °C";
+              return str_sprintf("%.1f °C", x);
+
+  - platform: homeassistant
+    id: w_hum_out
+    entity_id: sensor.ws2900_v2_01_08_humidity
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_w_hum_out
+            text: !lambda |-
+              if(std::isnan(x)) return "-- %";
+              return str_sprintf("%.0f %%", x);
+
+  - platform: homeassistant
+    id: w_temp_in
+    entity_id: sensor.ws2900_v2_01_08_indoor_temperature
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_w_temp_in
+            text: !lambda |-
+              if(std::isnan(x)) return "-- °C";
+              return str_sprintf("%.1f °C", x);
+
+  - platform: homeassistant
+    id: w_hum_in
+    entity_id: sensor.ws2900_v2_01_08_indoor_humidity
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_w_hum_in
+            text: !lambda |-
+              if(std::isnan(x)) return "-- %";
+              return str_sprintf("%.0f %%", x);
+
+  - platform: homeassistant
+    id: w_pres
+    entity_id: sensor.ws2900_v2_01_08_relative_pressure
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_w_pres
+            text: !lambda |-
+              if(std::isnan(x)) return "-- hPa";
+              return str_sprintf("%.1f hPa", x);
+
+  - platform: homeassistant
+    id: w_wind_s
+    entity_id: sensor.ws2900_v2_01_08_wind_speed
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_w_wind_s
+            text: !lambda |-
+              if(std::isnan(x)) return "-- km/h";
+              return str_sprintf("%.1f km/h", x);
+
+  - platform: homeassistant
+    id: w_wind_d
+    entity_id: sensor.ws2900_v2_01_08_wind_direction
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_w_wind_d
+            text: !lambda |-
+              if(std::isnan(x)) return "-- °";
+              return str_sprintf("%.0f °", x);
+
+  - platform: homeassistant
+    id: w_solar_l
+    entity_id: sensor.ws2900_v2_01_08_solar_lux
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_w_solar_l
+            text: !lambda |-
+              if(std::isnan(x)) return "-- lx";
+              return str_sprintf("%.0f lx", x);
+
+  - platform: homeassistant
+    id: w_solar_r
+    entity_id: sensor.ws2900_v2_01_08_solar_radiation
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_w_solar_r
+            text: !lambda |-
+              if(std::isnan(x)) return "-- W/m2";
+              return str_sprintf("%.0f W/m2", x);
+
+  - platform: homeassistant
+    id: w_uv
+    entity_id: sensor.ws2900_v2_01_08_uv_index
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_w_uv
+            text: !lambda |-
+              if(std::isnan(x)) return "--";
+              return str_sprintf("%.0f", x);
+
+  - platform: homeassistant
+    id: w_rain_r
+    entity_id: sensor.ws2900_v2_01_08_rain_rate
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_w_rain_r
+            text: !lambda |-
+              if(std::isnan(x)) return "-- mm/h";
+              return str_sprintf("%.1f mm/h", x);
+
+  - platform: homeassistant
+    id: w_rain_d
+    entity_id: sensor.ws2900_v2_01_08_daily_rain_rate
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_w_rain_d
+            text: !lambda |-
+              if(std::isnan(x)) return "-- mm";
+              return str_sprintf("%.1f mm", x);
+
+  - platform: homeassistant
+    id: w_rain_w
+    entity_id: sensor.ws2900_v2_01_08_weekly_rain_rate
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_w_rain_w
+            text: !lambda |-
+              if(std::isnan(x)) return "-- mm";
+              return str_sprintf("%.1f mm", x);
+
+  - platform: homeassistant
+    id: w_rain_m
+    entity_id: sensor.ws2900_v2_01_08_monthly_rain_rate
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_w_rain_m
+            text: !lambda |-
+              if(std::isnan(x)) return "-- mm";
+              return str_sprintf("%.1f mm", x);
+   # ==========================================
+# ==========================================
+  # --- PROGNOZA POGODY NA 6 DNI (TEMPERATURY) ---
+  # ==========================================
+  - platform: homeassistant
+    id: prog_d1_max
+    entity_id: sensor.prognoza_lcd
+    attribute: d1_max
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_prog_temp_max_1
+            text: !lambda 'return str_sprintf("%.0f °C", x);'
+
+  - platform: homeassistant
+    id: prog_d1_min
+    entity_id: sensor.prognoza_lcd
+    attribute: d1_min
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_prog_temp_min_1
+            text: !lambda 'return str_sprintf("%.0f °C", x);'
+
+  - platform: homeassistant
+    id: prog_d2_max
+    entity_id: sensor.prognoza_lcd
+    attribute: d2_max
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_prog_temp_max_2
+            text: !lambda 'return str_sprintf("%.0f °C", x);'
+
+  - platform: homeassistant
+    id: prog_d2_min
+    entity_id: sensor.prognoza_lcd
+    attribute: d2_min
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_prog_temp_min_2
+            text: !lambda 'return str_sprintf("%.0f °C", x);'
+
+  - platform: homeassistant
+    id: prog_d3_max
+    entity_id: sensor.prognoza_lcd
+    attribute: d3_max
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_prog_temp_max_3
+            text: !lambda 'return str_sprintf("%.0f °C", x);'
+
+  - platform: homeassistant
+    id: prog_d3_min
+    entity_id: sensor.prognoza_lcd
+    attribute: d3_min
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_prog_temp_min_3
+            text: !lambda 'return str_sprintf("%.0f °C", x);'
+
+  - platform: homeassistant
+    id: prog_d4_max
+    entity_id: sensor.prognoza_lcd
+    attribute: d4_max
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_prog_temp_max_4
+            text: !lambda 'return str_sprintf("%.0f °C", x);'
+
+  - platform: homeassistant
+    id: prog_d4_min
+    entity_id: sensor.prognoza_lcd
+    attribute: d4_min
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_prog_temp_min_4
+            text: !lambda 'return str_sprintf("%.0f °C", x);'
+
+  - platform: homeassistant
+    id: prog_d5_max
+    entity_id: sensor.prognoza_lcd
+    attribute: d5_max
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_prog_temp_max_5
+            text: !lambda 'return str_sprintf("%.0f °C", x);'
+
+  - platform: homeassistant
+    id: prog_d5_min
+    entity_id: sensor.prognoza_lcd
+    attribute: d5_min
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_prog_temp_min_5
+            text: !lambda 'return str_sprintf("%.0f °C", x);'
+
+  - platform: homeassistant
+    id: prog_d6_max
+    entity_id: sensor.prognoza_lcd
+    attribute: d6_max
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_prog_temp_max_6
+            text: !lambda 'return str_sprintf("%.0f °C", x);'
+
+  - platform: homeassistant
+    id: prog_d6_min
+    entity_id: sensor.prognoza_lcd
+    attribute: d6_min
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_prog_temp_min_6
+            text: !lambda 'return str_sprintf("%.0f °C", x);'
+
+
+  # --- MEDIA / FALOWNIK ---
+  # ==========================================
+  - platform: homeassistant
+    id: pv_power
+    entity_id: sensor.moc_aktualna_inv_2
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_pv_power
+            text: !lambda |-
+              if(std::isnan(x)) return "--- W";
+              return str_sprintf("%.0f W", x);
+        - lvgl.label.update:
+            id: lbl_pv_power_arc
+            text: !lambda |-
+              if(std::isnan(x)) return "--- W";
+              return str_sprintf("%.0f W", x);
+        - lvgl.arc.update:
+            id: arc_pv_power
+            value: !lambda |-
+              if(std::isnan(x)) return 0;
+              return x;
+
+  - platform: homeassistant
+    id: pv_daily
+    entity_id: sensor.produkcja_dzis_inv
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_pv_daily
+            text: !lambda |-
+              if(std::isnan(x)) return "--- kWh";
+              return str_sprintf("%.1f kWh", x);
+        - lvgl.label.update:
+            id: lbl_pv_daily_2
+            text: !lambda |-
+              if(std::isnan(x)) return "--- kWh";
+              return str_sprintf("%.1f kWh", x);
+
+  - platform: homeassistant
+    id: pv_total
+    entity_id: sensor.produkcja_total_inv
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_pv_total
+            text: !lambda |-
+              if(std::isnan(x)) return "--- kWh";
+              return str_sprintf("%.0f kWh", x);
+
+  - platform: homeassistant
+    id: pv_v_ac
+    entity_id: sensor.napiecie_ac_inv
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_pv_v_ac
+            text: !lambda |-
+              if(std::isnan(x)) return "--- V";
+              return str_sprintf("%.1f V", x);
+
+  - platform: homeassistant
+    id: pv_i_ac
+    entity_id: sensor.prad_ac_inv
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_pv_i_ac
+            text: !lambda |-
+              if(std::isnan(x)) return "--- A";
+              return str_sprintf("%.2f A", x);
+
+  - platform: homeassistant
+    id: pv_freq
+    entity_id: sensor.czestotliwosc_inv
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_pv_freq
+            text: !lambda |-
+              if(std::isnan(x)) return "--- Hz";
+              return str_sprintf("%.1f Hz", x);
+
+  - platform: homeassistant
+    id: pv_v_dc
+    entity_id: sensor.napiecie_pv_inv
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_pv_v_dc
+            text: !lambda |-
+              if(std::isnan(x)) return "--- V";
+              return str_sprintf("%.1f V", x);
+
+  - platform: homeassistant
+    id: pv_i_dc
+    entity_id: sensor.prad_pv_inv
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_pv_i_dc
+            text: !lambda |-
+              if(std::isnan(x)) return "--- A";
+              return str_sprintf("%.2f A", x);
+
+  - platform: homeassistant
+    id: pv_temp
+    entity_id: sensor.temperatura_inv
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_pv_temp
+            text: !lambda |-
+              if(std::isnan(x)) return "--- °C";
+              return str_sprintf("%.1f °C", x);
+
+  # ==========================================
+  # --- ZASILANIE (KÓŁKA TAURON I DOM) ---
+  # ==========================================
+  - platform: homeassistant
+    id: grid_power
+    entity_id: sensor.used_energy
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_grid_power
+            text: !lambda |-
+              if(std::isnan(x)) return "--- W";
+              return str_sprintf("%.0f W", x);
+
+  - platform: homeassistant
+    id: home_power
+    entity_id: sensor.house_power_consumption_2
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_home_power
+            text: !lambda |-
+              if(std::isnan(x)) return "--- W";
+              return str_sprintf("%.0f W", x);
+
+  # ==========================================
+  # --- LICZNIKI ENERGII, WODY I GAZU ---
+  # ==========================================
+  - platform: homeassistant
+    id: import_daily
+    entity_id: sensor.dzienna_energia_pobrana
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_import_daily
+            text: !lambda |-
+              if(std::isnan(x)) return "--- kWh";
+              return str_sprintf("%.1f kWh", x);
+
+  - platform: homeassistant
+    id: export_daily
+    entity_id: sensor.dzienna_energia_oddana
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_export_daily
+            text: !lambda |-
+              if(std::isnan(x)) return "--- kWh";
+              return str_sprintf("%.1f kWh", x);
+
+  - platform: homeassistant
+    id: home_daily
+    entity_id: sensor.dzienne_zuzycie_domu
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_home_daily
+            text: !lambda |-
+              if(std::isnan(x)) return "--- kWh";
+              return str_sprintf("%.1f kWh", x);
+
+  - platform: homeassistant
+    id: import_monthly
+    entity_id: sensor.miesieczna_energia_pobrana
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_import_monthly
+            text: !lambda |-
+              if(std::isnan(x)) return "--- kWh";
+              return str_sprintf("%.0f kWh", x);
+        - lvgl.label.update:
+            id: lbl_k_prad_real_z
+            text: !lambda |-
+              if(std::isnan(x)) return "--- kWh";
+              return str_sprintf("%.0f kWh", x);
+
+  - platform: homeassistant
+    id: export_monthly
+    entity_id: sensor.miesieczna_energia_oddana
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_export_monthly
+            text: !lambda |-
+              if(std::isnan(x)) return "--- kWh";
+              return str_sprintf("%.0f kWh", x);
+
+  - platform: homeassistant
+    id: home_monthly_kwh
+    entity_id: sensor.miesieczne_zuzycie_domu
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_home_monthly
+            text: !lambda |-
+              if(std::isnan(x)) return "--- kWh";
+              return str_sprintf("%.0f kWh", x);
+        - lvgl.label.update:
+            id: lbl_k_house_z
+            text: !lambda |-
+              if(std::isnan(x)) return "--- kWh";
+              return str_sprintf("%.1f kWh", x);
+
+  - platform: homeassistant
+    id: water_daily
+    entity_id: sensor.dzienne_zuzycie_wody
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_water_daily
+            text: !lambda |-
+              if(std::isnan(x)) return "--- L";
+              return str_sprintf("%.0f L", x * 1000.0);
+
+  - platform: homeassistant
+    id: gas_daily
+    entity_id: sensor.dzienne_zuzycie_gazu
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_gas_daily
+            text: !lambda |-
+              if(std::isnan(x)) return "--- m3";
+              return str_sprintf("%.2f m3", x);
+
+  - platform: homeassistant
+    id: water_total
+    entity_id: sensor.watermeter_value
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_water_total
+            text: !lambda |-
+              if(std::isnan(x)) return "Woda --- m3";
+              return str_sprintf("Woda %.2f m3", x);
+
+  - platform: homeassistant
+    id: gas_total
+    entity_id: sensor.gasmeter_value
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_gas_total
+            text: !lambda |-
+              if(std::isnan(x)) return "GAZ --- m3";
+              return str_sprintf("GAZ %.2f m3", x);
+
+  # ==========================================
+  # --- DANE KOSZTOWE (PLN i MIESIĘCZNE M3) ---
+  # ==========================================
+  - platform: homeassistant
+    id: s_zuz_m_woda
+    entity_id: sensor.miesieczne_zuzycie_wody_2
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_k_woda_z
+            text: !lambda |-
+              if(std::isnan(x)) return "--- m3";
+              return str_sprintf("%.2f m3", x);
+
+  - platform: homeassistant
+    id: s_zuz_m_gaz
+    entity_id: sensor.miesieczne_zuzycie_gazu
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_k_gaz_z
+            text: !lambda |-
+              if(std::isnan(x)) return "--- m3";
+              return str_sprintf("%.2f m3", x);
+
+  - platform: homeassistant
+    id: s_koszt_m_gaz
+    entity_id: sensor.miesieczny_koszt_gazu
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_k_gaz_m_k
+            text: !lambda |-
+              if(std::isnan(x)) return "--- zł";
+              return str_sprintf("%.2f zł", x);
+
+  - platform: homeassistant
+    id: house_monthly_cost
+    entity_id: sensor.miesieczny_wirtualny_koszt_pradu
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_k_house_k
+            text: !lambda |-
+              if(std::isnan(x)) return "--- zł";
+              return str_sprintf("%.2f zł", x);
+
+  - platform: homeassistant
+    id: import_monthly_cost
+    entity_id: sensor.realny_miesieczny_koszt_pradu
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_k_prad_real_k
+            text: !lambda |-
+              if(std::isnan(x)) return "--- zł";
+              return str_sprintf("%.2f zł", x);
+
+  - platform: homeassistant
+    id: water_monthly_cost
+    entity_id: sensor.miesieczny_koszt_wody
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_k_woda_k
+            text: !lambda |-
+              if(std::isnan(x)) return "--- zł";
+              return str_sprintf("%.2f zł", x);
+
+  - platform: homeassistant
+    id: gas_invoice
+    entity_id: sensor.pgnig_gas_invoice_sensor_8018590365500076475509_5829681
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_k_gaz_k
+            text: !lambda |-
+              if(std::isnan(x)) return "--- zł";
+              return str_sprintf("%.2f zł", x);
+        - lvgl.label.update:
+            id: lbl_gas_invoice
+            text: !lambda |-
+              if(std::isnan(x)) return "Gaz do zapłaty: --- zł";
+              return str_sprintf("Gaz do zapłaty: %.2f zł", x);
+
+  - platform: homeassistant
+    id: pv_savings_koszty
+    entity_id: sensor.miesieczny_zysk_pv
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_k_zysk_pv_val
+            text: !lambda |-
+              if(std::isnan(x)) return "--- zł";
+              return str_sprintf("%.2f zł", x);
+
+  - platform: homeassistant
+    id: savings_pln
+    entity_id: sensor.dzienna_oszczednosc_pln
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_savings_pln
+            text: !lambda |-
+              if(std::isnan(x)) return "--- PLN";
+              return str_sprintf("%.2f PLN", x);
+
+  - platform: homeassistant
+    id: total_monthly_costs
+    entity_id: sensor.miesieczne_koszty_razem
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_k_suma
+            text: !lambda |-
+              if(std::isnan(x)) return "--- zł";
+              return str_sprintf("%.2f zł", x);
+  - platform: homeassistant
+    id: magazyn_tauron
+    entity_id: sensor.magazyn_tauron_na_zywo_miesiac
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_k_magazyn_val
+            text: !lambda 'return str_sprintf("%.1f kWh", x);'
+
+  # ==========================================
+  # --- DANE NA EKRAN KOSZTÓW ROCZNYCH ---
+  # ==========================================
+  
+  # 1. PRĄD (Pobrany z sieci)
+  - platform: homeassistant
+    id: kr_prad_z
+    entity_id: sensor.roczna_energia_pobrana
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_kr_prad_z
+            text: !lambda 'return str_sprintf("%.1f kWh", x);'
+            
+  - platform: homeassistant
+    id: kr_prad_k
+    entity_id: sensor.roczny_koszt_pradu
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_kr_prad_k
+            text: !lambda 'return str_sprintf("%.2f zł", x);'
+
+  # 2. WODA
+  - platform: homeassistant
+    id: kr_woda_z
+    entity_id: sensor.roczne_zuzycie_wody
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_kr_woda_z
+            text: !lambda 'return str_sprintf("%.2f m3", x);'
+            
+  - platform: homeassistant
+    id: kr_woda_k
+    entity_id: sensor.roczny_koszt_wody
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_kr_woda_k
+            text: !lambda 'return str_sprintf("%.2f zł", x);'
+
+  # 3. GAZ
+  - platform: homeassistant
+    id: kr_gaz_z
+    entity_id: sensor.roczne_zuzycie_gazu
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_kr_gaz_z
+            text: !lambda 'return str_sprintf("%.2f m3", x);'
+            
+  - platform: homeassistant
+    id: kr_gaz_k
+    entity_id: sensor.roczny_koszt_gazu
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_kr_gaz_k
+            text: !lambda 'return str_sprintf("%.2f zł", x);'
+
+  # 4. ZYSK Z PV (Oszczędność roczna)
+  - platform: homeassistant
+    id: kr_zysk_pv
+    entity_id: sensor.roczna_oszczednosc_pv
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_kr_zysk_pv
+            text: !lambda 'return str_sprintf("%.2f zł", x);'
+
+  # 5. CAŁKOWITE ZUŻYCIE DOMU
+  - platform: homeassistant
+    id: kr_dom_z
+    entity_id: sensor.roczne_zuzycie_domu
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_kr_dom_z
+            text: !lambda 'return str_sprintf("%.1f kWh", x);'
+  # ==========================================
+  # --- TERMOSTAT ---
+  # ==========================================
+  - platform: homeassistant
+    id: current_temp
+    entity_id: sensor.temperatura_termostat 
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_curr_temp
+            text: !lambda |-
+              if(std::isnan(x)) return "--.- °C";
+              return str_sprintf("%.1f °C", x);
+
+  - platform: homeassistant
+    id: ha_temp_setpoint
+    entity_id: climate.ogrzewanie
+    attribute: temperature
+    on_value:
+      then:
+        - globals.set:
+            id: temp_setpoint
+            value: !lambda "return x;"
+        - lvgl.label.update:
+            id: lbl_temp_set
+            text: !lambda 'return str_sprintf("%.1f °C", x);'
+
+  # --- STATUS SYGNAŁU WIFI ---
+
+  - platform: uptime
+    id: sys_uptime
+    name: "Czas pracy"
+    update_interval: 60s
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_uptime
+            text: !lambda |-
+              int days = int(x / 86400);
+              int hours = int((int(x) % 86400) / 3600);
+              int mins = int((int(x) % 3600) / 60);
+              if (days > 0) {
+                return str_sprintf("%d dni, %02d:%02d", days, hours, mins);
+              } else {
+                return str_sprintf("%02d:%02d", hours, mins);
+              }
+
+  - platform: wifi_signal
+    id: wifi_signal_sensor
+    name: "WiFi Signal"
+    update_interval: 60s
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: icon_wifi
+            text_color: 0x4CAF50
+        - lvgl.label.update:
+            id: lbl_wifi_str
+            text: !lambda 'return str_sprintf("%.0f dBm", x);'
+
+# LOGIKA DLA PANELI PV
+  - platform: homeassistant
+    id: pv_power_logic
+    entity_id: sensor.moc_aktualna_inv_2
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_pv_icon
+            # Zmieniono z lvgl::Color na samo Color
+            text_color: !lambda |-
+              return (x > 10) ? Color(0xFBC02D) : Color(0x9E9E9E);
+
+  # LOGIKA DLA SIECI I DOMU
+  - platform: homeassistant
+    id: grid_power_logic
+    entity_id: sensor.used_energy
+    on_value:
+      then:
+        # --- ZMIANA DLA SŁUPA (SIEĆ) ---
+        - lvgl.label.update:
+            id: lbl_grid_icon
+            # Dodano std::string(), żeby naprawić błąd c_str
+            text: !lambda |-
+              return (x > 0) ? std::string("\U000F192C") : std::string("\U000F192D");
+            text_color: !lambda |-
+              return (x > 0) ? Color(0xF44336) : Color(0x4CAF50);
+        
+        # --- ZMIANA DLA DOMU ---
+        - lvgl.label.update:
+            id: lbl_home_icon
+            # Dodano std::string()
+            text: !lambda |-
+              return (x > 0) ? std::string("\U000F0F9C") : std::string("\U000F0F9B");
+            text_color: !lambda |-
+              return (x > 0) ? Color(0x4CAF50) : Color(0x2196F3);
+
+text_sensor:
+  - platform: homeassistant
+    id: hvac_mode_sensor
+    entity_id: climate.ogrzewanie
+    on_value:
+      then:
+        - script.execute: sync_thermostat_colors
+
+  - platform: homeassistant
+    id: w_state
+    entity_id: weather.forecast_home
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_w_state
+            text: !lambda |-
+              std::string stan = x;
+              if (stan == "clear-night") return "Bezchmurna noc";
+              if (stan == "cloudy") return "Pochmurno";
+              if (stan == "fog") return "Mgła";
+              if (stan == "hail") return "Grad";
+              if (stan == "lightning") return "Burza";
+              if (stan == "lightning-rainy") return "Burza z deszczem";
+              if (stan == "partlycloudy") return "Częściowe zachm.";
+              if (stan == "pouring") return "Ulewa";
+              if (stan == "rainy") return "Deszczowo";
+              if (stan == "snowy") return "Śnieg";
+              if (stan == "snowy-rainy") return "Śnieg z deszczem";
+              if (stan == "sunny") return "Słonecznie";
+              if (stan == "windy") return "Wietrznie";
+              return stan.c_str();
+        - lvgl.label.update:
+            id: lbl_w_icon
+            text: !lambda |-
+              std::string stan = x;
+              if (stan == "clear-night") return "🌙";
+              if (stan == "cloudy" || stan == "partlycloudy" || stan == "windy" || stan == "fog") return "☁";
+              if (stan == "rainy" || stan == "pouring" || stan == "hail") return "☂";
+              if (stan == "lightning" || stan == "lightning-rainy") return "⚡";
+              if (stan == "snowy" || stan == "snowy-rainy") return "❄";
+              return "☀";
+
+  - platform: homeassistant
+    id: w_sunrise
+    entity_id: sensor.sun_next_rising
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_w_sunrise
+            text: !lambda 'return x.substr(11, 5);'
+
+  - platform: homeassistant
+    id: w_sunset
+    entity_id: sensor.sun_next_setting
+    on_value:
+      then:
+        - lvgl.label.update:
+            id: lbl_w_sunset
+            text: !lambda 'return x.substr(11, 5);'
+# ==========================================
+# --- PRZYCISKI ŚWIATEŁ (1 - 27) ---
+# ==========================================
+# NAPRAWIONO: Błąd flow node (line 547) poprzez zmianę na styl blokowy
+  - platform: homeassistant
+    id: s_1
+    entity_id: switch.lamp_switch_1_3
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_2
+    entity_id: light.ambient_4
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_3
+    entity_id: light.ambient_2_3
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_4
+    entity_id: light.wiz_tunable_white_40aefe
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_5
+    entity_id: switch.kitchen_switch_1_3
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_6
+    entity_id: switch.lighting_switch_switch_1_2
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_7
+    entity_id: switch.lighting_switch_switch_2_3
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_8
+    entity_id: switch.lighting_switch_switch_3_3
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_9
+    entity_id: switch.workshop_switch_1_3
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_10
+    entity_id: switch.wiata_socket_1_3
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_11
+    entity_id: light.garland
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_12
+    entity_id: light.kury_kurwisko
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_13
+    entity_id: light.kury_kurnik
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_14
+    entity_id: light.lcd
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_15
+    entity_id: light.flower_lamp
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_16
+    entity_id: light.pink_socket_1
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_17
+    entity_id: light.red_socket_1
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_18
+    entity_id: switch.christmas_tree_socket_1_2
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_19
+    entity_id: light.bedroom1_3
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_20
+    entity_id: light.bedroom2_3
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_21
+    entity_id: light.ice_socket_1
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_22
+    entity_id: light.bathroom_3
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_23
+    entity_id: switch.monitor_socket_1_3
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_24
+    entity_id: light.plants_socket_1
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_25
+    entity_id: light.biurko
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_26
+    entity_id: light.salt_lamp
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+  - platform: homeassistant
+    id: s_27
+    entity_id: light.komorka_3
+    on_value:
+      then:
+        - script.execute: sync_ui_colors
+
+# ==========================================
+  # --- PROGNOZA POGODY (IKONY I OPIS) ---
+  # ==========================================
+  - platform: homeassistant
+    id: prog_d1_cond
+    entity_id: sensor.prognoza_lcd
+    attribute: d1_cond
+    on_value:
+      - lvgl.label.update:
+          id: lbl_prog_icon_1
+          text: !lambda |-
+            if (x == "clear-night") return "🌙"; if (x == "sunny") return "☀"; if (x == "partlycloudy") return "⛅"; if (x == "cloudy" || x == "fog") return "☁"; if (x == "pouring" || x == "rainy") return "☂"; if (x == "snowy" || x == "snowy-rainy" || x == "hail") return "❄"; if (x == "lightning" || x == "lightning-rainy") return "⚡"; return "☁";
+      - lvgl.label.update:
+          id: lbl_prog_desc_1
+          text: !lambda |-
+            if (x == "clear-night") return "Jasno"; if (x == "sunny") return "Słonecznie"; if (x == "partlycloudy") return "Częśc. pochm."; if (x == "cloudy") return "Pochmurno"; if (x == "fog") return "Mgła"; if (x == "pouring") return "Ulewa"; if (x == "rainy") return "Deszcz"; if (x == "snowy" || x == "snowy-rainy") return "Śnieg"; if (x == "hail") return "Grad"; if (x == "lightning" || x == "lightning-rainy") return "Burza"; return "Nieznane";
+
+  - platform: homeassistant
+    id: prog_d2_cond
+    entity_id: sensor.prognoza_lcd
+    attribute: d2_cond
+    on_value:
+      - lvgl.label.update:
+          id: lbl_prog_icon_2
+          text: !lambda |-
+            if (x == "clear-night") return "🌙"; if (x == "sunny") return "☀"; if (x == "partlycloudy") return "⛅"; if (x == "cloudy" || x == "fog") return "☁"; if (x == "pouring" || x == "rainy") return "☂"; if (x == "snowy" || x == "snowy-rainy" || x == "hail") return "❄"; if (x == "lightning" || x == "lightning-rainy") return "⚡"; return "☁";
+      - lvgl.label.update:
+          id: lbl_prog_desc_2
+          text: !lambda |-
+            if (x == "clear-night") return "Jasno"; if (x == "sunny") return "Słonecznie"; if (x == "partlycloudy") return "Częśc. pochm."; if (x == "cloudy") return "Pochmurno"; if (x == "fog") return "Mgła"; if (x == "pouring") return "Ulewa"; if (x == "rainy") return "Deszcz"; if (x == "snowy" || x == "snowy-rainy") return "Śnieg"; if (x == "hail") return "Grad"; if (x == "lightning" || x == "lightning-rainy") return "Burza"; return "Nieznane";
+
+  - platform: homeassistant
+    id: prog_d3_cond
+    entity_id: sensor.prognoza_lcd
+    attribute: d3_cond
+    on_value:
+      - lvgl.label.update:
+          id: lbl_prog_icon_3
+          text: !lambda |-
+            if (x == "clear-night") return "🌙"; if (x == "sunny") return "☀"; if (x == "partlycloudy") return "⛅"; if (x == "cloudy" || x == "fog") return "☁"; if (x == "pouring" || x == "rainy") return "☂"; if (x == "snowy" || x == "snowy-rainy" || x == "hail") return "❄"; if (x == "lightning" || x == "lightning-rainy") return "⚡"; return "☁";
+      - lvgl.label.update:
+          id: lbl_prog_desc_3
+          text: !lambda |-
+            if (x == "clear-night") return "Jasno"; if (x == "sunny") return "Słonecznie"; if (x == "partlycloudy") return "Częśc. pochm."; if (x == "cloudy") return "Pochmurno"; if (x == "fog") return "Mgła"; if (x == "pouring") return "Ulewa"; if (x == "rainy") return "Deszcz"; if (x == "snowy" || x == "snowy-rainy") return "Śnieg"; if (x == "hail") return "Grad"; if (x == "lightning" || x == "lightning-rainy") return "Burza"; return "Nieznane";
+
+  - platform: homeassistant
+    id: prog_d4_cond
+    entity_id: sensor.prognoza_lcd
+    attribute: d4_cond
+    on_value:
+      - lvgl.label.update:
+          id: lbl_prog_icon_4
+          text: !lambda |-
+            if (x == "clear-night") return "🌙"; if (x == "sunny") return "☀"; if (x == "partlycloudy") return "⛅"; if (x == "cloudy" || x == "fog") return "☁"; if (x == "pouring" || x == "rainy") return "☂"; if (x == "snowy" || x == "snowy-rainy" || x == "hail") return "❄"; if (x == "lightning" || x == "lightning-rainy") return "⚡"; return "☁";
+      - lvgl.label.update:
+          id: lbl_prog_desc_4
+          text: !lambda |-
+            if (x == "clear-night") return "Jasno"; if (x == "sunny") return "Słonecznie"; if (x == "partlycloudy") return "Częśc. pochm."; if (x == "cloudy") return "Pochmurno"; if (x == "fog") return "Mgła"; if (x == "pouring") return "Ulewa"; if (x == "rainy") return "Deszcz"; if (x == "snowy" || x == "snowy-rainy") return "Śnieg"; if (x == "hail") return "Grad"; if (x == "lightning" || x == "lightning-rainy") return "Burza"; return "Nieznane";
+
+  - platform: homeassistant
+    id: prog_d5_cond
+    entity_id: sensor.prognoza_lcd
+    attribute: d5_cond
+    on_value:
+      - lvgl.label.update:
+          id: lbl_prog_icon_5
+          text: !lambda |-
+            if (x == "clear-night") return "🌙"; if (x == "sunny") return "☀"; if (x == "partlycloudy") return "⛅"; if (x == "cloudy" || x == "fog") return "☁"; if (x == "pouring" || x == "rainy") return "☂"; if (x == "snowy" || x == "snowy-rainy" || x == "hail") return "❄"; if (x == "lightning" || x == "lightning-rainy") return "⚡"; return "☁";
+      - lvgl.label.update:
+          id: lbl_prog_desc_5
+          text: !lambda |-
+            if (x == "clear-night") return "Jasno"; if (x == "sunny") return "Słonecznie"; if (x == "partlycloudy") return "Częśc. pochm."; if (x == "cloudy") return "Pochmurno"; if (x == "fog") return "Mgła"; if (x == "pouring") return "Ulewa"; if (x == "rainy") return "Deszcz"; if (x == "snowy" || x == "snowy-rainy") return "Śnieg"; if (x == "hail") return "Grad"; if (x == "lightning" || x == "lightning-rainy") return "Burza"; return "Nieznane";
+
+  - platform: homeassistant
+    id: prog_d6_cond
+    entity_id: sensor.prognoza_lcd
+    attribute: d6_cond
+    on_value:
+      - lvgl.label.update:
+          id: lbl_prog_icon_6
+          text: !lambda |-
+            if (x == "clear-night") return "🌙"; if (x == "sunny") return "☀"; if (x == "partlycloudy") return "⛅"; if (x == "cloudy" || x == "fog") return "☁"; if (x == "pouring" || x == "rainy") return "☂"; if (x == "snowy" || x == "snowy-rainy" || x == "hail") return "❄"; if (x == "lightning" || x == "lightning-rainy") return "⚡"; return "☁";
+      - lvgl.label.update:
+          id: lbl_prog_desc_6
+          text: !lambda |-
+            if (x == "clear-night") return "Jasno"; if (x == "sunny") return "Słonecznie"; if (x == "partlycloudy") return "Częśc. pochm."; if (x == "cloudy") return "Pochmurno"; if (x == "fog") return "Mgła"; if (x == "pouring") return "Ulewa"; if (x == "rainy") return "Deszcz"; if (x == "snowy" || x == "snowy-rainy") return "Śnieg"; if (x == "hail") return "Grad"; if (x == "lightning" || x == "lightning-rainy") return "Burza"; return "Nieznane";        
+
+# ==========================================
+# --- STATUS POŁĄCZENIA API ---
+# ==========================================
+binary_sensor:
+  - platform: status
+    id: api_status
+    on_state:
+      then:
+        - if:
+            condition:
+              binary_sensor.is_on: api_status
+            then:
+              - lvgl.label.update:
+                  id: icon_ha
+                  text_color: 0x4CAF50  # ZIELONY
+            else:
+              - lvgl.label.update:
+                  id: icon_ha
+                  text_color: 0xF44336  # CZERWONY

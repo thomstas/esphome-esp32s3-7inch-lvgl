@@ -1,0 +1,218 @@
+# --- PASEK STATUSU (GÓRA) ---
+- obj:
+    id: pasek_statusu
+    x: 0
+    y: 0
+    width: 800
+    height: 45
+    bg_color: 0xD0D0D0
+    border_width: 0
+    radius: 0
+    pad_all: 0
+    widgets:
+      - button:
+          x: 5
+          y: 3
+          width: 60
+          height: 39
+          bg_color: 0x9E9E9E
+          on_click:
+            - lvgl.obj.update:
+                id: my_menu_window
+                hidden: false
+          widgets:
+            - label:
+                text: "\U000F035C" # Menu Icon
+                text_font: font_mdi
+                align: CENTER
+                text_color: 0xFFFFFF
+
+      - label:
+          id: lbl_date
+          text: "--, --.--.----"
+          text_font: font_title
+          align: RIGHT_MID
+          x: -310
+          text_color: 0x333333
+      
+      - label:
+          id: lbl_time
+          text: "--:--"
+          text_font: font_title
+          align: RIGHT_MID
+          x: -200
+          text_color: 0x333333
+
+      - label:
+          id: lbl_bat_top
+          text: "--%"
+          text_font: font_btn
+          align: RIGHT_MID
+          x: -135
+          text_color: 0x333333
+
+      - label:
+          id: icon_bat
+          text: "\U000F0085"
+          text_font: font_mdi
+          align: RIGHT_MID
+          x: -100
+          text_color: 0x333333
+      
+      - label:
+          id: icon_wifi
+          text: "\U000F05A9"
+          text_font: font_mdi
+          align: RIGHT_MID
+          x: -65
+          text_color: 0x4CAF50
+      
+      - label:
+          id: icon_ha
+          text: "\U000F07D0"
+          text_font: font_mdi
+          align: RIGHT_MID
+          x: -20
+          text_color: 0xF44336
+
+# --- OKNO MENU GŁÓWNEGO ---
+- obj:
+    id: my_menu_window
+    align: CENTER
+    width: 560
+    height: 380
+    radius: 20
+    bg_color: 0xEEEEEE
+    border_width: 3
+    border_color: 0x9E9E9E
+    hidden: true
+    widgets:
+      - label:
+          text: "MENU GŁÓWNE"
+          align: TOP_MID
+          y: 10
+          text_font: font_title
+          text_color: 0x333333
+      
+      - button:
+          align: TOP_RIGHT
+          x: -10
+          y: 10
+          width: 45
+          height: 45
+          bg_color: 0xF44336
+          on_click:
+            - lvgl.obj.update:
+                id: my_menu_window
+                hidden: true
+          widgets:
+            - label:
+                text: "\U000F0156" # Close
+                text_font: font_mdi
+                align: CENTER
+                text_color: 0xFFFFFF
+
+      - button:
+          x: 30
+          y: 60
+          width: 240
+          height: 65
+          bg_color: 0x2196F3
+          on_click:
+            - lvgl.page.show: page_dom
+            - lvgl.obj.update: {id: my_menu_window, hidden: true}
+          widgets:
+            - label: {text: "\U000F02DC", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
+            - label: {text: "DOM", text_font: font_title, align: RIGHT_MID, x: -30, text_color: 0xFFFFFF}
+      
+      - button:
+          x: 290
+          y: 60
+          width: 240
+          height: 65
+          bg_color: 0x4CAF50
+          on_click:
+            - lvgl.page.show: page_termostat
+            - lvgl.obj.update: {id: my_menu_window, hidden: true}
+          widgets:
+            - label: {text: "\U000F050F", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
+            - label: {text: "TERMO", text_font: font_title, align: RIGHT_MID, x: -25, text_color: 0xFFFFFF}
+
+      - button:
+          x: 30
+          y: 135
+          width: 240
+          height: 65
+          bg_color: 0xFF9800
+          on_click:
+            - lvgl.page.show: page_media
+            - lvgl.obj.update: {id: my_menu_window, hidden: true}
+          widgets:
+            - label: {text: "\U000F0E1F", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
+            - label: {text: "SOLAR", text_font: font_title, align: RIGHT_MID, x: -25, text_color: 0xFFFFFF}
+
+      - button:
+          x: 290
+          y: 135
+          width: 240
+          height: 65
+          bg_color: 0x00BCD4
+          on_click:
+            - lvgl.page.show: page_pogoda
+            - lvgl.obj.update: {id: my_menu_window, hidden: true}
+          widgets:
+            - label: {text: "\U000F0590", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
+            - label: {text: "POGODA", text_font: font_title, align: RIGHT_MID, x: -20, text_color: 0xFFFFFF}
+
+      - button:
+          x: 30
+          y: 210
+          width: 240
+          height: 65
+          bg_color: 0x9C27B0
+          on_click:
+            - lvgl.page.show: page_zasilanie
+            - lvgl.obj.update: {id: my_menu_window, hidden: true}
+          widgets:
+            - label: {text: "\U000F0210", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
+            - label: {text: "MOC", text_font: font_title, align: RIGHT_MID, x: -35, text_color: 0xFFFFFF}
+
+      - button:
+          x: 290
+          y: 210
+          width: 240
+          height: 65
+          bg_color: 0x795548
+          on_click:
+            - lvgl.page.show: page_koszty
+            - lvgl.obj.update: {id: my_menu_window, hidden: true}
+          widgets:
+            - label: {text: "\U000F01B6", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
+            - label: {text: "KOSZTY", text_font: font_title, align: RIGHT_MID, x: -25, text_color: 0xFFFFFF}
+
+      # --- ZMODYFIKOWANY RZĄD 4 (Podzielony na ROK i SYSTEM) ---
+      - button:
+          x: 30
+          y: 285
+          width: 240
+          height: 65
+          bg_color: 0x3F51B5
+          on_click:
+            - lvgl.page.show: page_koszty_roczne
+            - lvgl.obj.update: {id: my_menu_window, hidden: true}
+          widgets:
+            - label: {text: "\U000F00ED", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
+            - label: {text: "ROK", text_font: font_title, align: RIGHT_MID, x: -45, text_color: 0xFFFFFF}
+
+      - button:
+          x: 290
+          y: 285
+          width: 240
+          height: 65
+          bg_color: 0x607D8B
+          on_click:
+            - lvgl.page.show: page_ustawienia
+            - lvgl.obj.update: {id: my_menu_window, hidden: true}
+          widgets:
+            - label: {text: "\U000F0493", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
+            - label: {text: "SYSTEM", text_font: font_title, align: RIGHT_MID, x: -20, text_color: 0xFFFFFF}
