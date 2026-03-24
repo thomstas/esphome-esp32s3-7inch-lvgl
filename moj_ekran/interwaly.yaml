@@ -90,7 +90,7 @@ interval:
                     return days[((t.day_of_week + 4) % 7) + 1];
                   }
 
-            # --- AKTUALIZACJA GÓRNEGO PASKA BATERII ---
+            # --- UPDATE TOP BAR BATTERY ---
             - lvgl.label.update:
                 id: lbl_bat_top
                 text: !lambda 'return str_sprintf("%.0f%%", id(bat_pct).state);'
@@ -102,4 +102,4 @@ interval:
                   if (pct > 50) return "\U000F0087"; // 80%
                   if (pct > 20) return "\U000F0089"; // 50%
                   if (pct > 5)  return "\U000F008C"; // 30%
-                  return "\U000F008E";               // Pusta
+                  return "\U000F008E";               // Empty

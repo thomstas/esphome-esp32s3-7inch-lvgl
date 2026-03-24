@@ -22,21 +22,21 @@
     - "\U000F0156" # Close
     - "\U000F05A9" # WiFi
     - "\U000F07D0" # HA
-    - "\U000F02DC" # Dom
-    - "\U000F050F" # Termostat
+    - "\U000F02DC" # Home
+    - "\U000F050F" # Thermostat
     - "\U000F0E1F" # Solar
-    - "\U000F0590" # Pogoda
-    - "\U000F0210" # Moc
-    - "\U000F01B6" # Koszty
-    - "\U000F0493" # Ustawienia (Zębatka)
-    - "\U000F004D" # Strzałka powrotu (RADAR)
-    - "\U000F0085" # Bateria 100
-    - "\U000F0087" # Bateria 80
-    - "\U000F0089" # Bateria 50
-    - "\U000F008C" # Bateria 30
-    - "\U000F008E" # Bateria 0
-    - "\U000F034A" # Ikonka: mdi-magnify-minus (Zoom Out)
-    - "\U000F034B" # Ikonka: mdi-magnify-plus (Zoom In)
+    - "\U000F0590" # Weather
+    - "\U000F0210" # Power
+    - "\U000F01B6" # Costs
+    - "\U000F0493" # Settings (Gear)
+    - "\U000F004D" # Back arrow (RADAR)
+    - "\U000F0085" # Battery 100
+    - "\U000F0087" # Battery 80
+    - "\U000F0089" # Battery 50
+    - "\U000F008C" # Battery 30
+    - "\U000F008E" # Battery 0
+    - "\U000F034A" # Icon: mdi-magnify-minus (Zoom Out)
+    - "\U000F034B" # Icon: mdi-magnify-plus (Zoom In)
     - "\U000F00ED"
 - file: gfonts://Roboto
   id: font_zegar_wielki
@@ -45,11 +45,11 @@
   id: font_mdi_wielka
   size: 85
   glyphs:
-    - "\U000F1A73" # Solar (Panel ze słońcem)
-    - "\U000F192D" # Słup IMPORT (Strzałka DO słupa)
-    - "\U000F192C" # Słup EKSPORT (Strzałka OD słupa)
-    - "\U000F0F9C" # Dom IMPORT (Pobór)
-    - "\U000F0F9B" # Dom EKSPORT (Nadwyżka)
-    - "\U000F058F" # Pompa studzienna
-    - "\U000F0238" # Gaz
-    - "\U000F0F8E" # Portfel (Zysk)
+    - "\U000F1A73" # Solar (Panel with sun)
+    - "\U000F192D" # Grid IMPORT (Arrow TO tower)
+    - "\U000F192C" # Grid EXPORT (Arrow FROM tower)
+    - "\U000F0F9C" # House IMPORT (Consumption)
+    - "\U000F0F9B" # House EXPORT (Surplus)
+    - "\U000F058F" # Well pump
+    - "\U000F0238" # Gas
+    - "\U000F0F8E" # Wallet (Profit)

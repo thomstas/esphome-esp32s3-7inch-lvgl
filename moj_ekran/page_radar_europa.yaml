@@ -1,13 +1,13 @@
 id: page_radar_europa
 bg_color: 0x000000
 widgets:
-  # Obraz główny - Mapa Europy
+  # Main image - Europe Map
   - image:
       id: img_radar_eu
-      src: img_radar_eu_baza  # Odwołanie do ID z online_image
+      src: img_radar_eu_baza  # Reference to ID from online_image
       align: CENTER
 
-  # Przycisk "Zoom In" (Powrót do Polski)
+  # "Zoom In" button (Return to local radar)
   - button:
       x: 720
       y: 50
@@ -22,7 +22,7 @@ widgets:
         - lvgl.page.show: page_radar
       widgets:
         - label: 
-            text: "\U000F034B"  # Ikonka: mdi-magnify-plus
+            text: "\U000F034B"  # Icon: mdi-magnify-plus
             text_font: font_mdi
             align: CENTER
             text_color: 0xFFFFFF

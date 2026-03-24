@@ -2,8 +2,6 @@
 
 A comprehensive, feature-rich smart home control panel (Home Assistant) based on a 7-inch touchscreen with an ESP32-S3 microcontroller. The user interface was built entirely using the powerful **LVGL** library within the **ESPHome** environment.
 
-> 🇵🇱 **Note:** A Polish version of the documentation will be published in the future!
-
 ---
 
 ## 📸 Project Gallery

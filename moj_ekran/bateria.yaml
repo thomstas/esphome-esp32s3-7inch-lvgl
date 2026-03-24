@@ -2,7 +2,7 @@
   address: 0x40
   shunt_resistance: 0.1 ohm
   current:
-    name: "Bateria Natężenie"
+    name: "Battery Current"
     id: bat_current
     unit_of_measurement: "A"
     accuracy_decimals: 3
@@ -12,7 +12,7 @@
             id: lbl_bat_a
             text: !lambda 'return str_sprintf("%.3f A", x);'
   bus_voltage:
-    name: "Bateria Napięcie"
+    name: "Battery Voltage"
     id: bat_voltage
     unit_of_measurement: "V"
     accuracy_decimals: 2
@@ -22,7 +22,7 @@
             id: lbl_bat_v
             text: !lambda 'return str_sprintf("%.2f V", x);'
   power:
-    name: "Bateria Moc"
+    name: "Battery Power"
     id: bat_power
     unit_of_measurement: "W"
     accuracy_decimals: 2
@@ -34,7 +34,7 @@
   update_interval: 10s
 
 - platform: template
-  name: "Bateria Procent"
+  name: "Battery Percent"
   id: bat_pct
   unit_of_measurement: "%"
   device_class: battery

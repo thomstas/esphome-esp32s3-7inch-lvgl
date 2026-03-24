@@ -11,8 +11,8 @@ widgets:
       pad_all: 0
       scrollbar_mode: "OFF"
       widgets:
-        # --- NAGŁÓWEK I PRZYCISK POWROTU ---
-        - label: {id: lbl_prog_title_l, text: "PROGNOZA NA 6 DNI", align: TOP_MID, y: 15, text_font: font_title, text_color: 0x333333}
+        # --- HEADER AND BACK BUTTON ---
+        - label: {id: lbl_prog_title_l, text: "6-DAY FORECAST", align: TOP_MID, y: 15, text_font: font_title, text_color: 0x333333}
         - button:
             x: 20
             y: 10
@@ -22,12 +22,12 @@ widgets:
             on_click:
               - lvgl.page.show: page_pogoda
             widgets:
-              - label: {id: lbl_prog_back_l, text: "< POWRÓT", align: CENTER, text_font: font_btn, text_color: 0xFFFFFF}
+              - label: {id: lbl_prog_back_l, text: "< BACK", align: CENTER, text_font: font_btn, text_color: 0xFFFFFF}
 
         # ==========================================
-        # --- RZĄD 1 ---
+        # --- ROW 1 ---
         # ==========================================
-        # KARTA 1
+        # CARD 1
         - obj:
             x: 30
             y: 75
@@ -41,9 +41,9 @@ widgets:
               - label: {id: lbl_prog_icon_1, text: "☁", align: LEFT_MID, x: 15, y: 15, text_font: font_weather_icon, text_color: 0x9E9E9E}
               - label: {id: lbl_prog_temp_max_1, text: "-- °C", align: RIGHT_MID, x: -15, y: -5, text_font: font_title, text_color: 0xE65100}
               - label: {id: lbl_prog_temp_min_1, text: "-- °C", align: RIGHT_MID, x: -15, y: 25, text_font: font_btn, text_color: 0x2196F3}
-              - label: {id: lbl_prog_desc_1, text: "Pochmurno", align: BOTTOM_MID, y: -10, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_prog_desc_1, text: "Cloudy", align: BOTTOM_MID, y: -10, text_font: font_btn, text_color: 0x555555}
 
-        # KARTA 2
+        # CARD 2
         - obj:
             x: 285
             y: 75
@@ -57,9 +57,9 @@ widgets:
               - label: {id: lbl_prog_icon_2, text: "☀", align: LEFT_MID, x: 15, y: 15, text_font: font_weather_icon, text_color: 0xFFD700}
               - label: {id: lbl_prog_temp_max_2, text: "-- °C", align: RIGHT_MID, x: -15, y: -5, text_font: font_title, text_color: 0xE65100}
               - label: {id: lbl_prog_temp_min_2, text: "-- °C", align: RIGHT_MID, x: -15, y: 25, text_font: font_btn, text_color: 0x2196F3}
-              - label: {id: lbl_prog_desc_2, text: "Słonecznie", align: BOTTOM_MID, y: -10, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_prog_desc_2, text: "Sunny", align: BOTTOM_MID, y: -10, text_font: font_btn, text_color: 0x555555}
 
-        # KARTA 3
+        # CARD 3
         - obj:
             x: 540
             y: 75
@@ -73,12 +73,12 @@ widgets:
               - label: {id: lbl_prog_icon_3, text: "☂", align: LEFT_MID, x: 15, y: 15, text_font: font_weather_icon, text_color: 0x2196F3}
               - label: {id: lbl_prog_temp_max_3, text: "-- °C", align: RIGHT_MID, x: -15, y: -5, text_font: font_title, text_color: 0xE65100}
               - label: {id: lbl_prog_temp_min_3, text: "-- °C", align: RIGHT_MID, x: -15, y: 25, text_font: font_btn, text_color: 0x2196F3}
-              - label: {id: lbl_prog_desc_3, text: "Deszczowo", align: BOTTOM_MID, y: -10, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_prog_desc_3, text: "Rainy", align: BOTTOM_MID, y: -10, text_font: font_btn, text_color: 0x555555}
 
         # ==========================================
-        # --- RZĄD 2 ---
+        # --- ROW 2 ---
         # ==========================================
-        # KARTA 4
+        # CARD 4
         - obj:
             x: 30
             y: 255
@@ -92,9 +92,9 @@ widgets:
               - label: {id: lbl_prog_icon_4, text: "⚡", align: LEFT_MID, x: 15, y: 15, text_font: font_weather_icon, text_color: 0x673AB7}
               - label: {id: lbl_prog_temp_max_4, text: "-- °C", align: RIGHT_MID, x: -15, y: -5, text_font: font_title, text_color: 0xE65100}
               - label: {id: lbl_prog_temp_min_4, text: "-- °C", align: RIGHT_MID, x: -15, y: 25, text_font: font_btn, text_color: 0x2196F3}
-              - label: {id: lbl_prog_desc_4, text: "Burze", align: BOTTOM_MID, y: -10, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_prog_desc_4, text: "Storms", align: BOTTOM_MID, y: -10, text_font: font_btn, text_color: 0x555555}
 
-        # KARTA 5
+        # CARD 5
         - obj:
             x: 285
             y: 255
@@ -108,9 +108,9 @@ widgets:
               - label: {id: lbl_prog_icon_5, text: "☁", align: LEFT_MID, x: 15, y: 15, text_font: font_weather_icon, text_color: 0x9E9E9E}
               - label: {id: lbl_prog_temp_max_5, text: "-- °C", align: RIGHT_MID, x: -15, y: -5, text_font: font_title, text_color: 0xE65100}
               - label: {id: lbl_prog_temp_min_5, text: "-- °C", align: RIGHT_MID, x: -15, y: 25, text_font: font_btn, text_color: 0x2196F3}
-              - label: {id: lbl_prog_desc_5, text: "Pochmurno", align: BOTTOM_MID, y: -10, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_prog_desc_5, text: "Cloudy", align: BOTTOM_MID, y: -10, text_font: font_btn, text_color: 0x555555}
 
-        # KARTA 6
+        # CARD 6
         - obj:
             x: 540
             y: 255
@@ -124,4 +124,4 @@ widgets:
               - label: {id: lbl_prog_icon_6, text: "☀", align: LEFT_MID, x: 15, y: 15, text_font: font_weather_icon, text_color: 0xFFD700}
               - label: {id: lbl_prog_temp_max_6, text: "-- °C", align: RIGHT_MID, x: -15, y: -5, text_font: font_title, text_color: 0xE65100}
               - label: {id: lbl_prog_temp_min_6, text: "-- °C", align: RIGHT_MID, x: -15, y: 25, text_font: font_btn, text_color: 0x2196F3}
-              - label: {id: lbl_prog_desc_6, text: "Słonecznie", align: BOTTOM_MID, y: -10, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_prog_desc_6, text: "Sunny", align: BOTTOM_MID, y: -10, text_font: font_btn, text_color: 0x555555}

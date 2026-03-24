@@ -1,4 +1,4 @@
-# --- PASEK STATUSU (GÓRA) ---
+# --- STATUS BAR (TOP) ---
 - obj:
     id: pasek_statusu
     x: 0
@@ -75,7 +75,7 @@
           x: -20
           text_color: 0xF44336
 
-# --- OKNO MENU GŁÓWNEGO ---
+# --- MAIN MENU WINDOW ---
 - obj:
     id: my_menu_window
     align: CENTER
@@ -89,7 +89,7 @@
     widgets:
       - label:
           id: lbl_menu_title
-          text: "MENU GŁÓWNE"
+          text: "MAIN MENU"
           align: TOP_MID
           y: 10
           text_font: font_title
@@ -124,7 +124,7 @@
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
             - label: {text: "\U000F02DC", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
-            - label: {id: lbl_menu_dom, text: "DOM", text_font: font_title, align: RIGHT_MID, x: -30, text_color: 0xFFFFFF}
+            - label: {id: lbl_menu_dom, text: "HOME", text_font: font_title, align: RIGHT_MID, x: -30, text_color: 0xFFFFFF}
       
       - button:
           x: 290
@@ -137,7 +137,7 @@
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
             - label: {text: "\U000F050F", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
-            - label: {id: lbl_menu_termo, text: "TERMO", text_font: font_title, align: RIGHT_MID, x: -25, text_color: 0xFFFFFF}
+            - label: {id: lbl_menu_termo, text: "THERMO", text_font: font_title, align: RIGHT_MID, x: -25, text_color: 0xFFFFFF}
 
       - button:
           x: 30
@@ -163,7 +163,7 @@
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
             - label: {text: "\U000F0590", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
-            - label: {id: lbl_menu_pogoda, text: "POGODA", text_font: font_title, align: RIGHT_MID, x: -20, text_color: 0xFFFFFF}
+            - label: {id: lbl_menu_pogoda, text: "WEATHER", text_font: font_title, align: RIGHT_MID, x: -20, text_color: 0xFFFFFF}
 
       - button:
           x: 30
@@ -176,7 +176,7 @@
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
             - label: {text: "\U000F0210", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
-            - label: {id: lbl_menu_moc, text: "MOC", text_font: font_title, align: RIGHT_MID, x: -35, text_color: 0xFFFFFF}
+            - label: {id: lbl_menu_moc, text: "POWER", text_font: font_title, align: RIGHT_MID, x: -35, text_color: 0xFFFFFF}
 
       - button:
           x: 290
@@ -189,9 +189,9 @@
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
             - label: {text: "\U000F01B6", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
-            - label: {id: lbl_menu_koszty, text: "KOSZTY", text_font: font_title, align: RIGHT_MID, x: -25, text_color: 0xFFFFFF}
+            - label: {id: lbl_menu_koszty, text: "COSTS", text_font: font_title, align: RIGHT_MID, x: -25, text_color: 0xFFFFFF}
 
-      # --- ZMODYFIKOWANY RZĄD 4 (Podzielony na ROK i SYSTEM) ---
+      # --- MODIFIED ROW 4 (Split into YEAR and SYSTEM) ---
       - button:
           x: 30
           y: 285
@@ -203,7 +203,7 @@
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
             - label: {text: "\U000F00ED", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
-            - label: {id: lbl_menu_rok, text: "ROK", text_font: font_title, align: RIGHT_MID, x: -45, text_color: 0xFFFFFF}
+            - label: {id: lbl_menu_rok, text: "YEAR", text_font: font_title, align: RIGHT_MID, x: -45, text_color: 0xFFFFFF}
 
       - button:
           x: 290

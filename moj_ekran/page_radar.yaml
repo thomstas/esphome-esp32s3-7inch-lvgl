@@ -2,13 +2,13 @@ id: page_radar
 bg_color: 0x000000
 
 widgets:
-  # Obraz główny - Mapa
+  # Main image - Map
   - image:
       id: widget_mapy
       src: img_mapa_tlo
       align: CENTER
 
-  # Przycisk "Wstecz" (Powrót do pogody)
+  # "Back" button (Return to weather)
   - button:
       x: 20
       y: 50
@@ -23,12 +23,12 @@ widgets:
         - lvgl.page.show: page_pogoda
       widgets:
         - label:
-            text: "\U000F004D"  # Ikonka: mdi-arrow-left
+            text: "\U000F004D"  # Icon: mdi-arrow-left
             text_font: font_mdi
             align: CENTER
             text_color: 0xFFFFFF
 
-  # Przycisk "Zoom Out" (Skok do Europy)
+  # "Zoom Out" button (Jump to Europe)
   - button:
       x: 720
       y: 50
@@ -43,7 +43,7 @@ widgets:
         - lvgl.page.show: page_radar_europa
       widgets:
         - label: 
-            text: "\U000F034A"  # Ikonka: mdi-magnify-minus
+            text: "\U000F034A"  # Icon: mdi-magnify-minus
             text_font: font_mdi
             align: CENTER
             text_color: 0xFFFFFF
