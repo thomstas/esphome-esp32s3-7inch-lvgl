@@ -1,4 +1,4 @@
-id: page_wygaszacz
+id: page_screensaver
 bg_color: 0x000000
 widgets:
   # --- LARGE CLOCK ---
@@ -18,4 +18,4 @@ widgets:
       bg_opa: 0       # Fully transparent
       border_width: 0 # No border
       on_click:
-        - lvgl.page.show: page_dom # <-- CHANGE TO YOUR MAIN PAGE ID (e.g. page_1, page_pogoda)
+        - lvgl.page.show: page_home # <-- CHANGE TO YOUR MAIN PAGE ID (e.g. page_1, page_weather)

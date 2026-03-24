@@ -1,4 +1,4 @@
-id: page_ustawienia
+id: page_settings
 bg_color: 0xEEEEEE
 widgets:
   - obj:

@@ -1,4 +1,4 @@
-id: page_pogoda
+id: page_weather
 bg_color: 0xEEEEEE
 widgets:
   - obj:
@@ -99,7 +99,7 @@ widgets:
                   height: 60
                   bg_color: 0x2196F3
                   on_click:
-                    - lvgl.page.show: page_prognoza
+                    - lvgl.page.show: page_forecast
                   widgets:
                     - label: {id: lbl_wo_fcst_btn, text: "FORECAST", align: CENTER, text_font: font_btn, text_color: 0xFFFFFF}
               

@@ -1,4 +1,4 @@
-id: page_termostat
+id: page_thermostat
 bg_color: 0xEEEEEE
 widgets:
   - arc:
