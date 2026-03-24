@@ -10,18 +10,18 @@ widgets:
       bg_opa: 0
       border_width: 0
       widgets:
-        # --- LEWA KOLUMNA (STATYSTYKI) ---
-        - label: {id: lbl_z_month_l, text: "MIESIĄC:", x: 10, y: 10, text_font: font_btn, text_color: 0x333333}
+        # --- LEFT COLUMN (STATISTICS) ---
+        - label: {id: lbl_z_month_l, text: "MONTH:", x: 10, y: 10, text_font: font_btn, text_color: 0x333333}
         - label: {id: lbl_import_monthly, text: "-- kWh", x: 10, y: 40, text_font: font_title, text_color: 0x1976D2}
         - label: {id: lbl_export_monthly, text: "-- kWh", x: 10, y: 70, text_font: font_btn, text_color: 0x333333}
         - label: {id: lbl_home_monthly, text: "-- kWh", x: 10, y: 95, text_font: font_btn, text_color: 0x333333}
-        - label: {id: lbl_z_counters_l, text: "LICZNIKI:", x: 10, y: 135, text_font: font_btn, text_color: 0x333333}
+        - label: {id: lbl_z_counters_l, text: "METERS:", x: 10, y: 135, text_font: font_btn, text_color: 0x333333}
         - label: {id: lbl_water_total, text: "---.--- m3", x: 10, y: 165, text_font: font_btn, text_color: 0x03A9F4}
         - label: {id: lbl_gas_total, text: "---.--- m3", x: 10, y: 195, text_font: font_btn, text_color: 0xFF9800}
-        - label: {id: lbl_gas_invoice, text: "Gaz: -- zł", x: 10, y: 265, text_font: font_btn, text_color: 0xC62828}
+        - label: {id: lbl_gas_invoice, text: "Gas: -- zł", x: 10, y: 265, text_font: font_btn, text_color: 0xC62828}
 
         # ==========================================
-        # 1. FOTOWOLTAIKA (GÓRA ŚRODEK)
+        # 1. PHOTOVOLTAICS (TOP CENTER)
         # ==========================================
         - obj:
             x: 310
@@ -42,7 +42,7 @@ widgets:
               - label: {id: lbl_pv_daily, text: "-- kWh", align: BOTTOM_MID, y: 0, text_font: font_btn, text_color: 0x333333}
 
         # ==========================================
-        # 6. PORTFEL ZYSKU (GÓRA PRAWA)
+        # 6. PROFIT WALLET (TOP RIGHT)
         # ==========================================
         - obj:
             x: 500
@@ -52,12 +52,12 @@ widgets:
             bg_opa: 0
             border_width: 0
             widgets:
-              # Zielona ikona portfela i wyrównany tekst wartości pod spodem
+              # Green wallet icon and value text aligned below
               - label: {id: lbl_wallet_icon, text: "\U000F0F8E", align: TOP_MID, y: 0, text_font: font_mdi_wielka, text_color: 0x4CAF50}
               - label: {id: lbl_savings_pln, text: "0.00 PLN", align: CENTER, y: 25, text_font: font_title, text_color: 0x2E7D32}
 
         # ==========================================
-        # 2. DOM (ŚRODEK LEWA)
+        # 2. HOME (CENTER LEFT)
         # ==========================================
         - obj:
             x: 220
@@ -79,7 +79,7 @@ widgets:
               - label: {id: lbl_home_daily, text: "-- kWh", align: BOTTOM_MID, y: 0, text_font: font_btn, text_color: 0x333333}
 
         # ==========================================
-        # 3. SIEĆ (ŚRODEK PRAWA)
+        # 3. GRID (CENTER RIGHT)
         # ==========================================
         - obj:
             x: 420
@@ -102,7 +102,7 @@ widgets:
               - label: {id: lbl_export_daily, text: "-- kWh", align: BOTTOM_MID, y: 0, text_font: font_btn, text_color: 0x2E7D32}
 
         # ==========================================
-        # 4. WODA (POMPA)
+        # 4. WATER (PUMP)
         # ==========================================
         - obj:
             x: 220
@@ -116,7 +116,7 @@ widgets:
               - label: {id: lbl_water_daily, text: "-- L", align: BOTTOM_MID, y: 0, text_font: font_title, text_color: 0x000000}
 
         # ==========================================
-        # 5. GAZ
+        # 5. GAS
         # ==========================================
         - obj:
             x: 420

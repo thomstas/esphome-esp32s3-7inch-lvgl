@@ -11,8 +11,8 @@ widgets:
       pad_all: 0
       scrollbar_mode: "AUTO"
       widgets:
-        # --- SEKCJA JĘZYK / LANGUAGE ---
-        - label: {text: "JĘZYK / LANGUAGE", x: 30, y: 10, text_font: font_title, text_color: 0x333333}
+        # --- LANGUAGE SECTION ---
+        - label: {text: "LANGUAGE", x: 30, y: 10, text_font: font_title, text_color: 0x333333}
         - line: {points: ["30, 45", "770, 45"], line_color: 0xDDDDDD, line_width: 2}
 
         - button:
@@ -21,7 +21,7 @@ widgets:
             y: 55
             width: 130
             height: 50
-            bg_color: 0x1565C0
+            bg_color: 0x9E9E9E
             on_click:
               - globals.set: {id: current_language, value: '0'}
               - script.execute: load_translations
@@ -34,18 +34,18 @@ widgets:
             y: 55
             width: 130
             height: 50
-            bg_color: 0x9E9E9E
+            bg_color: 0x1565C0
             on_click:
               - globals.set: {id: current_language, value: '1'}
               - script.execute: load_translations
             widgets:
               - label: {text: "EN", align: CENTER, text_font: font_title, text_color: 0xFFFFFF}
 
-        # --- SEKCJA EKRANU ---
-        - label: {id: lbl_set_screen_l, text: "EKRAN", x: 30, y: 120, text_font: font_title, text_color: 0x333333}
+        # --- SCREEN SECTION ---
+        - label: {id: lbl_set_screen_l, text: "SCREEN", x: 30, y: 120, text_font: font_title, text_color: 0x333333}
         - line: {points: ["30, 155", "770, 155"], line_color: 0xDDDDDD, line_width: 2}
 
-        - label: {id: lbl_set_bright_l, text: "Jasność podświetlenia:", x: 30, y: 175, text_font: font_btn, text_color: 0x555555}
+        - label: {id: lbl_set_bright_l, text: "Backlight brightness:", x: 30, y: 175, text_font: font_btn, text_color: 0x555555}
         - slider:
             id: slider_brightness
             x: 30
@@ -74,23 +74,23 @@ widgets:
             text_font: font_title
             text_color: 0x1976D2
 
-        # --- SEKCJA BATERIA (INA219) ---
-        - label: {id: lbl_set_bat_l, text: "ZASILANIE I BATERIA", x: 30, y: 265, text_font: font_title, text_color: 0x333333}
+        # --- BATTERY SECTION (INA219) ---
+        - label: {id: lbl_set_bat_l, text: "POWER & BATTERY", x: 30, y: 265, text_font: font_title, text_color: 0x333333}
         - line: {points: ["30, 300", "770, 300"], line_color: 0xDDDDDD, line_width: 2}
 
-        - label: {id: lbl_set_volt_l, text: "Napięcie:", x: 30, y: 315, text_font: font_btn, text_color: 0x555555}
+        - label: {id: lbl_set_volt_l, text: "Voltage:", x: 30, y: 315, text_font: font_btn, text_color: 0x555555}
         - label: {id: lbl_bat_v, text: "0.00 V", x: 160, y: 310, text_font: font_title, text_color: 0x000000}
 
-        - label: {id: lbl_set_curr_l, text: "Natężenie:", x: 280, y: 315, text_font: font_btn, text_color: 0x555555}
+        - label: {id: lbl_set_curr_l, text: "Current:", x: 280, y: 315, text_font: font_btn, text_color: 0x555555}
         - label: {id: lbl_bat_a, text: "0.000 A", x: 420, y: 310, text_font: font_title, text_color: 0x000000}
 
-        - label: {id: lbl_set_status_l, text: "Stan:", x: 550, y: 315, text_font: font_btn, text_color: 0x555555}
+        - label: {id: lbl_set_status_l, text: "Status:", x: 550, y: 315, text_font: font_btn, text_color: 0x555555}
         - label: {id: lbl_bat_pct, text: "0%", x: 650, y: 310, text_font: font_title, text_color: 0x1976D2}
 
-        - label: {id: lbl_set_power_l, text: "Aktualna moc:", x: 30, y: 360, text_font: font_btn, text_color: 0x555555}
+        - label: {id: lbl_set_power_l, text: "Current power:", x: 30, y: 360, text_font: font_btn, text_color: 0x555555}
         - label: {id: lbl_bat_w, text: "0.00 W", x: 160, y: 355, text_font: font_title, text_color: 0x000000}
 
-        # --- SEKCJA SYSTEM ---
+        # --- SYSTEM SECTION ---
         - label: {text: "SYSTEM", x: 30, y: 410, text_font: font_title, text_color: 0x333333}
         - line: {points: ["30, 445", "770, 445"], line_color: 0xDDDDDD, line_width: 2}
 

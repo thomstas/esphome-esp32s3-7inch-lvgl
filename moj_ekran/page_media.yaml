@@ -11,7 +11,7 @@ widgets:
       pad_all: 0
       scrollbar_mode: "OFF"
       widgets:
-        # --- LEWA STRONA (Zegar Mocy i Produkcje) ---
+        # --- LEFT SIDE (Power gauge and production) ---
         - arc:
             id: arc_pv_power
             x: 40
@@ -25,7 +25,7 @@ widgets:
             widgets:
               - label:
                   id: lbl_media_curr_pwr
-                  text: "AKTUALNA MOC"
+                  text: "CURRENT POWER"
                   align: TOP_MID
                   y: 50
                   text_font: font_btn
@@ -38,7 +38,7 @@ widgets:
                   text_font: font_title
                   text_color: 0x000000
 
-        # Kafelki DZIŚ i CAŁKOWITA
+        # TODAY and TOTAL tiles
         - obj:
             x: 20
             y: 300
@@ -48,7 +48,7 @@ widgets:
             bg_color: 0xFFFFFF
             border_width: 0
             widgets:
-              - label: {id: lbl_media_today, text: "DZIŚ", align: TOP_MID, y: 15, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_media_today, text: "TODAY", align: TOP_MID, y: 15, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_pv_daily_2, text: "-- kWh", align: CENTER, y: 10, text_font: font_title, text_color: 0x2E7D32}
 
         - obj:
@@ -60,10 +60,10 @@ widgets:
             bg_color: 0xFFFFFF
             border_width: 0
             widgets:
-              - label: {id: lbl_media_total, text: "CAŁKOWITA", align: TOP_MID, y: 15, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_media_total, text: "TOTAL", align: TOP_MID, y: 15, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_pv_total, text: "-- kWh", align: CENTER, y: 10, text_font: font_title, text_color: 0x1976D2}
 
-        # --- PRAWA STRONA (Parametry Techniczne) ---
+        # --- RIGHT SIDE (Technical Parameters) ---
         - obj:
             x: 360
             y: 20
@@ -73,40 +73,40 @@ widgets:
             bg_color: 0xFFFFFF
             border_width: 0
             widgets:
-              - label: {id: lbl_media_tech, text: "PARAMETRY TECHNICZNE", align: TOP_MID, y: 15, text_font: font_btn, text_color: 0x333333}
+              - label: {id: lbl_media_tech, text: "TECHNICAL PARAMS", align: TOP_MID, y: 15, text_font: font_btn, text_color: 0x333333}
               
               # AC
-              - label: {id: lbl_media_grid_ac, text: "SIEĆ (AC)", x: 20, y: 60, text_font: font_btn, text_color: 0x1976D2}
-              - label: {id: lbl_media_volt_ac, text: "Napięcie:", x: 20, y: 90, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_media_grid_ac, text: "GRID (AC)", x: 20, y: 60, text_font: font_btn, text_color: 0x1976D2}
+              - label: {id: lbl_media_volt_ac, text: "Voltage:", x: 20, y: 90, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_pv_v_ac, text: "-- V", x: 180, y: 90, text_font: font_btn, text_color: 0x000000}
               
-              - label: {id: lbl_media_curr_ac, text: "Prąd:", x: 20, y: 120, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_media_curr_ac, text: "Current:", x: 20, y: 120, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_pv_i_ac, text: "-- A", x: 180, y: 120, text_font: font_btn, text_color: 0x000000}
               
-              - label: {id: lbl_media_freq, text: "Częstotliwość:", x: 20, y: 150, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_media_freq, text: "Frequency:", x: 20, y: 150, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_pv_freq, text: "-- Hz", x: 180, y: 150, text_font: font_btn, text_color: 0x000000}
 
-              # LINIA ODDZIELAJĄCA 1
+              # SEPARATOR LINE 1
               - line:
                   points: ["20, 190", "400, 190"]
                   line_color: 0xDDDDDD
                   line_width: 2
 
               # DC
-              - label: {id: lbl_media_pv, text: "PANELE (PV)", x: 20, y: 210, text_font: font_btn, text_color: 0xE65100}
-              - label: {id: lbl_media_volt_dc, text: "Napięcie:", x: 20, y: 240, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_media_pv, text: "PANELS (PV)", x: 20, y: 210, text_font: font_btn, text_color: 0xE65100}
+              - label: {id: lbl_media_volt_dc, text: "Voltage:", x: 20, y: 240, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_pv_v_dc, text: "-- V", x: 180, y: 240, text_font: font_btn, text_color: 0x000000}
               
-              - label: {id: lbl_media_curr_dc, text: "Prąd:", x: 20, y: 270, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_media_curr_dc, text: "Current:", x: 20, y: 270, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_pv_i_dc, text: "-- A", x: 180, y: 270, text_font: font_btn, text_color: 0x000000}
 
-              # LINIA ODDZIELAJĄCA 2
+              # SEPARATOR LINE 2
               - line:
                   points: ["20, 310", "400, 310"]
                   line_color: 0xDDDDDD
                   line_width: 2
 
               # TEMP
-              - label: {id: lbl_media_inv, text: "FALOWNIK", x: 20, y: 330, text_font: font_btn, text_color: 0x388E3C}
-              - label: {id: lbl_media_temp_l, text: "Temperatura:", x: 20, y: 360, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_media_inv, text: "INVERTER", x: 20, y: 330, text_font: font_btn, text_color: 0x388E3C}
+              - label: {id: lbl_media_temp_l, text: "Temperature:", x: 20, y: 360, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_pv_temp, text: "-- °C", x: 180, y: 360, text_font: font_btn, text_color: 0x000000}

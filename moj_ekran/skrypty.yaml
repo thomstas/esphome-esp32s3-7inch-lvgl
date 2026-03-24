@@ -3,41 +3,41 @@ script:
     mode: restart
     then:
       # ==================================
-      # --- WYBUDZENIE (Dotknięcie) ---
+      # --- WAKE UP (Touch) ---
       # ==================================
-      # 1. Przywracamy jasność z suwaka
+      # 1. Restore brightness from slider
       - light.turn_on:
           id: screen_backlight
           brightness: !lambda 'return id(brightness_setpoint);'
           
-      # 2. Odkrywamy z powrotem górny pasek
+      # 2. Reveal the top bar again
       - lvgl.obj.update:
           id: pasek_statusu
           hidden: false
 
       # ==================================
-      # --- OCZEKIWANIE ---
+      # --- WAITING ---
       # ==================================
-      - delay: 60s  # <-- Zmieniono na 1 minutę
+      - delay: 60s  # <-- Changed to 1 minute
       
       # ==================================
-      # --- UŚPIENIE (Dzień: Mapa / Noc: Zegar) ---
+      # --- SLEEP (Day: Map / Night: Clock) ---
       # ==================================
       - if:
           condition:
             lambda: |-
-              // UWAGA: Upewnij się, że "ha_time" to właściwe ID Twojego czasu
+              // NOTE: Make sure "ha_time" is the correct ID of your time component
               auto time = id(my_time).now();
               if (!time.is_valid()) return false;
               
-              // Noc: od 22:00 do 05:29
+              // Night: from 22:00 to 05:29
               if (time.hour >= 22 || time.hour < 5 || (time.hour == 5 && time.minute < 30)) {
-                return true; // Jest noc
+                return true; // It's night
               } else {
-                return false; // Jest dzień
+                return false; // It's day
               }
           then:
-            # --- AKCJA DLA NOCY (Wygaszacz) ---
+            # --- ACTION FOR NIGHT (Screensaver) ---
             - lvgl.page.show: page_wygaszacz
             - lvgl.obj.update:
                 id: pasek_statusu
@@ -46,7 +46,7 @@ script:
                 id: screen_backlight
                 brightness: 0.5
           else:
-            # --- AKCJA DLA DNIA (Mapa Europy) ---
+            # --- ACTION FOR DAY (Europe Map) ---
             - lvgl.page.show: page_radar_europa
             - lvgl.obj.update:
                 id: pasek_statusu
@@ -81,7 +81,7 @@ script:
           id: btn_term_auto
           bg_color: !lambda 'return (id(hvac_mode_sensor).state == "auto") ? lv_color_hex(0xFFD700) : lv_color_hex(0xFFFFFF);'
       - lvgl.widget.update:
-          id: btn_term_wylacz # <--- POPRAWIONE ID
+          id: btn_term_wylacz # <--- CORRECTED ID
           bg_color: !lambda 'return (id(hvac_mode_sensor).state == "off") ? lv_color_hex(0xFFD700) : lv_color_hex(0xFFFFFF);'
 
   - id: sync_ui_colors

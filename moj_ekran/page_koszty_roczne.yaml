@@ -3,16 +3,16 @@ bg_color: 0xEEEEEE
 widgets:
   - label:
       id: lbl_kr_title_l
-      text: "PODSUMOWANIE ROKU"
+      text: "ANNUAL SUMMARY"
       align: TOP_MID
       y: 60
       text_font: font_title
       text_color: 0x333333
 
   # ==========================================
-  # --- RZĄD 1: MEDIA (Prąd, Woda, Gaz) ---
+  # --- ROW 1: UTILITIES (Electricity, Water, Gas) ---
   # ==========================================
-  # 1. PRĄD (Pobór z sieci)
+  # 1. ELECTRICITY (Grid consumption)
   - obj:
       x: 20
       y: 110
@@ -21,11 +21,11 @@ widgets:
       radius: 15
       bg_color: 0x90CAF9
       widgets:
-        - label: {id: lbl_kr_prad_l, text: "PRĄD (SIEĆ)", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_kr_prad_l, text: "ELECTRICITY (GRID)", align: TOP_MID, y: 15, text_font: font_btn}
         - label: {id: lbl_kr_prad_z, text: "-- kWh", align: CENTER, y: 0, text_font: font_btn}
         - label: {id: lbl_kr_prad_k, text: "-- zł", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0xC62828}
 
-  # 2. WODA
+  # 2. WATER
   - obj:
       x: 280
       y: 110
@@ -34,11 +34,11 @@ widgets:
       radius: 15
       bg_color: 0x81D4FA
       widgets:
-        - label: {id: lbl_kr_woda_l, text: "WODA", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_kr_woda_l, text: "WATER", align: TOP_MID, y: 15, text_font: font_btn}
         - label: {id: lbl_kr_woda_z, text: "-- m3", align: CENTER, y: 0, text_font: font_btn}
         - label: {id: lbl_kr_woda_k, text: "-- zł", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0x01579B}
 
-  # 3. GAZ
+  # 3. GAS
   - obj:
       x: 540
       y: 110
@@ -47,12 +47,12 @@ widgets:
       radius: 15
       bg_color: 0x4DD0E1
       widgets:
-        - label: {id: lbl_kr_gaz_l, text: "GAZ", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_kr_gaz_l, text: "GAS", align: TOP_MID, y: 15, text_font: font_btn}
         - label: {id: lbl_kr_gaz_z, text: "-- m3", align: CENTER, y: 0, text_font: font_btn}
         - label: {id: lbl_kr_gaz_k, text: "-- zł", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0x006064}
 
   # ==========================================
-  # --- RZĄD 2: ZYSK PV I ZUŻYCIE DOMU ---
+  # --- ROW 2: PV PROFIT AND HOME CONSUMPTION ---
   # ==========================================
   - obj:
       x: 20
@@ -62,7 +62,7 @@ widgets:
       radius: 15
       bg_color: 0xA5D6A7
       widgets:
-        - label: {id: lbl_kr_pv_l, text: "OSZCZĘDNOŚĆ Z FOTOWOLTAIKI", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_kr_pv_l, text: "SOLAR PV SAVINGS", align: TOP_MID, y: 15, text_font: font_btn}
         - label: {id: lbl_kr_zysk_pv, text: "-- zł", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0x2E7D32}
 
   - obj:
@@ -73,5 +73,5 @@ widgets:
       radius: 15
       bg_color: 0xBBDEFB
       widgets:
-        - label: {id: lbl_kr_home_l, text: "CAŁKOWITE ZUŻYCIE DOMU", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_kr_home_l, text: "TOTAL HOME USAGE", align: TOP_MID, y: 15, text_font: font_btn}
         - label: {id: lbl_kr_dom_z, text: "-- kWh", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0x1565C0}

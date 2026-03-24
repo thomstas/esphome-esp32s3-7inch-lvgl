@@ -1,6 +1,6 @@
 sensor:
   # ==========================================
-  # --- POGODA ---
+  # --- WEATHER ---
   # ==========================================
   - platform: homeassistant
     id: w_temp_out
@@ -157,7 +157,7 @@ sensor:
               return str_sprintf("%.1f mm", x);
    # ==========================================
 # ==========================================
-  # --- PROGNOZA POGODY NA 6 DNI (TEMPERATURY) ---
+  # --- 6-DAY WEATHER FORECAST (TEMPERATURES) ---
   # ==========================================
   - platform: homeassistant
     id: prog_d1_max
@@ -280,7 +280,7 @@ sensor:
             text: !lambda 'return str_sprintf("%.0f °C", x);'
 
 
-  # --- MEDIA / FALOWNIK ---
+  # --- SOLAR / INVERTER ---
   # ==========================================
   - platform: homeassistant
     id: pv_power
@@ -397,7 +397,7 @@ sensor:
               return str_sprintf("%.1f °C", x);
 
   # ==========================================
-  # --- ZASILANIE (KÓŁKA TAURON I DOM) ---
+  # --- POWER (GRID AND HOME) ---
   # ==========================================
   - platform: homeassistant
     id: grid_power
@@ -422,7 +422,7 @@ sensor:
               return str_sprintf("%.0f W", x);
 
   # ==========================================
-  # --- LICZNIKI ENERGII, WODY I GAZU ---
+  # --- ENERGY, WATER AND GAS METERS ---
   # ==========================================
   - platform: homeassistant
     id: import_daily
@@ -530,8 +530,8 @@ sensor:
         - lvgl.label.update:
             id: lbl_water_total
             text: !lambda |-
-              if(std::isnan(x)) return "Woda --- m3";
-              return str_sprintf("Woda %.2f m3", x);
+              if(std::isnan(x)) return "Water --- m3";
+              return str_sprintf("Water %.2f m3", x);
 
   - platform: homeassistant
     id: gas_total
@@ -545,7 +545,7 @@ sensor:
               return str_sprintf("GAZ %.2f m3", x);
 
   # ==========================================
-  # --- DANE KOSZTOWE (PLN i MIESIĘCZNE M3) ---
+  # --- COST DATA (PLN and MONTHLY M3) ---
   # ==========================================
   - platform: homeassistant
     id: s_zuz_m_woda
@@ -626,8 +626,8 @@ sensor:
         - lvgl.label.update:
             id: lbl_gas_invoice
             text: !lambda |-
-              if(std::isnan(x)) return "Gaz do zapłaty: --- zł";
-              return str_sprintf("Gaz do zapłaty: %.2f zł", x);
+              if(std::isnan(x)) return "Gas due: --- zł";
+              return str_sprintf("Gas due: %.2f zł", x);
 
   - platform: homeassistant
     id: pv_savings_koszty
@@ -671,10 +671,10 @@ sensor:
             text: !lambda 'return str_sprintf("%.1f kWh", x);'
 
   # ==========================================
-  # --- DANE NA EKRAN KOSZTÓW ROCZNYCH ---
+  # --- ANNUAL COSTS DATA ---
   # ==========================================
   
-  # 1. PRĄD (Pobrany z sieci)
+  # 1. ELECTRICITY (Grid consumption)
   - platform: homeassistant
     id: kr_prad_z
     entity_id: sensor.roczna_energia_pobrana
@@ -693,7 +693,7 @@ sensor:
             id: lbl_kr_prad_k
             text: !lambda 'return str_sprintf("%.2f zł", x);'
 
-  # 2. WODA
+  # 2. WATER
   - platform: homeassistant
     id: kr_woda_z
     entity_id: sensor.roczne_zuzycie_wody
@@ -712,7 +712,7 @@ sensor:
             id: lbl_kr_woda_k
             text: !lambda 'return str_sprintf("%.2f zł", x);'
 
-  # 3. GAZ
+  # 3. GAS
   - platform: homeassistant
     id: kr_gaz_z
     entity_id: sensor.roczne_zuzycie_gazu
@@ -731,7 +731,7 @@ sensor:
             id: lbl_kr_gaz_k
             text: !lambda 'return str_sprintf("%.2f zł", x);'
 
-  # 4. ZYSK Z PV (Oszczędność roczna)
+  # 4. PV PROFIT (Annual savings)
   - platform: homeassistant
     id: kr_zysk_pv
     entity_id: sensor.roczna_oszczednosc_pv
@@ -741,7 +741,7 @@ sensor:
             id: lbl_kr_zysk_pv
             text: !lambda 'return str_sprintf("%.2f zł", x);'
 
-  # 5. CAŁKOWITE ZUŻYCIE DOMU
+  # 5. TOTAL HOME CONSUMPTION
   - platform: homeassistant
     id: kr_dom_z
     entity_id: sensor.roczne_zuzycie_domu
@@ -751,7 +751,7 @@ sensor:
             id: lbl_kr_dom_z
             text: !lambda 'return str_sprintf("%.1f kWh", x);'
   # ==========================================
-  # --- TERMOSTAT ---
+  # --- THERMOSTAT ---
   # ==========================================
   - platform: homeassistant
     id: current_temp
@@ -777,11 +777,11 @@ sensor:
             id: lbl_temp_set
             text: !lambda 'return str_sprintf("%.1f °C", x);'
 
-  # --- STATUS SYGNAŁU WIFI ---
+  # --- WIFI SIGNAL STATUS ---
 
   - platform: uptime
     id: sys_uptime
-    name: "Czas pracy"
+    name: "Uptime"
     update_interval: 60s
     on_value:
       then:
@@ -792,7 +792,7 @@ sensor:
               int hours = int((int(x) % 86400) / 3600);
               int mins = int((int(x) % 3600) / 60);
               if (days > 0) {
-                return str_sprintf("%d dni, %02d:%02d", days, hours, mins);
+                return str_sprintf("%d days, %02d:%02d", days, hours, mins);
               } else {
                 return str_sprintf("%02d:%02d", hours, mins);
               }
@@ -810,7 +810,7 @@ sensor:
             id: lbl_wifi_str
             text: !lambda 'return str_sprintf("%.0f dBm", x);'
 
-# LOGIKA DLA PANELI PV
+# LOGIC FOR PV PANELS
   - platform: homeassistant
     id: pv_power_logic
     entity_id: sensor.moc_aktualna_inv_2
@@ -818,29 +818,29 @@ sensor:
       then:
         - lvgl.label.update:
             id: lbl_pv_icon
-            # Zmieniono z lvgl::Color na samo Color
+            # Changed from lvgl::Color to just Color
             text_color: !lambda |-
               return (x > 10) ? Color(0xFBC02D) : Color(0x9E9E9E);
 
-  # LOGIKA DLA SIECI I DOMU
+  # LOGIC FOR GRID AND HOME
   - platform: homeassistant
     id: grid_power_logic
     entity_id: sensor.used_energy
     on_value:
       then:
-        # --- ZMIANA DLA SŁUPA (SIEĆ) ---
+        # --- CHANGE FOR GRID (TOWER) ---
         - lvgl.label.update:
             id: lbl_grid_icon
-            # Dodano std::string(), żeby naprawić błąd c_str
+            # Added std::string() to fix c_str error
             text: !lambda |-
               return (x > 0) ? std::string("\U000F192C") : std::string("\U000F192D");
             text_color: !lambda |-
               return (x > 0) ? Color(0xF44336) : Color(0x4CAF50);
         
-        # --- ZMIANA DLA DOMU ---
+        # --- CHANGE FOR HOME ---
         - lvgl.label.update:
             id: lbl_home_icon
-            # Dodano std::string()
+            # Added std::string()
             text: !lambda |-
               return (x > 0) ? std::string("\U000F0F9C") : std::string("\U000F0F9B");
             text_color: !lambda |-
@@ -863,19 +863,19 @@ text_sensor:
             id: lbl_w_state
             text: !lambda |-
               std::string stan = x;
-              if (stan == "clear-night") return "Bezchmurna noc";
-              if (stan == "cloudy") return "Pochmurno";
-              if (stan == "fog") return "Mgła";
-              if (stan == "hail") return "Grad";
-              if (stan == "lightning") return "Burza";
-              if (stan == "lightning-rainy") return "Burza z deszczem";
-              if (stan == "partlycloudy") return "Częściowe zachm.";
-              if (stan == "pouring") return "Ulewa";
-              if (stan == "rainy") return "Deszczowo";
-              if (stan == "snowy") return "Śnieg";
-              if (stan == "snowy-rainy") return "Śnieg z deszczem";
-              if (stan == "sunny") return "Słonecznie";
-              if (stan == "windy") return "Wietrznie";
+              if (stan == "clear-night") return "Clear night";
+              if (stan == "cloudy") return "Cloudy";
+              if (stan == "fog") return "Fog";
+              if (stan == "hail") return "Hail";
+              if (stan == "lightning") return "Thunderstorm";
+              if (stan == "lightning-rainy") return "Thunderstorm with rain";
+              if (stan == "partlycloudy") return "Partly cloudy";
+              if (stan == "pouring") return "Downpour";
+              if (stan == "rainy") return "Rainy";
+              if (stan == "snowy") return "Snow";
+              if (stan == "snowy-rainy") return "Sleet";
+              if (stan == "sunny") return "Sunny";
+              if (stan == "windy") return "Windy";
               return stan.c_str();
         - lvgl.label.update:
             id: lbl_w_icon
@@ -906,9 +906,9 @@ text_sensor:
             id: lbl_w_sunset
             text: !lambda 'return x.substr(11, 5);'
 # ==========================================
-# --- PRZYCISKI ŚWIATEŁ (1 - 27) ---
+# --- LIGHT BUTTONS (1 - 27) ---
 # ==========================================
-# NAPRAWIONO: Błąd flow node (line 547) poprzez zmianę na styl blokowy
+# FIXED: Flow node error (line 547) by switching to block style
   - platform: homeassistant
     id: s_1
     entity_id: switch.lamp_switch_1_3
@@ -1073,7 +1073,7 @@ text_sensor:
         - script.execute: sync_ui_colors
 
 # ==========================================
-  # --- PROGNOZA POGODY (IKONY I OPIS) ---
+  # --- WEATHER FORECAST (ICONS AND DESCRIPTION) ---
   # ==========================================
   - platform: homeassistant
     id: prog_d1_cond
@@ -1087,7 +1087,7 @@ text_sensor:
       - lvgl.label.update:
           id: lbl_prog_desc_1
           text: !lambda |-
-            if (x == "clear-night") return "Jasno"; if (x == "sunny") return "Słonecznie"; if (x == "partlycloudy") return "Częśc. pochm."; if (x == "cloudy") return "Pochmurno"; if (x == "fog") return "Mgła"; if (x == "pouring") return "Ulewa"; if (x == "rainy") return "Deszcz"; if (x == "snowy" || x == "snowy-rainy") return "Śnieg"; if (x == "hail") return "Grad"; if (x == "lightning" || x == "lightning-rainy") return "Burza"; return "Nieznane";
+            if (x == "clear-night") return "Clear"; if (x == "sunny") return "Sunny"; if (x == "partlycloudy") return "Partly cloudy"; if (x == "cloudy") return "Cloudy"; if (x == "fog") return "Fog"; if (x == "pouring") return "Downpour"; if (x == "rainy") return "Rainy"; if (x == "snowy" || x == "snowy-rainy") return "Snow"; if (x == "hail") return "Hail"; if (x == "lightning" || x == "lightning-rainy") return "Storm"; return "Unknown";
 
   - platform: homeassistant
     id: prog_d2_cond
@@ -1101,7 +1101,7 @@ text_sensor:
       - lvgl.label.update:
           id: lbl_prog_desc_2
           text: !lambda |-
-            if (x == "clear-night") return "Jasno"; if (x == "sunny") return "Słonecznie"; if (x == "partlycloudy") return "Częśc. pochm."; if (x == "cloudy") return "Pochmurno"; if (x == "fog") return "Mgła"; if (x == "pouring") return "Ulewa"; if (x == "rainy") return "Deszcz"; if (x == "snowy" || x == "snowy-rainy") return "Śnieg"; if (x == "hail") return "Grad"; if (x == "lightning" || x == "lightning-rainy") return "Burza"; return "Nieznane";
+            if (x == "clear-night") return "Clear"; if (x == "sunny") return "Sunny"; if (x == "partlycloudy") return "Partly cloudy"; if (x == "cloudy") return "Cloudy"; if (x == "fog") return "Fog"; if (x == "pouring") return "Downpour"; if (x == "rainy") return "Rainy"; if (x == "snowy" || x == "snowy-rainy") return "Snow"; if (x == "hail") return "Hail"; if (x == "lightning" || x == "lightning-rainy") return "Storm"; return "Unknown";
 
   - platform: homeassistant
     id: prog_d3_cond
@@ -1115,7 +1115,7 @@ text_sensor:
       - lvgl.label.update:
           id: lbl_prog_desc_3
           text: !lambda |-
-            if (x == "clear-night") return "Jasno"; if (x == "sunny") return "Słonecznie"; if (x == "partlycloudy") return "Częśc. pochm."; if (x == "cloudy") return "Pochmurno"; if (x == "fog") return "Mgła"; if (x == "pouring") return "Ulewa"; if (x == "rainy") return "Deszcz"; if (x == "snowy" || x == "snowy-rainy") return "Śnieg"; if (x == "hail") return "Grad"; if (x == "lightning" || x == "lightning-rainy") return "Burza"; return "Nieznane";
+            if (x == "clear-night") return "Clear"; if (x == "sunny") return "Sunny"; if (x == "partlycloudy") return "Partly cloudy"; if (x == "cloudy") return "Cloudy"; if (x == "fog") return "Fog"; if (x == "pouring") return "Downpour"; if (x == "rainy") return "Rainy"; if (x == "snowy" || x == "snowy-rainy") return "Snow"; if (x == "hail") return "Hail"; if (x == "lightning" || x == "lightning-rainy") return "Storm"; return "Unknown";
 
   - platform: homeassistant
     id: prog_d4_cond
@@ -1129,7 +1129,7 @@ text_sensor:
       - lvgl.label.update:
           id: lbl_prog_desc_4
           text: !lambda |-
-            if (x == "clear-night") return "Jasno"; if (x == "sunny") return "Słonecznie"; if (x == "partlycloudy") return "Częśc. pochm."; if (x == "cloudy") return "Pochmurno"; if (x == "fog") return "Mgła"; if (x == "pouring") return "Ulewa"; if (x == "rainy") return "Deszcz"; if (x == "snowy" || x == "snowy-rainy") return "Śnieg"; if (x == "hail") return "Grad"; if (x == "lightning" || x == "lightning-rainy") return "Burza"; return "Nieznane";
+            if (x == "clear-night") return "Clear"; if (x == "sunny") return "Sunny"; if (x == "partlycloudy") return "Partly cloudy"; if (x == "cloudy") return "Cloudy"; if (x == "fog") return "Fog"; if (x == "pouring") return "Downpour"; if (x == "rainy") return "Rainy"; if (x == "snowy" || x == "snowy-rainy") return "Snow"; if (x == "hail") return "Hail"; if (x == "lightning" || x == "lightning-rainy") return "Storm"; return "Unknown";
 
   - platform: homeassistant
     id: prog_d5_cond
@@ -1143,7 +1143,7 @@ text_sensor:
       - lvgl.label.update:
           id: lbl_prog_desc_5
           text: !lambda |-
-            if (x == "clear-night") return "Jasno"; if (x == "sunny") return "Słonecznie"; if (x == "partlycloudy") return "Częśc. pochm."; if (x == "cloudy") return "Pochmurno"; if (x == "fog") return "Mgła"; if (x == "pouring") return "Ulewa"; if (x == "rainy") return "Deszcz"; if (x == "snowy" || x == "snowy-rainy") return "Śnieg"; if (x == "hail") return "Grad"; if (x == "lightning" || x == "lightning-rainy") return "Burza"; return "Nieznane";
+            if (x == "clear-night") return "Clear"; if (x == "sunny") return "Sunny"; if (x == "partlycloudy") return "Partly cloudy"; if (x == "cloudy") return "Cloudy"; if (x == "fog") return "Fog"; if (x == "pouring") return "Downpour"; if (x == "rainy") return "Rainy"; if (x == "snowy" || x == "snowy-rainy") return "Snow"; if (x == "hail") return "Hail"; if (x == "lightning" || x == "lightning-rainy") return "Storm"; return "Unknown";
 
   - platform: homeassistant
     id: prog_d6_cond
@@ -1157,10 +1157,10 @@ text_sensor:
       - lvgl.label.update:
           id: lbl_prog_desc_6
           text: !lambda |-
-            if (x == "clear-night") return "Jasno"; if (x == "sunny") return "Słonecznie"; if (x == "partlycloudy") return "Częśc. pochm."; if (x == "cloudy") return "Pochmurno"; if (x == "fog") return "Mgła"; if (x == "pouring") return "Ulewa"; if (x == "rainy") return "Deszcz"; if (x == "snowy" || x == "snowy-rainy") return "Śnieg"; if (x == "hail") return "Grad"; if (x == "lightning" || x == "lightning-rainy") return "Burza"; return "Nieznane";        
+            if (x == "clear-night") return "Clear"; if (x == "sunny") return "Sunny"; if (x == "partlycloudy") return "Partly cloudy"; if (x == "cloudy") return "Cloudy"; if (x == "fog") return "Fog"; if (x == "pouring") return "Downpour"; if (x == "rainy") return "Rainy"; if (x == "snowy" || x == "snowy-rainy") return "Snow"; if (x == "hail") return "Hail"; if (x == "lightning" || x == "lightning-rainy") return "Storm"; return "Unknown";        
 
 # ==========================================
-# --- STATUS POŁĄCZENIA API ---
+# --- API CONNECTION STATUS ---
 # ==========================================
 binary_sensor:
   - platform: status
@@ -1173,8 +1173,8 @@ binary_sensor:
             then:
               - lvgl.label.update:
                   id: icon_ha
-                  text_color: 0x4CAF50  # ZIELONY
+                  text_color: 0x4CAF50  # GREEN
             else:
               - lvgl.label.update:
                   id: icon_ha
-                  text_color: 0xF44336  # CZERWONY
+                  text_color: 0xF44336  # RED
