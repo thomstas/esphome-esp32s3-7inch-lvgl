@@ -20,7 +20,7 @@ widgets:
       border_width: 2
       border_color: 0x555555
       on_click:
-        - lvgl.page.show: page_pogoda
+        - lvgl.page.show: page_weather
       widgets:
         - label:
             text: "\U000F004D"  # Icon: mdi-arrow-left
@@ -40,7 +40,7 @@ widgets:
       border_width: 2
       border_color: 0x555555
       on_click:
-        - lvgl.page.show: page_radar_europa
+        - lvgl.page.show: page_radar_europe
       widgets:
         - label: 
             text: "\U000F034A"  # Icon: mdi-magnify-minus

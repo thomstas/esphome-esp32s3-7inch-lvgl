@@ -120,7 +120,7 @@
           height: 65
           bg_color: 0x2196F3
           on_click:
-            - lvgl.page.show: page_dom
+            - lvgl.page.show: page_home
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
             - label: {text: "\U000F02DC", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
@@ -133,7 +133,7 @@
           height: 65
           bg_color: 0x4CAF50
           on_click:
-            - lvgl.page.show: page_termostat
+            - lvgl.page.show: page_thermostat
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
             - label: {text: "\U000F050F", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
@@ -159,7 +159,7 @@
           height: 65
           bg_color: 0x00BCD4
           on_click:
-            - lvgl.page.show: page_pogoda
+            - lvgl.page.show: page_weather
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
             - label: {text: "\U000F0590", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
@@ -172,7 +172,7 @@
           height: 65
           bg_color: 0x9C27B0
           on_click:
-            - lvgl.page.show: page_zasilanie
+            - lvgl.page.show: page_power
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
             - label: {text: "\U000F0210", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
@@ -185,7 +185,7 @@
           height: 65
           bg_color: 0x795548
           on_click:
-            - lvgl.page.show: page_koszty
+            - lvgl.page.show: page_costs
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
             - label: {text: "\U000F01B6", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
@@ -199,7 +199,7 @@
           height: 65
           bg_color: 0x3F51B5
           on_click:
-            - lvgl.page.show: page_koszty_roczne
+            - lvgl.page.show: page_annual_costs
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
             - label: {text: "\U000F00ED", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
@@ -212,7 +212,7 @@
           height: 65
           bg_color: 0x607D8B
           on_click:
-            - lvgl.page.show: page_ustawienia
+            - lvgl.page.show: page_settings
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
             - label: {text: "\U000F0493", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}

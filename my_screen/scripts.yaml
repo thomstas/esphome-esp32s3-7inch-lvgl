@@ -38,7 +38,7 @@ script:
               }
           then:
             # --- ACTION FOR NIGHT (Screensaver) ---
-            - lvgl.page.show: page_wygaszacz
+            - lvgl.page.show: page_screensaver
             - lvgl.obj.update:
                 id: pasek_statusu
                 hidden: true
@@ -47,7 +47,7 @@ script:
                 brightness: 0.5
           else:
             # --- ACTION FOR DAY (Europe Map) ---
-            - lvgl.page.show: page_radar_europa
+            - lvgl.page.show: page_radar_europe
             - lvgl.obj.update:
                 id: pasek_statusu
                 hidden: false
