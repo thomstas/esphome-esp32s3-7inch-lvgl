@@ -11,11 +11,11 @@ widgets:
       border_width: 0
       widgets:
         # --- LEWA KOLUMNA (STATYSTYKI) ---
-        - label: {text: "MIESIĄC:", x: 10, y: 10, text_font: font_btn, text_color: 0x333333}
+        - label: {id: lbl_z_month_l, text: "MIESIĄC:", x: 10, y: 10, text_font: font_btn, text_color: 0x333333}
         - label: {id: lbl_import_monthly, text: "-- kWh", x: 10, y: 40, text_font: font_title, text_color: 0x1976D2}
         - label: {id: lbl_export_monthly, text: "-- kWh", x: 10, y: 70, text_font: font_btn, text_color: 0x333333}
         - label: {id: lbl_home_monthly, text: "-- kWh", x: 10, y: 95, text_font: font_btn, text_color: 0x333333}
-        - label: {text: "LICZNIKI:", x: 10, y: 135, text_font: font_btn, text_color: 0x333333}
+        - label: {id: lbl_z_counters_l, text: "LICZNIKI:", x: 10, y: 135, text_font: font_btn, text_color: 0x333333}
         - label: {id: lbl_water_total, text: "---.--- m3", x: 10, y: 165, text_font: font_btn, text_color: 0x03A9F4}
         - label: {id: lbl_gas_total, text: "---.--- m3", x: 10, y: 195, text_font: font_btn, text_color: 0xFF9800}
         - label: {id: lbl_gas_invoice, text: "Gaz: -- zł", x: 10, y: 265, text_font: font_btn, text_color: 0xC62828}

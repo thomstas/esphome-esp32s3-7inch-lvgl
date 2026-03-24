@@ -13,6 +13,7 @@ esphome:
       - script.execute: sync_ui_colors
       - script.execute: screen_timeout_script
       - script.execute: sync_thermostat_colors
+      - script.execute: load_translations
       - lvgl.slider.update:
           id: slider_brightness
           value: !lambda 'return id(brightness_setpoint) * 100;'
@@ -94,7 +95,13 @@ api:
         - lvgl.page.show: page_radar_europa
     - service: pokaz_strone_koszty_roczne
       then:
-        - lvgl.page.show: page_koszty_roczne                     
+        - lvgl.page.show: page_koszty_roczne
+    - service: toggle_language
+      then:
+        - globals.set:
+            id: current_language
+            value: !lambda 'return id(current_language) == 0 ? 1 : 0;'
+        - script.execute: load_translations                     
 
 ota:
   - platform: esphome
@@ -204,6 +211,7 @@ packages:
   dane_ha: !include moj_ekran/sensory.yaml
   skrypty: !include moj_ekran/skrypty.yaml
   interwaly: !include moj_ekran/interwaly.yaml
+  jezyki: !include moj_ekran/languages.yaml
 lvgl:
   displays: [my_display]
   touchscreens: [my_touch]

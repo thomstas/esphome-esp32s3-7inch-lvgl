@@ -1,0 +1,243 @@
+# =====================================================
+# LANGUAGE / TRANSLATION MANAGER
+# 0 = Polski (PL)   1 = English (EN)
+# =====================================================
+
+globals:
+  - id: current_language
+    type: int
+    initial_value: '0'
+    restore_value: yes
+
+script:
+  - id: load_translations
+    then:
+      # ===== UI SHELL – MENU GŁÓWNE =====
+      - lvgl.label.update:
+          id: lbl_menu_title
+          text: !lambda 'return id(current_language) == 0 ? "MENU GŁÓWNE" : "MAIN MENU";'
+      - lvgl.label.update:
+          id: lbl_menu_dom
+          text: !lambda 'return id(current_language) == 0 ? "DOM" : "HOME";'
+      - lvgl.label.update:
+          id: lbl_menu_termo
+          text: !lambda 'return id(current_language) == 0 ? "TERMO" : "THERMO";'
+      - lvgl.label.update:
+          id: lbl_menu_pogoda
+          text: !lambda 'return id(current_language) == 0 ? "POGODA" : "WEATHER";'
+      - lvgl.label.update:
+          id: lbl_menu_moc
+          text: !lambda 'return id(current_language) == 0 ? "MOC" : "POWER";'
+      - lvgl.label.update:
+          id: lbl_menu_koszty
+          text: !lambda 'return id(current_language) == 0 ? "KOSZTY" : "COSTS";'
+      - lvgl.label.update:
+          id: lbl_menu_rok
+          text: !lambda 'return id(current_language) == 0 ? "ROK" : "YEAR";'
+
+      # ===== PAGE MEDIA – SOLAR / PV =====
+      - lvgl.label.update:
+          id: lbl_media_curr_pwr
+          text: !lambda 'return id(current_language) == 0 ? "AKTUALNA MOC" : "CURRENT POWER";'
+      - lvgl.label.update:
+          id: lbl_media_today
+          text: !lambda 'return id(current_language) == 0 ? "DZIŚ" : "TODAY";'
+      - lvgl.label.update:
+          id: lbl_media_total
+          text: !lambda 'return id(current_language) == 0 ? "CAŁKOWITA" : "TOTAL";'
+      - lvgl.label.update:
+          id: lbl_media_tech
+          text: !lambda 'return id(current_language) == 0 ? "PARAMETRY TECHNICZNE" : "TECHNICAL PARAMS";'
+      - lvgl.label.update:
+          id: lbl_media_grid_ac
+          text: !lambda 'return id(current_language) == 0 ? "SIEĆ (AC)" : "GRID (AC)";'
+      - lvgl.label.update:
+          id: lbl_media_volt_ac
+          text: !lambda 'return id(current_language) == 0 ? "Napięcie:" : "Voltage:";'
+      - lvgl.label.update:
+          id: lbl_media_curr_ac
+          text: !lambda 'return id(current_language) == 0 ? "Prąd:" : "Current:";'
+      - lvgl.label.update:
+          id: lbl_media_freq
+          text: !lambda 'return id(current_language) == 0 ? "Częstotliwość:" : "Frequency:";'
+      - lvgl.label.update:
+          id: lbl_media_pv
+          text: !lambda 'return id(current_language) == 0 ? "PANELE (PV)" : "PANELS (PV)";'
+      - lvgl.label.update:
+          id: lbl_media_volt_dc
+          text: !lambda 'return id(current_language) == 0 ? "Napięcie:" : "Voltage:";'
+      - lvgl.label.update:
+          id: lbl_media_curr_dc
+          text: !lambda 'return id(current_language) == 0 ? "Prąd:" : "Current:";'
+      - lvgl.label.update:
+          id: lbl_media_inv
+          text: !lambda 'return id(current_language) == 0 ? "FALOWNIK" : "INVERTER";'
+      - lvgl.label.update:
+          id: lbl_media_temp_l
+          text: !lambda 'return id(current_language) == 0 ? "Temperatura:" : "Temperature:";'
+
+      # ===== PAGE POGODA – WEATHER =====
+      - lvgl.label.update:
+          id: lbl_wo_general
+          text: !lambda 'return id(current_language) == 0 ? "OGÓLNIE" : "GENERAL";'
+      - lvgl.label.update:
+          id: lbl_wo_outside
+          text: !lambda 'return id(current_language) == 0 ? "ZEWNĄTRZ" : "OUTSIDE";'
+      - lvgl.label.update:
+          id: lbl_wo_hum_out_l
+          text: !lambda 'return id(current_language) == 0 ? "Wilgot.:" : "Humid.:";'
+      - lvgl.label.update:
+          id: lbl_wo_inside
+          text: !lambda 'return id(current_language) == 0 ? "WEWNĄTRZ" : "INSIDE";'
+      - lvgl.label.update:
+          id: lbl_wo_hum_in_l
+          text: !lambda 'return id(current_language) == 0 ? "Wilgot.:" : "Humid.:";'
+      - lvgl.label.update:
+          id: lbl_wo_atmos
+          text: !lambda 'return id(current_language) == 0 ? "ATMOSFERA" : "ATMOSPHERE";'
+      - lvgl.label.update:
+          id: lbl_wo_press_l
+          text: !lambda 'return id(current_language) == 0 ? "Ciśnienie:" : "Pressure:";'
+      - lvgl.label.update:
+          id: lbl_wo_wind_l
+          text: !lambda 'return id(current_language) == 0 ? "Wiatr:" : "Wind:";'
+      - lvgl.label.update:
+          id: lbl_wo_dir_l
+          text: !lambda 'return id(current_language) == 0 ? "Kierunek:" : "Direction:";'
+      - lvgl.label.update:
+          id: lbl_wo_solar_l2
+          text: !lambda 'return id(current_language) == 0 ? "Słońce:" : "Sunlight:";'
+      - lvgl.label.update:
+          id: lbl_wo_rad_l
+          text: !lambda 'return id(current_language) == 0 ? "Promien.:" : "Radiation:";'
+      - lvgl.label.update:
+          id: lbl_wo_uv_l
+          text: !lambda 'return id(current_language) == 0 ? "Indeks UV:" : "UV Index:";'
+      - lvgl.label.update:
+          id: lbl_wo_sunriseset
+          text: !lambda 'return id(current_language) == 0 ? "SŁOŃCE:" : "SUNRISE:";'
+      - lvgl.label.update:
+          id: lbl_wo_precip
+          text: !lambda 'return id(current_language) == 0 ? "OPADY" : "PRECIP.";'
+      - lvgl.label.update:
+          id: lbl_wo_inst_l
+          text: !lambda 'return id(current_language) == 0 ? "Chwilowe:" : "Instant:";'
+      - lvgl.label.update:
+          id: lbl_wo_today_l
+          text: !lambda 'return id(current_language) == 0 ? "Dzisiaj:" : "Today:";'
+      - lvgl.label.update:
+          id: lbl_wo_week_l
+          text: !lambda 'return id(current_language) == 0 ? "Ten tydzień:" : "This week:";'
+      - lvgl.label.update:
+          id: lbl_wo_month_l
+          text: !lambda 'return id(current_language) == 0 ? "Ten miesiąc:" : "This month:";'
+      - lvgl.label.update:
+          id: lbl_wo_fcst_btn
+          text: !lambda 'return id(current_language) == 0 ? "PROGNOZA" : "FORECAST";'
+
+      # ===== PAGE TERMOSTAT =====
+      - lvgl.label.update:
+          id: lbl_termo_setpoint
+          text: !lambda 'return id(current_language) == 0 ? "NASTAWA" : "SETPOINT";'
+      - lvgl.label.update:
+          id: lbl_termo_heat
+          text: !lambda 'return id(current_language) == 0 ? "GRZANIE" : "HEATING";'
+      - lvgl.label.update:
+          id: lbl_termo_off_l
+          text: !lambda 'return id(current_language) == 0 ? "WYŁĄCZ" : "OFF";'
+
+      # ===== PAGE KOSZTY – MONTHLY COSTS =====
+      - lvgl.label.update:
+          id: lbl_k_title_l
+          text: !lambda 'return id(current_language) == 0 ? "PODSUMOWANIE KOSZTÓW MIESIĄCA" : "MONTHLY COSTS SUMMARY";'
+      - lvgl.label.update:
+          id: lbl_k_dom_l
+          text: !lambda 'return id(current_language) == 0 ? "DOM" : "HOME";'
+      - lvgl.label.update:
+          id: lbl_k_prad_l
+          text: !lambda 'return id(current_language) == 0 ? "PRĄD" : "ELECTRICITY";'
+      - lvgl.label.update:
+          id: lbl_k_woda_l
+          text: !lambda 'return id(current_language) == 0 ? "WODA" : "WATER";'
+      - lvgl.label.update:
+          id: lbl_k_gaz_l
+          text: !lambda 'return id(current_language) == 0 ? "GAZ" : "GAS";'
+      - lvgl.label.update:
+          id: lbl_k_gaz_inv_l
+          text: !lambda 'return id(current_language) == 0 ? "GAZ (FAKTURA)" : "GAS (INVOICE)";'
+      - lvgl.label.update:
+          id: lbl_k_pv_l
+          text: !lambda 'return id(current_language) == 0 ? "ZYSK PV" : "PV PROFIT";'
+      - lvgl.label.update:
+          id: lbl_k_storage_l
+          text: !lambda 'return id(current_language) == 0 ? "W MAGAZYNIE" : "IN STORAGE";'
+      - lvgl.label.update:
+          id: lbl_k_total_l
+          text: !lambda 'return id(current_language) == 0 ? "DO ZAPŁATY (SUMA):" : "TO PAY (TOTAL):";'
+
+      # ===== PAGE KOSZTY ROCZNE – ANNUAL COSTS =====
+      - lvgl.label.update:
+          id: lbl_kr_title_l
+          text: !lambda 'return id(current_language) == 0 ? "PODSUMOWANIE ROKU" : "ANNUAL SUMMARY";'
+      - lvgl.label.update:
+          id: lbl_kr_prad_l
+          text: !lambda 'return id(current_language) == 0 ? "PRĄD (SIEĆ)" : "ELECTRICITY (GRID)";'
+      - lvgl.label.update:
+          id: lbl_kr_woda_l
+          text: !lambda 'return id(current_language) == 0 ? "WODA" : "WATER";'
+      - lvgl.label.update:
+          id: lbl_kr_gaz_l
+          text: !lambda 'return id(current_language) == 0 ? "GAZ" : "GAS";'
+      - lvgl.label.update:
+          id: lbl_kr_pv_l
+          text: !lambda 'return id(current_language) == 0 ? "OSZCZĘDNOŚĆ Z FOTOWOLTAIKI" : "SOLAR PV SAVINGS";'
+      - lvgl.label.update:
+          id: lbl_kr_home_l
+          text: !lambda 'return id(current_language) == 0 ? "CAŁKOWITE ZUŻYCIE DOMU" : "TOTAL HOME USAGE";'
+
+      # ===== PAGE USTAWIENIA – SETTINGS =====
+      - lvgl.label.update:
+          id: lbl_set_screen_l
+          text: !lambda 'return id(current_language) == 0 ? "EKRAN" : "SCREEN";'
+      - lvgl.label.update:
+          id: lbl_set_bright_l
+          text: !lambda 'return id(current_language) == 0 ? "Jasność podświetlenia:" : "Backlight brightness:";'
+      - lvgl.label.update:
+          id: lbl_set_bat_l
+          text: !lambda 'return id(current_language) == 0 ? "ZASILANIE I BATERIA" : "POWER & BATTERY";'
+      - lvgl.label.update:
+          id: lbl_set_volt_l
+          text: !lambda 'return id(current_language) == 0 ? "Napięcie:" : "Voltage:";'
+      - lvgl.label.update:
+          id: lbl_set_curr_l
+          text: !lambda 'return id(current_language) == 0 ? "Natężenie:" : "Current:";'
+      - lvgl.label.update:
+          id: lbl_set_status_l
+          text: !lambda 'return id(current_language) == 0 ? "Stan:" : "Status:";'
+      - lvgl.label.update:
+          id: lbl_set_power_l
+          text: !lambda 'return id(current_language) == 0 ? "Aktualna moc:" : "Current power:";'
+
+      # ===== PAGE PROGNOZA – FORECAST =====
+      - lvgl.label.update:
+          id: lbl_prog_title_l
+          text: !lambda 'return id(current_language) == 0 ? "PROGNOZA NA 6 DNI" : "6-DAY FORECAST";'
+      - lvgl.label.update:
+          id: lbl_prog_back_l
+          text: !lambda 'return id(current_language) == 0 ? "< POWRÓT" : "< BACK";'
+
+      # ===== PAGE ZASILANIE – POWER FLOW =====
+      - lvgl.label.update:
+          id: lbl_z_month_l
+          text: !lambda 'return id(current_language) == 0 ? "MIESIĄC:" : "MONTH:";'
+      - lvgl.label.update:
+          id: lbl_z_counters_l
+          text: !lambda 'return id(current_language) == 0 ? "LICZNIKI:" : "METERS:";'
+
+      # ===== LANGUAGE BUTTON HIGHLIGHT =====
+      - lvgl.widget.update:
+          id: btn_lang_pl
+          bg_color: !lambda 'return id(current_language) == 0 ? lv_color_hex(0x1565C0) : lv_color_hex(0x9E9E9E);'
+      - lvgl.widget.update:
+          id: btn_lang_en
+          bg_color: !lambda 'return id(current_language) == 1 ? lv_color_hex(0x1565C0) : lv_color_hex(0x9E9E9E);'
