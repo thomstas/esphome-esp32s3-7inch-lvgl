@@ -22,20 +22,20 @@ widgets:
             bg_color: 0xFFFFFF
             border_width: 0
             widgets:
-              - label: {text: "OGÓLNIE", align: TOP_MID, y: 10, text_font: font_btn, text_color: 0x333333}
+              - label: {id: lbl_wo_general, text: "OGÓLNIE", align: TOP_MID, y: 10, text_font: font_btn, text_color: 0x333333}
               - label: {id: lbl_w_icon, text: "☀", align: CENTER, y: -140, text_font: font_weather_icon, text_color: 0xFFA500}
               - label: {id: lbl_w_state, text: "Pobieram...", align: CENTER, y: -90, text_font: font_title, text_color: 0x1976D2}
               - line: {points: ["10, 130", "240, 130"], line_color: 0xDDDDDD, line_width: 2}
-              - label: {text: "ZEWNĄTRZ", align: TOP_MID, y: 145, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_wo_outside, text: "ZEWNĄTRZ", align: TOP_MID, y: 145, text_font: font_btn, text_color: 0x555555}
               - label: {text: "Temp:", x: 10, y: 175, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_w_temp_out, text: "-- °C", x: 120, y: 175, text_font: font_btn, text_color: 0x000000}
-              - label: {text: "Wilgot.:", x: 10, y: 205, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_wo_hum_out_l, text: "Wilgot.:", x: 10, y: 205, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_w_hum_out, text: "-- %", x: 120, y: 205, text_font: font_btn, text_color: 0x000000}
               - line: {points: ["10, 250", "240, 250"], line_color: 0xDDDDDD, line_width: 2}
-              - label: {text: "WEWNĄTRZ", align: TOP_MID, y: 265, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_wo_inside, text: "WEWNĄTRZ", align: TOP_MID, y: 265, text_font: font_btn, text_color: 0x555555}
               - label: {text: "Temp:", x: 10, y: 295, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_w_temp_in, text: "-- °C", x: 120, y: 295, text_font: font_btn, text_color: 0x000000}
-              - label: {text: "Wilgot.:", x: 10, y: 325, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_wo_hum_in_l, text: "Wilgot.:", x: 10, y: 325, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_w_hum_in, text: "-- %", x: 120, y: 325, text_font: font_btn, text_color: 0x000000}
 
         # --- KOLUMNA 2: ATMOSFERA I SŁOŃCE ---
@@ -48,23 +48,23 @@ widgets:
             bg_color: 0xFFFFFF
             border_width: 0
             widgets:
-              - label: {text: "ATMOSFERA", align: TOP_MID, y: 15, text_font: font_btn, text_color: 0x333333}
-              - label: {text: "Ciśnienie:", x: 10, y: 60, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_wo_atmos, text: "ATMOSFERA", align: TOP_MID, y: 15, text_font: font_btn, text_color: 0x333333}
+              - label: {id: lbl_wo_press_l, text: "Ciśnienie:", x: 10, y: 60, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_w_pres, text: "-- hPa", x: 120, y: 60, text_font: font_btn, text_color: 0x000000}
               - line: {points: ["10, 110", "240, 110"], line_color: 0xDDDDDD, line_width: 2}
-              - label: {text: "Wiatr:", x: 10, y: 140, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_wo_wind_l, text: "Wiatr:", x: 10, y: 140, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_w_wind_s, text: "-- km/h", x: 120, y: 140, text_font: font_btn, text_color: 0x000000}
-              - label: {text: "Kierunek:", x: 10, y: 170, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_wo_dir_l, text: "Kierunek:", x: 10, y: 170, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_w_wind_d, text: "-- °", x: 120, y: 170, text_font: font_btn, text_color: 0x000000}
               - line: {points: ["10, 220", "240, 220"], line_color: 0xDDDDDD, line_width: 2}
-              - label: {text: "Słońce:", x: 10, y: 250, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_wo_solar_l2, text: "Słońce:", x: 10, y: 250, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_w_solar_l, text: "-- lx", x: 120, y: 250, text_font: font_btn, text_color: 0xE65100}
-              - label: {text: "Promien.:", x: 10, y: 280, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_wo_rad_l, text: "Promien.:", x: 10, y: 280, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_w_solar_r, text: "-- W/m2", x: 120, y: 280, text_font: font_btn, text_color: 0xE65100}
-              - label: {text: "Indeks UV:", x: 10, y: 310, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_wo_uv_l, text: "Indeks UV:", x: 10, y: 310, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_w_uv, text: "--", x: 120, y: 310, text_font: font_btn, text_color: 0xE65100}
               - line: {points: ["10, 340", "240, 340"], line_color: 0xDDDDDD, line_width: 2}
-              - label: {text: "SŁOŃCE:", x: 10, y: 350, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_wo_sunriseset, text: "SŁOŃCE:", x: 10, y: 350, text_font: font_btn, text_color: 0x555555}
               - label: {text: "☀", x: 80, y: 350, text_font: font_weather_mini, text_color: 0xE65100}
               - label: {id: lbl_w_sunrise, text: "--:--", x: 105, y: 350, text_font: font_btn, text_color: 0x000000}
               - label: {text: "🌙", x: 160, y: 350, text_font: font_weather_mini, text_color: 0xE65100}
@@ -80,28 +80,16 @@ widgets:
             bg_color: 0xFFFFFF
             border_width: 0
             widgets:
-              - label: {text: "OPADY", align: TOP_MID, y: 15, text_font: font_btn, text_color: 0x333333}
-              - label: {text: "Chwilowe:", x: 10, y: 60, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_wo_precip, text: "OPADY", align: TOP_MID, y: 15, text_font: font_btn, text_color: 0x333333}
+              - label: {id: lbl_wo_inst_l, text: "Chwilowe:", x: 10, y: 60, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_w_rain_r, text: "-- mm/h", x: 120, y: 60, text_font: font_btn, text_color: 0x1976D2}
               - line: {points: ["10, 110", "240, 110"], line_color: 0xDDDDDD, line_width: 2}
-              - label: {text: "Dzisiaj:", x: 10, y: 140, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_wo_today_l, text: "Dzisiaj:", x: 10, y: 140, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_w_rain_d, text: "-- mm", x: 120, y: 140, text_font: font_btn, text_color: 0x1976D2}
-              - label: {text: "Ten tydzień:", x: 10, y: 190, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_wo_week_l, text: "Ten tydzień:", x: 10, y: 190, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_w_rain_w, text: "-- mm", x: 120, y: 190, text_font: font_btn, text_color: 0x1976D2}
-              - label: {text: "Ten miesiąc:", x: 10, y: 240, text_font: font_btn, text_color: 0x555555}
+              - label: {id: lbl_wo_month_l, text: "Ten miesiąc:", x: 10, y: 240, text_font: font_btn, text_color: 0x555555}
               - label: {id: lbl_w_rain_m, text: "-- mm", x: 120, y: 240, text_font: font_btn, text_color: 0x1976D2}
-              
-              # PRZYCISKI (Teraz poprawnie wewnątrz kolumny 3)
-              - button:
-                  x: 10
-                  y: 340
-                  width: 110
-                  height: 60
-                  bg_color: 0x2196F3
-                  on_click:
-                    - lvgl.page.show: page_prognoza
-                  widgets:
-                    - label: {text: "PROGNOZA", align: CENTER, text_font: font_btn, text_color: 0xFFFFFF}
               
  # PRZYCISKI (Teraz poprawnie wewnątrz kolumny 3)
               - button:
@@ -113,7 +101,7 @@ widgets:
                   on_click:
                     - lvgl.page.show: page_prognoza
                   widgets:
-                    - label: {text: "PROGNOZA", align: CENTER, text_font: font_btn, text_color: 0xFFFFFF}
+                    - label: {id: lbl_wo_fcst_btn, text: "PROGNOZA", align: CENTER, text_font: font_btn, text_color: 0xFFFFFF}
               
               - button:
                   x: 130

@@ -88,6 +88,7 @@
     hidden: true
     widgets:
       - label:
+          id: lbl_menu_title
           text: "MENU GŁÓWNE"
           align: TOP_MID
           y: 10
@@ -123,7 +124,7 @@
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
             - label: {text: "\U000F02DC", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
-            - label: {text: "DOM", text_font: font_title, align: RIGHT_MID, x: -30, text_color: 0xFFFFFF}
+            - label: {id: lbl_menu_dom, text: "DOM", text_font: font_title, align: RIGHT_MID, x: -30, text_color: 0xFFFFFF}
       
       - button:
           x: 290
@@ -136,7 +137,7 @@
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
             - label: {text: "\U000F050F", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
-            - label: {text: "TERMO", text_font: font_title, align: RIGHT_MID, x: -25, text_color: 0xFFFFFF}
+            - label: {id: lbl_menu_termo, text: "TERMO", text_font: font_title, align: RIGHT_MID, x: -25, text_color: 0xFFFFFF}
 
       - button:
           x: 30
@@ -162,7 +163,7 @@
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
             - label: {text: "\U000F0590", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
-            - label: {text: "POGODA", text_font: font_title, align: RIGHT_MID, x: -20, text_color: 0xFFFFFF}
+            - label: {id: lbl_menu_pogoda, text: "POGODA", text_font: font_title, align: RIGHT_MID, x: -20, text_color: 0xFFFFFF}
 
       - button:
           x: 30
@@ -175,7 +176,7 @@
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
             - label: {text: "\U000F0210", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
-            - label: {text: "MOC", text_font: font_title, align: RIGHT_MID, x: -35, text_color: 0xFFFFFF}
+            - label: {id: lbl_menu_moc, text: "MOC", text_font: font_title, align: RIGHT_MID, x: -35, text_color: 0xFFFFFF}
 
       - button:
           x: 290
@@ -188,7 +189,7 @@
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
             - label: {text: "\U000F01B6", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
-            - label: {text: "KOSZTY", text_font: font_title, align: RIGHT_MID, x: -25, text_color: 0xFFFFFF}
+            - label: {id: lbl_menu_koszty, text: "KOSZTY", text_font: font_title, align: RIGHT_MID, x: -25, text_color: 0xFFFFFF}
 
       # --- ZMODYFIKOWANY RZĄD 4 (Podzielony na ROK i SYSTEM) ---
       - button:
@@ -202,7 +203,7 @@
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
             - label: {text: "\U000F00ED", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
-            - label: {text: "ROK", text_font: font_title, align: RIGHT_MID, x: -45, text_color: 0xFFFFFF}
+            - label: {id: lbl_menu_rok, text: "ROK", text_font: font_title, align: RIGHT_MID, x: -45, text_color: 0xFFFFFF}
 
       - button:
           x: 290

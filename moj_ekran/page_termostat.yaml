@@ -24,7 +24,7 @@ widgets:
       border_width: 0
       widgets:
         - label: {id: lbl_curr_temp, text: "--.- °C", align: TOP_MID, text_font: font_title, text_color: 0x2E7D32}
-        - label: {text: "NASTAWA", align: CENTER, text_font: font_btn, text_color: 0x555555}
+        - label: {id: lbl_termo_setpoint, text: "NASTAWA", align: CENTER, text_font: font_btn, text_color: 0x555555}
         - label: {id: lbl_temp_set, text: "21.0 °C", align: BOTTOM_MID, text_font: font_title, text_color: 0xE65100}
   - button:
       x: 150
@@ -60,7 +60,7 @@ widgets:
       bg_opa: 0
       border_width: 0
       widgets:
-        - button: {id: btn_term_grzanie, x: 0, width: 150, height: 60, bg_color: 0xFFFFFF, on_click: {homeassistant.service: {service: climate.set_hvac_mode, data: {entity_id: climate.ogrzewanie, hvac_mode: heat}}}, widgets: [{label: {text: "GRZANIE", align: CENTER, text_font: font_btn, text_color: 0x333333}}]}
+        - button: {id: btn_term_grzanie, x: 0, width: 150, height: 60, bg_color: 0xFFFFFF, on_click: {homeassistant.service: {service: climate.set_hvac_mode, data: {entity_id: climate.ogrzewanie, hvac_mode: heat}}}, widgets: [{label: {id: lbl_termo_heat, text: "GRZANIE", align: CENTER, text_font: font_btn, text_color: 0x333333}}]}
         - button: {id: btn_term_auto, x: 170, width: 150, height: 60, bg_color: 0xFFFFFF, on_click: {homeassistant.service: {service: climate.set_hvac_mode, data: {entity_id: climate.ogrzewanie, hvac_mode: auto}}}, widgets: [{label: {text: "AUTO", align: CENTER, text_font: font_btn, text_color: 0x333333}}]}
-        - button: {id: btn_term_wylacz, x: 340, width: 150, height: 60, bg_color: 0xFFFFFF, on_click: {homeassistant.service: {service: climate.set_hvac_mode, data: {entity_id: climate.ogrzewanie, hvac_mode: "off"}}}, widgets: [{label: {text: "WYŁĄCZ", align: CENTER, text_font: font_btn, text_color: 0x333333}}]}
+        - button: {id: btn_term_wylacz, x: 340, width: 150, height: 60, bg_color: 0xFFFFFF, on_click: {homeassistant.service: {service: climate.set_hvac_mode, data: {entity_id: climate.ogrzewanie, hvac_mode: "off"}}}, widgets: [{label: {id: lbl_termo_off_l, text: "WYŁĄCZ", align: CENTER, text_font: font_btn, text_color: 0x333333}}]}
         - button: {id: btn_term_turbo, x: 510, width: 150, height: 60, bg_color: 0xFFFFFF, on_click: {script.execute: turbo_25st}, widgets: [{label: {text: "TURBO", align: CENTER, text_font: font_btn, text_color: 0x333333}}]}

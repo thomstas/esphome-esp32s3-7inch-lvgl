@@ -2,6 +2,7 @@ id: page_koszty
 bg_color: 0xEEEEEE
 widgets:
   - label:
+      id: lbl_k_title_l
       text: "PODSUMOWANIE KOSZTÓW MIESIĄCA"
       align: TOP_MID
       y: 60
@@ -20,7 +21,7 @@ widgets:
       radius: 15
       bg_color: 0xBBDEFB
       widgets:
-        - label: {text: "DOM", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_k_dom_l, text: "DOM", align: TOP_MID, y: 15, text_font: font_btn}
         - label: {id: lbl_k_house_z, text: "-- kWh", align: CENTER, y: 0, text_font: font_btn}
         - label: {id: lbl_k_house_k, text: "-- zł", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0x1565C0}
 
@@ -33,7 +34,7 @@ widgets:
       radius: 15
       bg_color: 0x90CAF9
       widgets:
-        - label: {text: "PRĄD", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_k_prad_l, text: "PRĄD", align: TOP_MID, y: 15, text_font: font_btn}
         - label: {id: lbl_k_prad_real_z, text: "-- kWh", align: CENTER, y: 0, text_font: font_btn}
         - label: {id: lbl_k_prad_real_k, text: "-- zł", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0xC62828}
 
@@ -46,7 +47,7 @@ widgets:
       radius: 15
       bg_color: 0x81D4FA
       widgets:
-        - label: {text: "WODA", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_k_woda_l, text: "WODA", align: TOP_MID, y: 15, text_font: font_btn}
         - label: {id: lbl_k_woda_z, text: "-- m3", align: CENTER, y: 0, text_font: font_btn}
         - label: {id: lbl_k_woda_k, text: "-- zł", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0x01579B}
 
@@ -59,7 +60,7 @@ widgets:
       radius: 15
       bg_color: 0x4DD0E1
       widgets:
-        - label: {text: "GAZ", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_k_gaz_l, text: "GAZ", align: TOP_MID, y: 15, text_font: font_btn}
         - label: {id: lbl_k_gaz_z, text: "-- m3", align: CENTER, y: 0, text_font: font_btn}
         - label: {id: lbl_k_gaz_m_k, text: "-- zł", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0x006064}
 
@@ -75,7 +76,7 @@ widgets:
       radius: 15
       bg_color: 0xFFAB91
       widgets:
-        - label: {text: "GAZ (FAKTURA)", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_k_gaz_inv_l, text: "GAZ (FAKTURA)", align: TOP_MID, y: 15, text_font: font_btn}
         - label: {id: lbl_k_gaz_k, text: "-- zł", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0xC62828}
 
   # 2. Zysk z PV
@@ -87,7 +88,7 @@ widgets:
       radius: 15
       bg_color: 0xA5D6A7
       widgets:
-        - label: {text: "ZYSK PV", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_k_pv_l, text: "ZYSK PV", align: TOP_MID, y: 15, text_font: font_btn}
         - label: {id: lbl_k_zysk_pv_val, text: "0.00 zł", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0x2E7D32}
 
   # 3. Magazyn Tauron
@@ -99,7 +100,7 @@ widgets:
       radius: 15
       bg_color: 0xD1C4E9
       widgets:
-        - label: {text: "W MAGAZYNIE", align: TOP_MID, y: 15, text_font: font_btn}
+        - label: {id: lbl_k_storage_l, text: "W MAGAZYNIE", align: TOP_MID, y: 15, text_font: font_btn}
         - label: {id: lbl_k_magazyn_val, text: "-- kWh", align: BOTTOM_MID, y: -15, text_font: font_title, text_color: 0x4527A0}
 
   # ==========================================
@@ -113,5 +114,5 @@ widgets:
       radius: 20
       bg_color: 0xFFE082
       widgets:
-        - label: {text: "DO ZAPŁATY (SUMA):", x: 30, y: 28, text_font: font_btn}
+        - label: {id: lbl_k_total_l, text: "DO ZAPŁATY (SUMA):", x: 30, y: 28, text_font: font_btn}
         - label: {id: lbl_k_suma, text: "-- zł", align: CENTER, y: 10, text_font: font_title, text_color: 0xC62828}
