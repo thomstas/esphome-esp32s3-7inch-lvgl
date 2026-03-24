@@ -1,6 +1,8 @@
 # ESPHome ESP32-S3 7-inch LVGL Smart Home Dashboard 🇬🇧
 
-A comprehensive, feature-rich smart home control panel (Home Assistant) based on a 7-inch touchscreen with an ESP32-S3 microcontroller. The user interface was built entirely using the powerful **LVGL** library within the **ESPHome** environment.
+A comprehensive, feature-rich smart home control panel (Home Assistant) based on a 7-inch touchscreen with an ESP32-S3 microcontroller. The user interface is built entirely using the powerful **LVGL** library within the **ESPHome** environment.
+
+> 🇵🇱 **Note for Polish speakers:** W przyszłości opublikowana zostanie również polska wersja dokumentacji! (Aktualny kod obsługuje już płynne przełączanie języka PL/EN w locie).
 
 ---
 
@@ -9,58 +11,56 @@ A comprehensive, feature-rich smart home control panel (Home Assistant) based on
 Below is a presentation of the individual screens and hardware details:
 
 ### General View & Menu
-![Front View](images/front_view.jpg)
-![Main Menu](images/main_menu.jpg)
+<img src="images/front_view.jpg" width="800">
+<img src="images/main_menu.jpg" width="800">
 
-### Feature Screens
-| Power & Utilities | Climate Control |
+### Core Dashboards (Power & Utilities)
+| Detailed Energy Flow | Battery & Charging Status |
 | :---: | :---: |
-| ![Power / Battery](images/battery.jpg) | ![Climate](images/climate.jpg) |
+| <img src="images/energy.jpg" width="400"> | <img src="images/battery.jpg" width="400"> |
 
-| Lighting | Weather & Radar |
+### Other Feature Screens
+| Climate Control | Lighting & Home Control |
 | :---: | :---: |
-| ![Lighting](images/light_contr.jpg) | ![Satellite Image](images/sat_img.jpg) |
+| <img src="images/climate.jpg" width="400"> | <img src="images/light_contr.jpg" width="400"> |
 
-### Hardware & Modifications
-| Rear View (PCB) | Backlight Modification |
+### System & Hardware
+| Weather Radar | Rear View (PCB) |
 | :---: | :---: |
-| ![Rear View](images/back_wiev.jpg) | ![Backlight Mod](images/backlight_mod.jpg) |
+| <img src="images/sat_img.jpg" width="400"> | <img src="images/back_wiev.jpg" width="400"> |
+
+<br>
+
+<img src="images/backlight_mod.jpg" width="800">
+<p align="center"><i>Hardware Backlight Modification</i></p>
 
 ---
 
 ## ✨ Main Features
 
-This project offers an advanced and fully interactive experience:
-
-* **Advanced Energy Dashboard:** Dynamic energy flow diagram. Icons (PV panels, transmission tower, house) change their colors and shapes (e.g., arrow direction on the transmission tower) in real-time depending on power flow. Includes daily profit calculation (wallet icon).
-* **Utility Management:** Real-time readings for water consumption (well pump), gas, and comprehensive cost overviews.
-* **Climate & Lighting Control:** Dedicated control screens for managing thermostats, air conditioning, and lights throughout the smart home.
-* **Weather & Satellite:** Weather forecast screen integrated with live satellite/radar images.
-* **Hardware Battery Monitoring:** Real-time tracking of the internal battery state using an INA sensor for highly accurate voltage and current statistics.
-* **Home Assistant Integration:** Instant and seamless communication via the native ESPHome API.
-* **Modular Code Structure:** Divided into readable YAML files (e.g., `page_zasilanie.yaml`, `sensory.yaml`), making development, debugging, and customization much easier.
-* **🌍 Multilanguage Support:** The user interface supports multiple languages, enabling users to select their preferred language from the settings menu. Easy language switching without requiring device restart.
+* **Multilanguage UI:** Instant switching between English and Polish directly from the dashboard without rebooting.
+* **Advanced Energy Flow:** Dynamic diagrams with real-time PV production, grid status, and daily profit calculations.
+* **Utility Management:** Track water, gas, and electricity costs (monthly and annual summaries).
+* **Climate & Lighting:** Full HVAC and lighting control integrated with Home Assistant.
+* **Live Weather Radar:** Real-time precipitation radar maps downloaded directly to the screen.
+* **Modular Code:** Clean ESPHome configuration split into logical packages (`packages/`) for easy maintenance.
 
 ---
 
-## 🛠️ Hardware Specifications
+## 🛠️ Hardware & Modifications
 
-* **Display:** 7-inch TFT touchscreen display.
-* **Microcontroller:** ESP32-S3 (offering plenty of PSRAM for smooth LVGL operation and complex UI rendering).
-* **Power Supply:** Built-in **battery** for continuous operation and backup power.
-* **Battery Monitoring:** **INA Sensor** (e.g., INA219) integrated for precise measurement of battery voltage, current, and overall charge level.
-* **Modifications:** Hardware modification of the screen backlight (`backlight_mod.jpg`) allowing for granular PWM brightness management directly from ESPHome.
+To achieve the full functionality of this dashboard, specific hardware additions and PCB modifications are required:
 
----
+### 1. Screen Backlight Modification (PWM Control)
+By default, the 7-inch screen's backlight is hardwired to be permanently on at 100% brightness. To allow ESPHome to control the brightness via a software slider and enable automatic screen timeout/dimming, you must modify the PCB.
+* **Action:** Cut the default backlight trace and solder a jumper wire to an available ESP32 PWM-capable pin.
+* **Reference:** See `images/backlight_mod.jpg` for exact soldering points.
 
-## 🚀 Installation & Setup
+### 2. 1S Battery Installation (UPS functionality)
+The dashboard is designed to run uninterrupted even during power outages.
+* **Action:** Connect a standard 3.7V 1S Li-Po or Li-Ion cell to the board. This acts as a built-in UPS.
 
-1. **Clone the repository:** Download all `.yaml` files and the `fonts` folder.
-2. **Fonts:** Ensure the `materialdesignicons-webfont.ttf` file is located in the `fonts/` folder in the root directory of your ESPHome configuration.
-3. **Entity Configuration:** Review `sensory.yaml` and the UI page files. Replace the `entity_id:` values with the ones corresponding to your specific Home Assistant sensors.
-4. **Compile and Flash:** Use the ESPHome Dashboard to compile and flash the firmware to your ESP32-S3 device.
-
----
-
-**Author:** [thomstas]  
-**Technologies:** ESPHome, LVGL, C++, Home Assistant
+### 3. INA219 Battery Monitoring Module
+To accurately display the battery percentage and charging status on the dashboard, an external I2C sensor is used.
+* **Action:** Connect an **INA219** module to the ESP32's I2C pins.
+* **Purpose:** The INA219 precisely measures the battery voltage (calibrated between 3.2V - 4.2V) and current, feeding this data to the `battery.yaml
