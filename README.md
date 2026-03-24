@@ -53,7 +53,7 @@ To achieve the full functionality of this dashboard, specific hardware additions
 
 ### 1. Screen Backlight Modification (PWM Control)
 By default, the 7-inch screen's backlight is hardwired to be permanently on at 100% brightness. To allow ESPHome to control the brightness via a software slider and enable automatic screen timeout/dimming, you must modify the PCB.
-* **Action:** Cut the default backlight trace and solder a jumper wire to an available ESP32 PWM-capable pin.
+* **Action:**  Solder a jumper wire to an available ESP32 PWM-capable pin.
 * **Reference:** See `images/backlight_mod.jpg` for exact soldering points.
 
 ### 2. 1S Battery Installation (UPS functionality)
@@ -63,4 +63,56 @@ The dashboard is designed to run uninterrupted even during power outages.
 ### 3. INA219 Battery Monitoring Module
 To accurately display the battery percentage and charging status on the dashboard, an external I2C sensor is used.
 * **Action:** Connect an **INA219** module to the ESP32's I2C pins.
-* **Purpose:** The INA219 precisely measures the battery voltage (calibrated between 3.2V - 4.2V) and current, feeding this data to the `battery.yaml
+* **Purpose:** The INA219 precisely measures the battery voltage (calibrated between 3.2V - 4.2V) and current, feeding this data to the `battery.yaml` package to render the UI battery icon and percentage.
+
+---
+
+## 🔌 Required Home Assistant Entities
+
+Map your specific Home Assistant entities in the `sensors.yaml` file. 
+
+### ☀️ Weather & Environment
+* **Outdoor/Indoor Humidity** (`%`) & **Pressure** (`hPa`)
+* **Wind Speed** (`km/h`) & **Wind Direction** (`°`)
+* **Solar Radiation** (`W/m²`) & **UV Index**
+* **Precipitation** (`mm/h`, `mm`)
+
+### ⚡ Photovoltaics & Power
+* **Current Power** (`W`) & **PV Yield Today/Total** (`kWh`)
+* **Inverter AC Grid** (`V`, `A`, `Hz`) & **DC Panels** (`V`, `A`)
+* **Inverter Temperature** (`°C`)
+
+### 💰 Costs & Utilities (Monthly/Annual)
+* **Electricity, Water, and Gas Costs** (`currency`)
+* **PV Profit & Savings** (`currency`)
+* **Energy in Storage** (`kWh`)
+
+### 🌡️ Climate Control
+* **Room Temperature** (`°C`) & **Target Setpoint** (`°C`)
+* **Heating State** (`boolean`)
+
+---
+
+## 🗺️ Live Radar Maps (HA Script Setup)
+
+The dashboard displays live weather radar maps by pulling images from your Home Assistant's local directory. 
+
+For this to work, you must set up a script or automation in Home Assistant that periodically downloads radar images and saves them to your `www` folder as:
+* `/config/www/gotowy_radar.png` (Local Radar)
+* `/config/www/gotowy_radar_europa.png` (Europe Radar)
+
+**⚠️ Important Region Note:** If you are using the sample HA python/bash script provided in this repository, please note that **the default map coordinates are set for Southern Poland and Europe**. 
+* You **must** modify the script's bounding box (longitude/latitude) and crop settings to match your specific geographic location and region.
+
+---
+
+## 🚀 Installation
+
+1. **Clone the repository:** Download all `.yaml` files and folders.
+2. **Fonts:** Ensure the `materialdesignicons-webfont.ttf` file is correctly placed in the `fonts/materialdesignicons-webfont.ttf` path relative to your ESPHome configuration directory.
+3. **Entities:** Update `sensors.yaml` with your Home Assistant entity IDs.
+4. **Compile:** Use ESPHome to compile and flash the firmware to your ESP32-S3.
+
+---
+**Author:** [thomstas]  
+**Technologies:** ESPHome, LVGL, C++, Home Assistant
