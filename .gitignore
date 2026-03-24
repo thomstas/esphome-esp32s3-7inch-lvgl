@@ -1,0 +1,13 @@
+# ESPHome build files and directories
+.esphome/
+build/
+*.bin
+*.elf
+*.map
+
+# Ignore secrets to protect passwords and API keys
+secrets.yaml
+
+# OS generated files
+.DS_Store
+Thumbs.db
