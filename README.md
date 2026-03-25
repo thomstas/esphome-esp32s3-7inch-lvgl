@@ -114,5 +114,10 @@ For this to work, you must set up a script or automation in Home Assistant that 
 4. **Compile:** Use ESPHome to compile and flash the firmware to your ESP32-S3.
 
 ---
+
+## 🙏 Acknowledgments
+* **Special thanks to Irek** for providing the 3D printer and support in creating the physical housing for this project.
+
+---
 **Author:** [thomstas]  
 **Technologies:** ESPHome, LVGL, C++, Home Assistant
