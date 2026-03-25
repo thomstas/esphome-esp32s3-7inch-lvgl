@@ -1,11 +1,10 @@
 # ESPHome ESP32-S3 7-inch LVGL Smart Home Dashboard 🇬🇧
-
 A comprehensive, feature-rich smart home control panel (Home Assistant) based on a 7-inch touchscreen with an ESP32-S3 microcontroller. The user interface is built entirely using the powerful **LVGL** library within the **ESPHome** environment.
 
 > 🇵🇱 **Note for Polish speakers:** W przyszłości opublikowana zostanie również polska wersja dokumentacji! (Aktualny kod obsługuje już płynne przełączanie języka PL/EN w locie).
 
 ---
-
+https://github.com/user-attachments/assets/28501945-e72b-47df-8c0f-5de732e042ea
 ## 📸 Project Gallery
 
 Below is a presentation of the individual screens and hardware details:
