@@ -178,14 +178,9 @@ output:
   - platform: ledc
     id: backlight_pwm
     pin: 16
-    frequency: 20000 Hz    # ~20 kHz – comfortable
-
-light:
-  - platform: monochromatic
-    output: backlight_pwm
-    name: "LCD Backlight"
-    id: screen_backlight
-    restore_mode: ALWAYS_ON
+    frequency: 1000 Hz         # Lower frequency for smoother transitions at low brightness levels
+    min_power: 20%             # Hardware dead-zone calibration (20% physical power equals 1% in HA)
+    zero_means_zero: true      # Ensures the screen turns off completely when set to 0% in HA
 
 touchscreen:
   - platform: gt911
