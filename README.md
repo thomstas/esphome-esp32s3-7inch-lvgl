@@ -114,8 +114,11 @@ For this to work, you must set up a script or automation in Home Assistant that 
 
 ---
 
+---
+
 ## 🙏 Acknowledgments
-* **Special thanks to Irek** for providing the 3D printer and support in creating the physical housing for this project.
+* **Hardware Support:** Special thanks to **Irek** for providing the 3D printer and support in creating the physical housing for this project.
+* **3D Case Design:** The beautiful tabletop housing shown in this project was designed by [David Smith](https://www.printables.com/model/1425850-waveshare-esp32-s3-7inch-capacitive-touch-display) (remixed from Sergey Morozov). Released under the CC BY-SA 4.0 license.
 
 ---
 **Author:** [thomstas]  
