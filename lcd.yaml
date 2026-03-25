@@ -182,6 +182,12 @@ output:
     min_power: 20%             # Hardware dead-zone calibration (20% physical power equals 1% in HA)
     zero_means_zero: true      # Ensures the screen turns off completely when set to 0% in HA
 
+light:
+  - platform: monochromatic
+    id: screen_backlight
+    name: "Screen Backlight"
+    output: backlight_pwm
+ 
 touchscreen:
   - platform: gt911
     id: my_touch
