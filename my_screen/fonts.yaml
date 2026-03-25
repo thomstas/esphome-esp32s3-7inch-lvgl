@@ -26,8 +26,8 @@
     - "\U000F050F" # Thermostat
     - "\U000F0E1F" # Solar
     - "\U000F0590" # Weather
-    - "\U000F0210" # Power
-    - "\U000F01B6" # Costs
+    - "\U000F140B" # Power
+    - "\U000F0F8E" # Costs
     - "\U000F0493" # Settings (Gear)
     - "\U000F004D" # Back arrow (RADAR)
     - "\U000F0085" # Battery 100
@@ -38,6 +38,7 @@
     - "\U000F034A" # Icon: mdi-magnify-minus (Zoom Out)
     - "\U000F034B" # Icon: mdi-magnify-plus (Zoom In)
     - "\U000F00ED"
+    - "\U000F1A73" # Solar (Panel with sun)
 - file: gfonts://Roboto
   id: font_zegar_wielki
   size: 180

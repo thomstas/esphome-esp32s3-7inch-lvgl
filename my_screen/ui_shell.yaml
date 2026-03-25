@@ -149,7 +149,7 @@
             - lvgl.page.show: page_media
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
-            - label: {text: "\U000F0E1F", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
+            - label: {text: "\U000F1A73", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
             - label: {text: "SOLAR", text_font: font_title, align: RIGHT_MID, x: -25, text_color: 0xFFFFFF}
 
       - button:
@@ -175,7 +175,7 @@
             - lvgl.page.show: page_power
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
-            - label: {text: "\U000F0210", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
+            - label: {text: "\U000F140B", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
             - label: {id: lbl_menu_moc, text: "POWER", text_font: font_title, align: RIGHT_MID, x: -35, text_color: 0xFFFFFF}
 
       - button:
@@ -202,7 +202,7 @@
             - lvgl.page.show: page_annual_costs
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
-            - label: {text: "\U000F00ED", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
+            - label: {text: "\U000F0F8E", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
             - label: {id: lbl_menu_rok, text: "YEAR", text_font: font_title, align: RIGHT_MID, x: -45, text_color: 0xFFFFFF}
 
       - button:
