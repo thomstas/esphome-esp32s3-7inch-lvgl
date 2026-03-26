@@ -25,7 +25,7 @@
   type: RGB565
   update_interval: 500ms
   request_headers:
-    Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJlYzQ5OGE1YzI2ODM0Zjc4OWZlYTJkMmQ2YzMyYmYwNiIsImlhdCI6MTc3NDUyMDE1MCwiZXhwIjoyMDg5ODgwMTUwfQ.4fm3uOgYVGSY7DZz9LYvvZ5sdTjpate4lCOmgsa8-A8"
+    Authorization: !secret ha_camera_token
   on_download_finished:      
     - lvgl.image.update:
         id: camera_stream_view
