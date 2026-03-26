@@ -34,6 +34,9 @@ script:
       - lvgl.label.update:
           id: lbl_menu_rok
           text: !lambda 'return std::string(id(current_language) == 0 ? "ROK" : "YEAR");'
+      - lvgl.label.update:
+          id: lbl_menu_kamera
+          text: !lambda 'return std::string(id(current_language) == 0 ? "KAMERA" : "CAMERA");'
 
       # ===== PAGE MEDIA – SOLAR / PV =====
       - lvgl.label.update:

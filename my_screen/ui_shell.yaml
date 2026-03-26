@@ -230,4 +230,4 @@
             - lvgl.obj.update: {id: my_menu_window, hidden: true}
           widgets:
             - label: {text: "\U000F07E6", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
-            - label: {text: "CAMERA", text_font: font_title, align: RIGHT_MID, x: -25, text_color: 0xFFFFFF}
+            - label: {id: lbl_menu_kamera, text: "CAMERA", text_font: font_title, align: RIGHT_MID, x: -25, text_color: 0xFFFFFF}
