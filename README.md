@@ -113,7 +113,23 @@ For this to work, you must set up a script or automation in Home Assistant that 
 4. **Compile:** Use ESPHome to compile and flash the firmware to your ESP32-S3.
 
 ---
+## 🗺️ Project Roadmap (Dashboard V2.0)
+This project is under active development. Below are the planned features for the next major release:
 
+### 📱 Smart Home Control
+- [ ] **Smart IR Remote Integration:** Dedicated page for controlling TV, AC, and other IR-based devices via Tuya Smart IR Hub.
+- [ ] **Advanced Lighting:** Color picker and mood scene selectors for RGB/RGBW lights.
+- [ ] **Climate Control Pro:** Detailed HVAC scheduling and humidity management.
+
+### 📹 Media & Monitoring
+- [ ] **Live Camera Streams:** Real-time MJPEG/RTSP preview for home security cameras (Doorbell, Backyard).
+- [ ] **Energy Dashboard:** Interactive charts showing solar production vs. home energy consumption.
+- [ ] **Media Center:** Enhanced Spotify/Media Player control with album art display.
+
+### 🛠️ Technical Improvements
+- [ ] **UI/UX Polish:** Full implementation of Material Design Icons for intuitive navigation.
+- [ ] **Performance:** Further LVGL memory optimizations for smoother page transitions.
+- [ ] **Dynamic Themes:** Support for Light/Dark modes based on time of day.
 ---
 
 ## 🙏 Acknowledgments
