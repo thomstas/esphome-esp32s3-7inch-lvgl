@@ -7,6 +7,7 @@
     - lvgl.image.update:
         id: widget_mapy
         src: img_mapa_tlo
+
 - url: "http://192.168.0.25:8123/local/gotowy_radar_europa.png"
   id: img_radar_eu_baza
   format: png
@@ -16,3 +17,16 @@
     - lvgl.image.update:
         id: img_radar_eu
         src: img_radar_eu_baza
+
+# --- CAMERA STREAM PROXY ---
+- url: "http://192.168.0.25:8123/api/camera_proxy/camera.kurczaki"
+  id: img_camera_frame
+  format: jpeg
+  type: RGB565
+  update_interval: 500ms
+  request_headers:
+    Authorization: !secret ha_camera_token
+  on_download_finished:      
+    - lvgl.image.update:
+        id: camera_stream_view
+        src: img_camera_frame

@@ -232,3 +232,4 @@ lvgl:
     - !include my_screen/page_radar.yaml
     - !include my_screen/page_radar_europe.yaml
     - !include my_screen/page_annual_costs.yaml
+    - !include my_screen/page_camera.yaml # Adding the new camera page

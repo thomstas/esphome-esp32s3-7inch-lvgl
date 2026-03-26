@@ -1,0 +1,32 @@
+id: page_camera
+widgets:
+  # Title Label
+  - label:
+      text: "LIVE CAMERA"
+      align: TOP_MID
+      y: 10
+      text_font: font_title
+
+  # The actual camera image widget updated by images.yaml
+  - image:
+      id: camera_stream_view
+      src: img_camera_frame    
+      align: CENTER
+      y: 20
+      width: 640
+      height: 360
+
+  # Back to Home Button
+  - button:
+      align: BOTTOM_LEFT
+      x: 20
+      y: -20
+      width: 60
+      height: 60
+      on_click:
+        - lvgl.page.show: page_home
+      widgets:
+        - label:
+            text: "\U000F02DC" # MDI Home Icon
+            text_font: font_mdi
+            align: CENTER
