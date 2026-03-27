@@ -27,14 +27,14 @@ esphome:
           id: lbl_brightness_val
           text: !lambda 'return str_sprintf("%.0f%%", id(brightness_setpoint) * 100);'
 
-      # --- NEW BOOT LOGIC ---
+      # --- BOOT LOGIC ---
       - if:
           condition:
-            lambda: 'return id(display_mode) == 1;' # If Kiosk mode was enabled
+            lambda: 'return id(display_mode) == 1;' # Kiosk mode active
           then:
             - script.execute: display_cycle_script
-          else: # If normal mode was active
-            - lvgl.page.show: page_radar_europe
+          else: # Normal mode - show home page
+            - lvgl.page.show: page_home
 esp32:
   board: esp32-s3-devkitc-1
   variant: ESP32S3
@@ -144,23 +144,32 @@ time:
     id: my_time
     timezone: "CET-1CEST,M3.5.0,M10.5.0/3"
     on_time:
-      # At 22:00 -> go to screensaver
+      # At 22:00 -> go to screensaver, stop all active scripts and radar updates
       - seconds: 0
         minutes: 0
         hours: 22
         then:
+          - script.stop: display_cycle_script
+          - script.stop: radar_local_fetch_loop
+          - script.stop: radar_europe_fetch_loop
           - lvgl.page.show: page_screensaver
           - lvgl.obj.update: {id: pasek_statusu, hidden: true}
           - light.turn_on: {id: screen_backlight, brightness: 0.5}
 
-      # At 05:30 -> go to Europe map
+      # At 05:30 -> wake up: show page_home (normal) or start carousel (kiosk)
       - seconds: 0
         minutes: 30
         hours: 5
         then:
-          - lvgl.page.show: page_radar_europe
           - lvgl.obj.update: {id: pasek_statusu, hidden: false}
           - light.turn_on: {id: screen_backlight, brightness: !lambda 'return id(brightness_setpoint);'}
+          - if:
+              condition:
+                lambda: 'return id(display_mode) == 0;'
+              then:
+                - lvgl.page.show: page_home
+              else:
+                - script.execute: display_cycle_script
 
 
 spi:
@@ -229,8 +238,8 @@ globals:
     initial_value: '21.0'
   - id: display_mode
     type: int
-    initial_value: '0'
-    restore_value: yes
+    initial_value: '1'
+    restore_value: false
   - id: brightness_setpoint
     type: float
     initial_value: '1.0'

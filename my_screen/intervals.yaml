@@ -25,8 +25,8 @@ interval:
                   if (pct > 5)  return "\U000F008C"; 
                   return "\U000F008E";               
 
-  # --- SLOW LOOP: Date and days of the week (every 1 hour) ---
-  - interval: 5s
+  # --- SLOW LOOP: Date and days of the week (every 10 seconds) ---
+  - interval: 10s
     then:
       - if:
           condition:

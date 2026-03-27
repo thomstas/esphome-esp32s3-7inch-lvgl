@@ -99,3 +99,46 @@ widgets:
 
         - label: {text: "Uptime:", x: 280, y: 462, text_font: font_btn, text_color: 0x555555}
         - label: {id: lbl_uptime, text: "--:--", x: 380, y: 457, text_font: font_title, text_color: 0x000000}
+
+        # --- KIOSK MODE SECTION ---
+        - label: {text: "KIOSK MODE", x: 30, y: 520, text_font: font_title, text_color: 0x333333}
+        - line: {points: ["30, 555", "770, 555"], line_color: 0xDDDDDD, line_width: 2}
+
+        - button:
+            id: btn_kiosk_mode
+            x: 30
+            y: 565
+            width: 200
+            height: 55
+            bg_color: !lambda 'return id(display_mode) == 1 ? lv_color_hex(0xFFD700) : lv_color_hex(0x607D8B);'
+            on_click:
+              - if:
+                  condition:
+                    lambda: 'return id(display_mode) == 1;'
+                  then:
+                    # Turn OFF kiosk mode
+                    - globals.set: {id: display_mode, value: '0'}
+                    - script.stop: display_cycle_script
+                    - lvgl.widget.update:
+                        id: btn_kiosk_mode
+                        bg_color: 0x607D8B
+                    - lvgl.label.update:
+                        id: lbl_kiosk_status
+                        text: "OFF"
+                  else:
+                    # Turn ON kiosk mode
+                    - globals.set: {id: display_mode, value: '1'}
+                    - script.execute: display_cycle_script
+                    - lvgl.widget.update:
+                        id: btn_kiosk_mode
+                        bg_color: 0xFFD700
+                    - lvgl.label.update:
+                        id: lbl_kiosk_status
+                        text: "ON"
+            widgets:
+              - label:
+                  id: lbl_kiosk_status
+                  text: !lambda 'return id(display_mode) == 1 ? "ON" : "OFF";'
+                  align: CENTER
+                  text_font: font_title
+                  text_color: 0xFFFFFF
