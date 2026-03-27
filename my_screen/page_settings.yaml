@@ -138,7 +138,7 @@ widgets:
             widgets:
               - label:
                   id: lbl_kiosk_status
-                  text: !lambda 'return id(display_mode) == 1 ? "ON" : "OFF";'
+                  text: !lambda 'return std::string(id(display_mode) == 1 ? "ON" : "OFF");'
                   align: CENTER
                   text_font: font_title
                   text_color: 0xFFFFFF
