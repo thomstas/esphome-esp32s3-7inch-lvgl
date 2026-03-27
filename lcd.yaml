@@ -1,3 +1,8 @@
+substitutions:
+  # Slightly lower pixel clock reduces display bus pressure and helps avoid visible jitter
+  # when the ESP32-S3 is under heavier CPU/load spikes.
+  display_pclk: 14MHz
+
 esphome:
   name: lcd
   friendly_name: "LCD"
@@ -153,7 +158,7 @@ display:
     model: CUSTOM
     dimensions: { width: 800, height: 480 }
     color_order: RGB
-    pclk_frequency: 16MHz
+    pclk_frequency: ${display_pclk}
     pclk_inverted: true
     auto_clear_enabled: false
     update_interval: never

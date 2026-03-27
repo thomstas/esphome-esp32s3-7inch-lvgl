@@ -111,6 +111,7 @@ For this to work, you must set up a script or automation in Home Assistant that 
 2. **Fonts:** Ensure the `materialdesignicons-webfont.ttf` file is correctly placed in the `fonts/materialdesignicons-webfont.ttf` path relative to your ESPHome configuration directory.
 3. **Entities:** Update `sensors.yaml` with your Home Assistant entity IDs.
 4. **Compile:** Use ESPHome to compile and flash the firmware to your ESP32-S3.
+5. **Display stability tuning:** If you notice visible image jitter under heavier CPU load, adjust `substitutions.display_pclk` in `lcd.yaml` (default `14MHz` in this repo). Lower values usually improve stability at the cost of a small refresh bandwidth reduction.
 
 ---
 ## 🗺️ Project Roadmap (Dashboard V2.0)
