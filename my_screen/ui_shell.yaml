@@ -80,7 +80,7 @@
     id: my_menu_window
     align: CENTER
     width: 560
-    height: 380
+    height: 450 # Increased height to fit the 5th row
     radius: 20
     bg_color: 0xEEEEEE
     border_width: 3
@@ -191,7 +191,7 @@
             - label: {text: "\U000F0F8E", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
             - label: {id: lbl_menu_koszty, text: "COSTS", text_font: font_title, align: RIGHT_MID, x: -25, text_color: 0xFFFFFF}
 
-      # --- MODIFIED ROW 4 (Split into YEAR and SYSTEM) ---
+      # --- ROW 4 ---
       - button:
           x: 30
           y: 285
@@ -217,3 +217,17 @@
           widgets:
             - label: {text: "\U000F0493", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
             - label: {text: "SYSTEM", text_font: font_title, align: RIGHT_MID, x: -20, text_color: 0xFFFFFF}
+
+      # --- ROW 5 (CAMERA & Future Extensions) ---
+      - button:
+          x: 30
+          y: 360
+          width: 240
+          height: 65
+          bg_color: 0x009688
+          on_click:
+            - lvgl.page.show: page_camera
+            - lvgl.obj.update: {id: my_menu_window, hidden: true}
+          widgets:
+            - label: {text: "\U000F07E6", text_font: font_mdi, align: LEFT_MID, x: 20, text_color: 0xFFFFFF}
+            - label: {id: lbl_menu_kamera, text: "CAMERA", text_font: font_title, align: RIGHT_MID, x: -25, text_color: 0xFFFFFF}
