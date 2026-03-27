@@ -1,11 +1,11 @@
 - file: gfonts://Arimo
   id: font_title
   size: 24
-  glyphs: "AĄBCĆDEĘFGHIJKLŁMNŃOÓPQRSŚTUWXVYZŹŻaąbcćdeęfghijklłmnńoópqrsśtuwxyzźż0123456789.,-+!? /()°:%²<"
+  glyphs: "AĄBCĆDEĘFGHIJKLŁMNŃOÓPQRSŚTUWXVYZŹŻaąbcćdeęfghijklłmnńoópqrsśtuwxyzźż0123456789.,-+!? /()°:%²<&"
 - file: gfonts://Arimo
   id: font_btn
   size: 14
-  glyphs: "AĄBCĆDEĘFGHIJKLŁMNŃOÓPQRSŚTUWXVYZŹŻaąbcćdeęfghijklłmnńoópqrsśtuwxyzźż0123456789.,-+!? /()°:%²<>"
+  glyphs: "AĄBCĆDEĘFGHIJKLŁMNŃOÓPQRSŚTUWXVYZŹŻaąbcćdeęfghijklłmnńoópqrsśtuwxyzźż0123456789.,-+!? /()°:%²<>&"
 - file: gfonts://Noto Emoji
   id: font_weather_icon
   size: 70
@@ -39,6 +39,7 @@
     - "\U000F034B" # Icon: mdi-magnify-plus (Zoom In)
     - "\U000F00ED"
     - "\U000F1A73" # Solar (Panel with sun)
+    - "\U000F07AE" # CCTV
 - file: gfonts://Roboto
   id: font_zegar_wielki
   size: 180
