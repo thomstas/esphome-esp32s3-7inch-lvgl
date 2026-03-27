@@ -105,16 +105,17 @@ api:
       then:
         - lvgl.page.show: page_camera
         - script.execute: camera_fetch_loop
+     - service: hide_page_camera
+      then:
+        - script.stop: camera_fetch_loop
+        - lvgl.page.show: page_home        
     - service: toggle_language
       then:
         - globals.set:
             id: current_language
             value: !lambda 'return id(current_language) == 0 ? 1 : 0;'
         - script.execute: load_translations                     
-     - service: hide_page_camera
-      then:
-        - script.stop: camera_fetch_loop
-        - lvgl.page.show: page_home
+
 ota:
   - platform: esphome
     password: !secret ota_password
