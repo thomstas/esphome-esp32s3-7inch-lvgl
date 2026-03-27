@@ -111,5 +111,6 @@ widgets:
                   bg_color: 0x607D8B
                   on_click:
                     - lvgl.page.show: page_radar
+                    - script.execute: radar_local_fetch_loop
                   widgets:
                     - label: {text: "RADAR", align: CENTER, text_font: font_btn, text_color: 0xFFFFFF}

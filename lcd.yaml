@@ -106,9 +106,11 @@ api:
     - service: pokaz_strone_radar
       then:
         - lvgl.page.show: page_radar
+        - script.execute: radar_local_fetch_loop
     - service: pokaz_strone_radar_europa
       then:
         - lvgl.page.show: page_radar_europe
+        - script.execute: radar_europe_fetch_loop
     - service: pokaz_strone_koszty_roczne
       then:
         - lvgl.page.show: page_annual_costs
