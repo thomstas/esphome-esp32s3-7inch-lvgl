@@ -243,10 +243,10 @@ script:
           text: !lambda 'return std::string(id(current_language) == 0 ? "Żyrandol" : "Chandelier");'
       - lvgl.label.update:
           id: lbl_btn_2_text
-          text: !lambda 'return std::string(id(current_language) == 0 ? "Oświetlenie 1" : "Ambient 1");'
+          text: !lambda 'return std::string(id(current_language) == 0 ? "Ambient 1" : "Ambient 1");'
       - lvgl.label.update:
           id: lbl_btn_3_text
-          text: !lambda 'return std::string(id(current_language) == 0 ? "Oświetlenie 2" : "Ambient 2");'
+          text: !lambda 'return std::string(id(current_language) == 0 ? "Ambient 22" : "Ambient 2");'
       - lvgl.label.update:
           id: lbl_btn_4_text
           text: !lambda 'return std::string(id(current_language) == 0 ? "Pipa" : "Pipa");'
@@ -258,13 +258,13 @@ script:
           text: !lambda 'return std::string(id(current_language) == 0 ? "Korytarz" : "Hallway");'
       - lvgl.label.update:
           id: lbl_btn_7_text
-          text: !lambda 'return std::string(id(current_language) == 0 ? "Drzwi" : "Doors");'
+          text: !lambda 'return std::string(id(current_language) == 0 ? "Drzwi" : "Door");'
       - lvgl.label.update:
           id: lbl_btn_8_text
-          text: !lambda 'return std::string(id(current_language) == 0 ? "Pole" : "Field");'
+          text: !lambda 'return std::string(id(current_language) == 0 ? "Pole" : "Outside");'
       - lvgl.label.update:
           id: lbl_btn_9_text
-          text: !lambda 'return std::string(id(current_language) == 0 ? "Narzędziownia" : "Utility");'
+          text: !lambda 'return std::string(id(current_language) == 0 ? "Gospodarczy" : "Workshop");'
       - lvgl.label.update:
           id: lbl_btn_10_text
           text: !lambda 'return std::string(id(current_language) == 0 ? "Wiata" : "Carport");'
@@ -273,10 +273,10 @@ script:
           text: !lambda 'return std::string(id(current_language) == 0 ? "Girlanda" : "Garland");'
       - lvgl.label.update:
           id: lbl_btn_12_text
-          text: !lambda 'return std::string(id(current_language) == 0 ? "Kurwisko" : "Kurwisko");'
+          text: !lambda 'return std::string(id(current_language) == 0 ? "Kurwisko" : "Chicken Run");'
       - lvgl.label.update:
           id: lbl_btn_13_text
-          text: !lambda 'return std::string(id(current_language) == 0 ? "Kurnik" : "Coop");'
+          text: !lambda 'return std::string(id(current_language) == 0 ? "Kurnik" : "Chicken Coop");'
       - lvgl.label.update:
           id: lbl_btn_14_text
           text: !lambda 'return std::string(id(current_language) == 0 ? "LCD" : "LCD");'
@@ -291,7 +291,7 @@ script:
           text: !lambda 'return std::string(id(current_language) == 0 ? "Czerwony" : "Red");'
       - lvgl.label.update:
           id: lbl_btn_18_text
-          text: !lambda 'return std::string(id(current_language) == 0 ? "Seramy" : "Seramy");'
+          text: !lambda 'return std::string(id(current_language) == 0 ? "Seramy" : "Seramas");'
       - lvgl.label.update:
           id: lbl_btn_19_text
           text: !lambda 'return std::string(id(current_language) == 0 ? "Sypialnia 1" : "Bedroom 1");'
@@ -303,7 +303,7 @@ script:
           text: !lambda 'return std::string(id(current_language) == 0 ? "Akwarium" : "Aquarium");'
       - lvgl.label.update:
           id: lbl_btn_22_text
-          text: !lambda 'return std::string(id(current_language) == 0 ? "Pokój PC" : "R.Shack");'
+          text: !lambda 'return std::string(id(current_language) == 0 ? "RadioShack" : "R.Shack");'
       - lvgl.label.update:
           id: lbl_btn_23_text
           text: !lambda 'return std::string(id(current_language) == 0 ? "Monitor" : "Monitor");'
@@ -318,7 +318,7 @@ script:
           text: !lambda 'return std::string(id(current_language) == 0 ? "Lampa Solna" : "Salt Lamp");'
       - lvgl.label.update:
           id: lbl_btn_27_text
-          text: !lambda 'return std::string(id(current_language) == 0 ? "Magazyn" : "Storage");'
+          text: !lambda 'return std::string(id(current_language) == 0 ? "Komórka" : "Pantry");'
 
       # ===== LANGUAGE BUTTON HIGHLIGHT =====
       - lvgl.widget.update:
