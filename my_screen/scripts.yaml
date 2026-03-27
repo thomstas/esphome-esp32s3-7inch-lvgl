@@ -5,15 +5,16 @@ script:
       # ==================================
       # --- WAKE UP (Touch) ---
       # ==================================
-      # 1. Restore brightness from slider
       - light.turn_on:
           id: screen_backlight
           brightness: !lambda 'return id(brightness_setpoint);'
           
-      # 2. Reveal the top bar again
       - lvgl.obj.update:
           id: pasek_statusu
           hidden: false
+
+      # PAUSE THE CAROUSEL WHILE INTERACTING!
+      - script.stop: display_cycle_script
 
       # ==================================
       # --- WAITING ---
@@ -25,38 +26,32 @@ script:
       # ==================================
       - if:
           condition:
-            lambda: 'return id(display_mode) == 0;' # Only sleep if NOT in loop mode
+            lambda: 'return id(display_mode) == 0;' # NORMAL MODE
           then:
             - if:
                 condition:
                   lambda: |-
                     auto time = id(my_time).now();
                     if (!time.is_valid()) return false;
-                    
-                    // Night: from 22:00 to 05:29
+                    // Night: 22:00 to 05:29
                     if (time.hour >= 22 || time.hour < 5 || (time.hour == 5 && time.minute < 30)) {
-                      return true; // It's night
+                      return true;
                     } else {
-                      return false; // It's day
+                      return false;
                     }
                 then:
-                  # --- ACTION FOR NIGHT (Screensaver) ---
+                  # --- ACTION FOR NIGHT (Clock screensaver) ---
                   - lvgl.page.show: page_screensaver
-                  - lvgl.obj.update:
-                      id: pasek_statusu
-                      hidden: true
-                  - light.turn_on:
-                      id: screen_backlight
-                      brightness: 0.2
+                  - lvgl.obj.update: { id: pasek_statusu, hidden: true }
+                  - light.turn_on: { id: screen_backlight, brightness: 0.2 }
                 else:
-                  # --- ACTION FOR DAY (Europe Map) ---
+                  # --- ACTION FOR DAY (Radar map) ---
                   - lvgl.page.show: page_radar_europe
-                  - lvgl.obj.update:
-                      id: pasek_statusu
-                      hidden: false
-                  - light.turn_on:
-                      id: screen_backlight
-                      brightness: !lambda 'return id(brightness_setpoint);'
+                  - lvgl.obj.update: { id: pasek_statusu, hidden: false }
+                  - light.turn_on: { id: screen_backlight, brightness: !lambda 'return id(brightness_setpoint);' }
+          else:
+            # KIOSK MODE - RESUME CAROUSEL AFTER 60s OF INACTIVITY
+            - script.execute: display_cycle_script
 
   # --- Automatic Page Cycle (Loop Mode: 10s per page) ---
   - id: display_cycle_script
