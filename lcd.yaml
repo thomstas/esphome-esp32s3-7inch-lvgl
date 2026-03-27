@@ -11,7 +11,8 @@ esphome:
     board_build.arduino.memory_type: qio_opi
     board_build.flash_mode: dio
     board_upload.maximum_ram_size: 524288
-   on_boot:
+    
+  on_boot:
     priority: -100
     then:
       - delay: 5s
@@ -34,7 +35,6 @@ esphome:
             - script.execute: display_cycle_script
           else: # If normal mode was active
             - lvgl.page.show: page_radar_europe
-esp32:
   board: esp32-s3-devkitc-1
   variant: ESP32S3
   flash_size: 8MB
