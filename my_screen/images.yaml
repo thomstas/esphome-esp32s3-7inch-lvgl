@@ -2,7 +2,7 @@
   id: img_mapa_tlo
   format: png
   type: RGB565
-  update_interval: 1min
+  update_interval: never
   on_download_finished:      
     - lvgl.image.update:
         id: widget_mapy
@@ -12,7 +12,7 @@
   id: img_radar_eu_baza
   format: png
   type: RGB565
-  update_interval: 1min
+  update_interval: never
   on_download_finished:      
     - lvgl.image.update:
         id: img_radar_eu

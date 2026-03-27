@@ -1,5 +1,9 @@
 id: page_radar_europe
 bg_color: 0x000000
+on_show:
+  - script.execute: radar_europe_fetch_loop
+on_hide:
+  - script.stop: radar_europe_fetch_loop
 widgets:
   # Main image - Europe Map
   - image:

@@ -13,7 +13,7 @@ script:
           id: pasek_statusu
           hidden: false
 
-      # PAUSE THE CAROUSEL WHILE INTERACTING!
+      # Stop the carousel while the user is interacting
       - script.stop: display_cycle_script
 
       # ==================================
@@ -26,32 +26,33 @@ script:
       # ==================================
       - if:
           condition:
-            lambda: 'return id(display_mode) == 0;' # NORMAL MODE
+            lambda: |-
+              auto time = id(my_time).now();
+              if (!time.is_valid()) return false;
+              // Night: 22:00 to 05:29
+              if (time.hour >= 22 || time.hour < 5 || (time.hour == 5 && time.minute < 30)) {
+                return true;
+              } else {
+                return false;
+              }
           then:
+            # --- ACTION FOR NIGHT (Clock screensaver) ---
+            - lvgl.page.show: page_screensaver
+            - lvgl.obj.update: { id: pasek_statusu, hidden: true }
+            - light.turn_on: { id: screen_backlight, brightness: 0.2 }
+          else:
+            # --- ACTION FOR DAY ---
             - if:
                 condition:
-                  lambda: |-
-                    auto time = id(my_time).now();
-                    if (!time.is_valid()) return false;
-                    // Night: 22:00 to 05:29
-                    if (time.hour >= 22 || time.hour < 5 || (time.hour == 5 && time.minute < 30)) {
-                      return true;
-                    } else {
-                      return false;
-                    }
+                  lambda: 'return id(display_mode) == 1;'
                 then:
-                  # --- ACTION FOR NIGHT (Clock screensaver) ---
-                  - lvgl.page.show: page_screensaver
-                  - lvgl.obj.update: { id: pasek_statusu, hidden: true }
-                  - light.turn_on: { id: screen_backlight, brightness: 0.2 }
+                  # Kiosk mode: resume carousel
+                  - script.execute: display_cycle_script
                 else:
-                  # --- ACTION FOR DAY (Radar map) ---
-                  - lvgl.page.show: page_radar_europe
+                  # Normal mode: show home page
+                  - lvgl.page.show: page_home
                   - lvgl.obj.update: { id: pasek_statusu, hidden: false }
                   - light.turn_on: { id: screen_backlight, brightness: !lambda 'return id(brightness_setpoint);' }
-          else:
-            # KIOSK MODE - RESUME CAROUSEL AFTER 60s OF INACTIVITY
-            - script.execute: display_cycle_script
 
   # --- Automatic Page Cycle (Loop Mode: 10s per page) ---
   - id: display_cycle_script
@@ -150,3 +151,25 @@ script:
           then:
             - component.update: img_camera_frame
             - delay: 5s
+
+  # --- Local radar image update loop (only active when page_radar is shown) ---
+  - id: radar_local_fetch_loop
+    mode: restart
+    then:
+      - while:
+          condition:
+            lambda: 'return true;'
+          then:
+            - component.update: img_mapa_tlo
+            - delay: 60s
+
+  # --- Europe radar image update loop (only active when page_radar_europe is shown) ---
+  - id: radar_europe_fetch_loop
+    mode: restart
+    then:
+      - while:
+          condition:
+            lambda: 'return true;'
+          then:
+            - component.update: img_radar_eu_baza
+            - delay: 60s
