@@ -104,7 +104,7 @@ api:
     - service: show_page_camera
       then:
         - lvgl.page.show: page_camera
-
+        - script.execute: camera_fetch_loop
     - service: toggle_language
       then:
         - globals.set:
