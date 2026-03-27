@@ -1,5 +1,6 @@
 interval:
-  - interval: 1s
+  # --- FAST LOOP: Clock and battery (every 5 seconds) ---
+  - interval: 5s
     then:
       - if:
           condition:
@@ -11,6 +12,26 @@ interval:
             - lvgl.label.update:
                 id: lbl_wygaszacz_czas
                 text: !lambda 'return id(my_time).now().strftime("%H:%M");'  
+            - lvgl.label.update:
+                id: lbl_bat_top
+                text: !lambda 'return str_sprintf("%.0f%%", id(bat_pct).state);'
+            - lvgl.label.update:
+                id: icon_bat
+                text: !lambda |-
+                  float pct = id(bat_pct).state;
+                  if (pct > 80) return "\U000F0085"; 
+                  if (pct > 50) return "\U000F0087"; 
+                  if (pct > 20) return "\U000F0089"; 
+                  if (pct > 5)  return "\U000F008C"; 
+                  return "\U000F008E";               
+
+  # --- SLOW LOOP: Date and days of the week (every 1 hour) ---
+  - interval: 1h
+    then:
+      - if:
+          condition:
+            time.has_time:
+          then:
             - lvgl.label.update:
                 id: lbl_date
                 text: !lambda |-
@@ -89,17 +110,3 @@ interval:
                     const char* days[] = {"", "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"};
                     return days[((t.day_of_week + 4) % 7) + 1];
                   }
-
-            # --- UPDATE TOP BAR BATTERY ---
-            - lvgl.label.update:
-                id: lbl_bat_top
-                text: !lambda 'return str_sprintf("%.0f%%", id(bat_pct).state);'
-            - lvgl.label.update:
-                id: icon_bat
-                text: !lambda |-
-                  float pct = id(bat_pct).state;
-                  if (pct > 80) return "\U000F0085"; // 100%
-                  if (pct > 50) return "\U000F0087"; // 80%
-                  if (pct > 20) return "\U000F0089"; // 50%
-                  if (pct > 5)  return "\U000F008C"; // 30%
-                  return "\U000F008E";               // Empty
