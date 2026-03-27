@@ -11,7 +11,7 @@ esphome:
     board_build.arduino.memory_type: qio_opi
     board_build.flash_mode: dio
     board_upload.maximum_ram_size: 524288
-    
+
   on_boot:
     priority: -100
     then:
@@ -26,7 +26,7 @@ esphome:
       - lvgl.label.update:
           id: lbl_brightness_val
           text: !lambda 'return str_sprintf("%.0f%%", id(brightness_setpoint) * 100);'
-          
+
       # --- NEW BOOT LOGIC ---
       - if:
           condition:
@@ -101,10 +101,10 @@ api:
         - lvgl.page.show: page_forecast
     - service: pokaz_strone_wygaszacz
       then:
-        - lvgl.page.show: page_screensaver   
+        - lvgl.page.show: page_screensaver
     - service: pokaz_strone_radar
       then:
-        - lvgl.page.show: page_radar     
+        - lvgl.page.show: page_radar
     - service: pokaz_strone_radar_europa
       then:
         - lvgl.page.show: page_radar_europe
@@ -118,13 +118,13 @@ api:
     - service: hide_page_camera
       then:
         - script.stop: camera_fetch_loop
-        - lvgl.page.show: page_home        
+        - lvgl.page.show: page_home
     - service: toggle_language
       then:
         - globals.set:
             id: current_language
             value: !lambda 'return id(current_language) == 0 ? 1 : 0;'
-        - script.execute: load_translations                     
+        - script.execute: load_translations
 
 ota:
   - platform: esphome
@@ -210,7 +210,7 @@ light:
     id: screen_backlight
     name: "Screen Backlight"
     output: backlight_pwm
- 
+
 touchscreen:
   - platform: gt911
     id: my_touch
