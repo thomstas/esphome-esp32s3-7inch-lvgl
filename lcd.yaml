@@ -48,6 +48,8 @@ psram:
 http_request:
   verify_ssl: false
 logger:
+  level: INFO
+  baud_rate: 0
 
 
 api:
