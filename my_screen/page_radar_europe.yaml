@@ -1,9 +1,5 @@
 id: page_radar_europe
 bg_color: 0x000000
-on_show:
-  - script.execute: radar_europe_fetch_loop
-on_hide:
-  - script.stop: radar_europe_fetch_loop
 widgets:
   # Main image - Europe Map
   - image:
@@ -23,7 +19,9 @@ widgets:
       border_width: 2
       border_color: 0x555555
       on_click:
+        - script.stop: radar_europe_fetch_loop
         - lvgl.page.show: page_radar
+        - script.execute: radar_local_fetch_loop
       widgets:
         - label: 
             text: "\U000F034B"  # Icon: mdi-magnify-plus
