@@ -96,6 +96,10 @@ api:
     - service: pokaz_strone_koszty_roczne
       then:
         - lvgl.page.show: page_annual_costs
+    - service: show_page_camera
+      then:
+        - lvgl.page.show: page_camera
+
     - service: toggle_language
       then:
         - globals.set:

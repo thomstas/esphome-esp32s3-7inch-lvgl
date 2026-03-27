@@ -24,6 +24,7 @@ widgets:
       width: 60
       height: 60
       on_click:
+        - script.stop: camera_fetch_loop    # <-- STOP FETCHING
         - lvgl.page.show: page_home
       widgets:
         - label:

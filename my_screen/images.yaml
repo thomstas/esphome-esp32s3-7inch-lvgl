@@ -18,12 +18,16 @@
         id: img_radar_eu
         src: img_radar_eu_baza
 
-# --- CAMERA STREAM PROXY ---
+# =====================================================
+# IMAGES & CAMERA STREAM CONFIGURATION
+# =====================================================
+
 - url: "http://192.168.0.25:8123/api/camera_proxy/camera.kurczaki"
   id: img_camera_frame
   format: jpeg
   type: RGB565
-  update_interval: 500ms
+  # Stop background automatic fetching to save CPU/RAM
+  update_interval: never 
   request_headers:
     Authorization: !secret ha_camera_token
   on_download_finished:      

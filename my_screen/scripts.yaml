@@ -18,42 +18,73 @@ script:
       # ==================================
       # --- WAITING ---
       # ==================================
-      - delay: 60s  # <-- Changed to 1 minute
+      - delay: 60s
       
       # ==================================
-      # --- SLEEP (Day: Map / Night: Clock) ---
+      # --- SLEEP LOGIC ---
       # ==================================
       - if:
           condition:
-            lambda: |-
-              // NOTE: Make sure "ha_time" is the correct ID of your time component
-              auto time = id(my_time).now();
-              if (!time.is_valid()) return false;
-              
-              // Night: from 22:00 to 05:29
-              if (time.hour >= 22 || time.hour < 5 || (time.hour == 5 && time.minute < 30)) {
-                return true; // It's night
-              } else {
-                return false; // It's day
-              }
+            lambda: 'return id(display_mode) == 0;' # Only sleep if NOT in loop mode
           then:
-            # --- ACTION FOR NIGHT (Screensaver) ---
-            - lvgl.page.show: page_screensaver
-            - lvgl.obj.update:
-                id: pasek_statusu
-                hidden: true
-            - light.turn_on:
-                id: screen_backlight
-                brightness: 0.2
-          else:
-            # --- ACTION FOR DAY (Europe Map) ---
-            - lvgl.page.show: page_radar_europe
-            - lvgl.obj.update:
-                id: pasek_statusu
-                hidden: false
-            - light.turn_on:
-                id: screen_backlight
-                brightness: !lambda 'return id(brightness_setpoint);'
+            - if:
+                condition:
+                  lambda: |-
+                    auto time = id(my_time).now();
+                    if (!time.is_valid()) return false;
+                    
+                    // Night: from 22:00 to 05:29
+                    if (time.hour >= 22 || time.hour < 5 || (time.hour == 5 && time.minute < 30)) {
+                      return true; // It's night
+                    } else {
+                      return false; // It's day
+                    }
+                then:
+                  # --- ACTION FOR NIGHT (Screensaver) ---
+                  - lvgl.page.show: page_screensaver
+                  - lvgl.obj.update:
+                      id: pasek_statusu
+                      hidden: true
+                  - light.turn_on:
+                      id: screen_backlight
+                      brightness: 0.2
+                else:
+                  # --- ACTION FOR DAY (Europe Map) ---
+                  - lvgl.page.show: page_radar_europe
+                  - lvgl.obj.update:
+                      id: pasek_statusu
+                      hidden: false
+                  - light.turn_on:
+                      id: screen_backlight
+                      brightness: !lambda 'return id(brightness_setpoint);'
+
+  # --- Automatic Page Cycle (Loop Mode: 10s per page) ---
+  - id: display_cycle_script
+    mode: restart
+    then:
+      - while:
+          condition:
+            lambda: 'return id(display_mode) == 1;'
+          then:
+            - lvgl.page.show: page_home
+            - delay: 10s
+            - lvgl.page.show: page_thermostat
+            - delay: 10s
+            - lvgl.page.show: page_media
+            - delay: 10s
+            - lvgl.page.show: page_weather
+            - delay: 10s
+            - lvgl.page.show: page_power
+            - delay: 10s
+            - lvgl.page.show: page_costs
+            - delay: 10s
+            - lvgl.page.show: page_annual_costs
+            - delay: 10s
+# --- CAMERA PAGE LOGIC ---
+            - lvgl.page.show: page_camera
+            - script.execute: camera_fetch_loop # Start streaming for 10s
+            - delay: 10s
+            - script.stop: camera_fetch_loop    # Stop streaming before moving on
 
   - id: turbo_25st
     then:
@@ -81,9 +112,9 @@ script:
           id: btn_term_auto
           bg_color: !lambda 'return (id(hvac_mode_sensor).state == "auto") ? lv_color_hex(0xFFD700) : lv_color_hex(0xFFFFFF);'
       - lvgl.widget.update:
-          id: btn_term_wylacz # <--- CORRECTED ID
+          id: btn_term_wylacz
           bg_color: !lambda 'return (id(hvac_mode_sensor).state == "off") ? lv_color_hex(0xFFD700) : lv_color_hex(0xFFFFFF);'
-
+   
   - id: sync_ui_colors
     then:
       - lvgl.widget.update: {id: btn_1, bg_color: !lambda 'if (id(s_1).state == "on") return lv_color_hex(0xFFD700); if (id(s_1).state == "unavailable" || id(s_1).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
@@ -113,3 +144,14 @@ script:
       - lvgl.widget.update: {id: btn_25, bg_color: !lambda 'if (id(s_25).state == "on") return lv_color_hex(0xFFD700); if (id(s_25).state == "unavailable" || id(s_25).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
       - lvgl.widget.update: {id: btn_26, bg_color: !lambda 'if (id(s_26).state == "on") return lv_color_hex(0xFFD700); if (id(s_26).state == "unavailable" || id(s_26).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
       - lvgl.widget.update: {id: btn_27, bg_color: !lambda 'if (id(s_27).state == "on") return lv_color_hex(0xFFD700); if (id(s_27).state == "unavailable" || id(s_27).state == "unknown") return lv_color_hex(0xB0B0B0); return lv_color_hex(0xFFFFFF);'}
+
+  # --- Camera update loop (only active when page is open) ---
+  - id: camera_fetch_loop
+    mode: restart
+    then:
+      - while:
+          condition:
+            lambda: 'return true;'
+          then:
+            - component.update: img_camera_frame
+            - delay: 1s
