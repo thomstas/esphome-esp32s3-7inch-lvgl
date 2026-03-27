@@ -149,4 +149,4 @@ script:
             lambda: 'return true;'
           then:
             - component.update: img_camera_frame
-            - delay: 1s
+            - delay: 100ms
