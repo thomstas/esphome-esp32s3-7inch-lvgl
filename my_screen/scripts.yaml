@@ -1,4 +1,11 @@
 script:
+  # Kill switch: stop all background image download loops at once
+  - id: stop_background_downloads
+    then:
+      - script.stop: camera_fetch_loop
+      - script.stop: radar_local_fetch_loop
+      - script.stop: radar_europe_fetch_loop
+
   - id: screen_timeout_script
     mode: restart
     then:
@@ -15,6 +22,7 @@ script:
 
       # Stop the carousel while the user is interacting
       - script.stop: display_cycle_script
+      - script.execute: stop_background_downloads
 
       # ==================================
       # --- WAITING ---
@@ -37,6 +45,7 @@ script:
               }
           then:
             # --- ACTION FOR NIGHT (Clock screensaver) ---
+            - script.execute: stop_background_downloads
             - lvgl.page.show: page_screensaver
             - lvgl.obj.update: { id: pasek_statusu, hidden: true }
             - light.turn_on: { id: screen_backlight, brightness: 0.2 }
@@ -50,6 +59,7 @@ script:
                   - script.execute: display_cycle_script
                 else:
                   # Normal mode: show home page
+                  - script.execute: stop_background_downloads
                   - lvgl.page.show: page_home
                   - lvgl.obj.update: { id: pasek_statusu, hidden: false }
                   - light.turn_on: { id: screen_backlight, brightness: !lambda 'return id(brightness_setpoint);' }
