@@ -119,6 +119,7 @@ widgets:
                     # Turn OFF kiosk mode
                     - globals.set: {id: display_mode, value: '0'}
                     - script.stop: display_cycle_script
+                    - script.execute: stop_background_downloads
                     - lvgl.widget.update:
                         id: btn_kiosk_mode
                         bg_color: 0x607D8B

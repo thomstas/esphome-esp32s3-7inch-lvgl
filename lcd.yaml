@@ -152,6 +152,7 @@ time:
         hours: 22
         then:
           - script.stop: display_cycle_script
+          - script.execute: stop_background_downloads
           - script.stop: radar_local_fetch_loop
           - script.stop: radar_europe_fetch_loop
           - lvgl.page.show: page_screensaver
